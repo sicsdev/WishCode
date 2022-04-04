@@ -1,0 +1,258 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import { imageBaseUrl } from "../base_url/config";
+import AddFeatureModel from "./models/AddFeatureModel";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "./Loader";
+import { useState, useEffect } from "react";
+import axiosConfig from "../base_url/config";
+import { Modal, Button } from "react-bootstrap";
+
+const FeatureComp = ({
+  features,
+  companyID,
+  suggestFeature,
+  getPageData,
+  companyData,
+}) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const [showClaimModal, setShowClaimModal] = useState(false);
+  const handleClaimCloseModal = () => setShowClaimModal(false);
+  const [loader, setloader] = useState(false);
+  const [featureId, setfeatureId] = useState();
+  const [selectedFile, setselectedFile] = useState(null);
+  const [featureTitle, setfeatureTitle] = useState("");
+  const [featureDescription, setfeatureDescription] = useState("");
+  const [claimEmail, setClaimEmail] = useState("");
+  // const [Features, setFeatures] = useState(features);
+
+  const tokens = localStorage.getItem("token");
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${tokens}`,
+    },
+  };
+
+  // useEffect(() => {
+  //   if (features !== undefined) {
+  //     setFeatures(features);
+
+  //   }
+  // }, [features]);
+
+  const addFeature = (val) => {
+    setShow(true);
+    setfeatureTitle("");
+    setfeatureDescription("");
+    setselectedFile(null);
+  };
+
+  const claimCompanyModalHandler = (company_id) => {
+    setShowClaimModal(true);
+  };
+
+  const claimCompnayHandler = async (e) => {
+    e.preventDefault();
+    setloader(true);
+    try {
+      const { data } = await axiosConfig.post(
+        `/company/claim_company`,
+        {
+          company_id: companyData.id,
+          request_type: "claim",
+          claim_email: claimEmail,
+        },
+        config
+      );
+      setloader(false);
+      setShowClaimModal(false);
+      setClaimEmail("");
+      return toast.success(`Claim Request Send Successfully!`, {
+        position: "bottom-right",
+        autoClose: 2000,
+      });
+    } catch (error) {
+      setloader(false);
+      return toast.error(
+        `${
+          error.response.data.message && error.response.data.message.company_id
+            ? error.response.data.message.company_id[0]
+            : error.response.data.message
+        }`,
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+        }
+      );
+    }
+  };
+
+  return (
+    <>
+      <div className="card-header d-flex justify-content-between align-items-center">
+        <h5 className="text-white text-uppercase">
+          {companyData ? (
+            <>Company Posts: {companyData.company_name}</>
+          ) : (
+            "Company Posts"
+          )}
+        </h5>
+        <div className="header-btns">
+          {suggestFeature === true ? (
+            <button
+              type="button"
+              className="btn btn-lg-primary text-white mr-2"
+              onClick={(e) => {
+                addFeature();
+              }}
+            >
+              Suggest Feature
+            </button>
+          ) : (
+            ""
+          )}
+          {companyData &&
+          companyData.is_claimed === "0" &&
+          companyData.requested_by !== null ? (
+            <button
+              type="button"
+              className="btn btn-lg-primary text-white"
+              onClick={(e) => {
+                // claimCompnayHandler(companyData.id);
+                claimCompanyModalHandler(companyData.id);
+              }}
+            >
+              Claim
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+      <div className="card-body">
+        <div className="row">
+          <div className="col-md-12">
+            {features !== undefined ? (
+              features?.map((feature, key) => (
+                <div className="company-post-wrapper" key={key}>
+                  <Link to={`/feature/${feature.id}`}>
+                    <div className="comp-post">
+                      <span className="text-lg-primary">
+                        {moment(feature.created_at).format("DD MMM YYYY")}
+                      </span>
+                      <div className="options">
+                        <h2>{feature.title}</h2>
+                      </div>
+                      <p>{feature.content}</p>
+                      <div className="user-img">
+                        {feature.image ? (
+                          <img
+                            src={`${imageBaseUrl}/${feature.image}`}
+                            alt=""
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="actions-links position-relative py-2 pt-4 ">
+                        <Link
+                          to={`/feature/${feature.id}`}
+                          className="text-secondary"
+                        >
+                          <i
+                            className="fa fa-comments-o"
+                            aria-hidden="true"
+                          ></i>{" "}
+                          {feature.comments_count}
+                        </Link>
+                        <Link
+                          to={`/feature/${feature.id}`}
+                          className="text-secondary"
+                          data-toggle="modal"
+                          data-target="#view-vote-post"
+                        >
+                          <i className="fa fa-arrow-up" aria-hidden="true"></i>{" "}
+                          {feature.post_votes_count}
+                        </Link>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div className="company-post-wrapper">
+                <h3>No data Found</h3>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      <AddFeatureModel
+        show={show}
+        handleClose={handleClose}
+        setShow={setShow}
+        setloader={setloader}
+        companyId={companyID}
+        getPageData={getPageData}
+        featureTitle={featureTitle}
+        featureDescription={featureDescription}
+        selectedFile={selectedFile}
+        setselectedFile={setselectedFile}
+        setfeatureTitle={setfeatureTitle}
+        setfeatureDescription={setfeatureDescription}
+        featureId={featureId}
+        setfeatureId={setfeatureId}
+      />
+      <Modal show={showClaimModal} onHide={handleClaimCloseModal}>
+        <Modal.Header>
+          <Modal.Title>
+            <h5 className="modal-title">Claim Company</h5>
+          </Modal.Title>
+        </Modal.Header>
+        <form
+          onSubmit={(e) => {
+            claimCompnayHandler(e);
+          }}
+        >
+          <Modal.Body>
+            <>
+              <div className="input-form">
+                <label> Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Enter Email"
+                  value={claimEmail}
+                  required
+                  onChange={(e) => setClaimEmail(e.target.value)}
+                />
+              </div>
+            </>
+          </Modal.Body>
+          <Modal.Footer>
+            <button type="submit" className="btn btn-lg-primary">
+              Claim Now
+            </button>
+            <Button
+              variant="secondary"
+              className="btn btn-lg-primary"
+              onClick={(e) => {
+                setShowClaimModal(false);
+              }}
+            >
+              Close Modal
+            </Button>
+          </Modal.Footer>
+        </form>
+      </Modal>
+      { features?.length == 0  ? <Loader /> : <></>}
+      <ToastContainer />
+    </>
+  );
+};
+
+export default FeatureComp;
