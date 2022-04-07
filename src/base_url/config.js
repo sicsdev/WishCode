@@ -2,8 +2,8 @@ import axios from "axios";
 
 const axiosConfig = axios.create({
     // baseURL: 'http://127.0.0.1:8000/api',
-    baseURL: 'https://sicsdev.com/wishtrax/api',
+    baseURL: 'http://137.184.128.65/api',
 });
     // export const imageBaseUrl = 'http://127.0.0.1:8000';
- export const imageBaseUrl = 'https://sicsdev.com/wishtrax';
+ export const imageBaseUrl = 'http://137.184.128.65/wishtrax';
 export default axiosConfig;
