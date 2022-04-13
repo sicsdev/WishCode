@@ -1,0 +1,108 @@
+.navbar .sign_in_btn {
+    background: #FFFFFF;
+    border: 1.5px solid #B7B3B3;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    margin-right: 10px;
+}
+
+.navbar .register_btn {
+    background: #DB595A;
+    border: 1.5px solid #B7B3B3;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.header_navbar {
+    position: absolute;
+    width: 100%;
+    top: 2%;
+}
+
+section.top-banner-wrapper {
+    padding-top: 200px;
+    padding-bottom: 100px;
+    text-align: left;
+}
+
+.top-banner-wrapper h2 {
+    font-weight: 700;
+    font-size: 80px;
+    color: #105652;
+    line-height: 80px;
+}
+
+.top-banner-wrapper h2 span {
+    color: #DB595A;
+}
+
+.top-banner-wrapper p {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100px;
+    letter-spacing: 0.05em;
+    color: #87A38E;
+}
+
+.top-banner-wrapper p span {
+    color: #000;
+}
+
+.top-banner-wrapper button {
+    background: #87A38E;
+    box-shadow: 0px 3px 13px rgb(0 0 0 / 16%);
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 24px;
+    color: #FFFFFF;
+    width: 250px;
+    padding: 10px;
+    border-color: #87A38E !important;
+}
+
+.bg-yellow {
+    background: #FFF0CB;
+}
+
+.bg-red {
+    background: #FFDADA;
+}
+
+.bg-white {
+    background: #ffffff;
+}
+
+.p-5 {
+    padding: 5rem 0 5rem 0;
+}
+
+.home_wrapper h3 {
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 28px;
+    letter-spacing: 0.2px;
+    color: #C84650;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.company_list_wrapper img {
+    width: 100px;
+    margin: 0 auto;
+}
+
+.features_wrapper {
+    text-align: center;
+}
+
+.features_wrapper img {
+    width: 100px;
+    margin: 0 auto;
+}
