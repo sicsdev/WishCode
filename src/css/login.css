@@ -870,11 +870,23 @@ span.mt-2.company-label {
 }
 
 .brand-nam h3 {
-  color: #aa504f;
+  color: #062a4d;
   font-family: "Libre Baskerville", serif;
   cursor: pointer;
+  font-size: 40px;
+  margin-bottom: 0;
 }
-
+.card-body-content h5 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #062a4d;
+  text-transform: capitalize;
+  padding: 20px 0 0;
+  margin-bottom: 0;
+}
+.features_content_iinner .card-body-content p{
+  padding: 15px 0 0;
+}
 .or span {
   position: relative;
   top: 2px;

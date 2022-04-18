@@ -1,73 +1,62 @@
 .navbar .sign_in_btn {
     background: #FFFFFF;
-    border: 1.5px solid #B7B3B3;
-    box-sizing: border-box;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
     color: #000000;
     margin-right: 10px;
+    padding: 8px 25px
 }
 
 .navbar .register_btn {
     background: #DB595A;
-    border: 1.5px solid #B7B3B3;
-    box-sizing: border-box;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
+    padding: 8px 25px;
     color: #FFFFFF;
 }
 
 .header_navbar {
     position: absolute;
     width: 100%;
-    top: 2%;
+    top: 0;
+    z-index: 999;
+    padding: 20px 0;
 }
-
-section.top-banner-wrapper {
-    padding-top: 200px;
-    padding-bottom: 100px;
-    text-align: left;
+.home_wrapper {
+    background-image: url(../images/home-bg.png);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 22;
+    position: relative;
+    width: 100%;
 }
 
 .top-banner-wrapper h2 {
     font-weight: 700;
-    font-size: 80px;
-    color: #105652;
-    line-height: 80px;
-}
-
-.top-banner-wrapper h2 span {
-    color: #DB595A;
+    font-size: 70px;
+    color: #062a4d;
+    line-height: 74px;
 }
 
 .top-banner-wrapper p {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 100px;
-    letter-spacing: 0.05em;
-    color: #87A38E;
+    font-size: 22px;
+    color: #062a4d;
+    padding: 30px 0 20px;
 }
 
 .top-banner-wrapper p span {
     color: #000;
 }
 
-.top-banner-wrapper button {
-    background: #87A38E;
+.btn-landing {
+    background: #db595a;
     box-shadow: 0px 3px 13px rgb(0 0 0 / 16%);
-    border-radius: 10px;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 21px;
     color: #FFFFFF;
-    width: 250px;
-    padding: 10px;
-    border-color: #87A38E !important;
+    padding: 10px 50px;
+    border-radius: 0;
 }
 
 .bg-yellow {
-    background: #FFF0CB;
+    background: #f0f7fc;
 }
 
 .bg-red {
@@ -81,18 +70,33 @@ section.top-banner-wrapper {
 .p-5 {
     padding: 5rem 0 5rem 0;
 }
-
-.home_wrapper h3 {
-    font-weight: 600;
-    font-size: 40px;
-    line-height: 28px;
-    letter-spacing: 0.2px;
-    color: #C84650;
-    text-align: center;
-    text-transform: uppercase;
-    width: 100%;
+.section-gap{
+    padding: 80px 0;
 }
-
+.section-title {
+    padding-bottom: 50px;
+}
+.section-title h3 {
+    color: #062a4d;
+    font-size: 42px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.section-title p {
+    font-size: 24px;
+}
+.card-wrapper {
+    background: white;
+    box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
+    padding: 20px 15px;
+    border-radius: 5px;
+    margin-bottom: 34px;
+}
+.card-body-content p {
+    font-size: 18px;
+    color: #062a4d;
+    padding: 35px 0 0;
+}
 .company_list_wrapper img {
     width: 100px;
     margin: 0 auto;
@@ -105,4 +109,36 @@ section.top-banner-wrapper {
 .features_wrapper img {
     width: 100px;
     margin: 0 auto;
+}
+
+.signup_wrapper{
+    background-image: url(../images/bg-11.jpg);
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.signup_wrapper .section-title {
+    padding-bottom: 0;
+    display: grid;
+    place-items: center;
+    height: 270px;
+    place-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.signup_wrapper .section-title h3 {
+    margin-bottom: 20px;
+}
+
+section.top-banner-wrapper {
+    text-align: left;
+    height: 100%;
+    padding-top: 270px;
+}
+.footer {
+    padding: 25px;
+    background: #062a4d;
+    color: white;
+    font-size: 18px;
 }
