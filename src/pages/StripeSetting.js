@@ -1,7 +1,6 @@
 import Header from "../Component/Header";
 import Sidebar from "../Component/Sidebar";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import InputText from "../Component/Inputs/InputText";
 import ButtonCom from "../Component/Inputs/ButtonCom";
 import Loader from "../Component/Loader";
