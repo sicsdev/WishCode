@@ -1,7 +1,6 @@
 import React from "react";
 import Sidebar from "../Component/Sidebar";
 import Header from "../Component/Header";
-import { Link } from "react-router-dom";
 
 const AddFeedback = () => {
   return (
