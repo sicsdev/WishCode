@@ -1,5 +1,6 @@
 import React from "react";
 import { imageBaseUrl } from "../base_url/config";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -13,10 +14,12 @@ const Home = () => {
               </div>
               <ul className="nav navbar-nav navbar-right">
                 <li>
-                  <button className="btn btn-small sign_in_btn">SIGN IN</button>
-                  <button className="btn btn-small register_btn">
+                  <Link to="/login" className="btn btn-small sign_in_btn">
+                    SIGN IN
+                  </Link>
+                  <Link to="/register" className="btn btn-small register_btn">
                     Register
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -27,11 +30,10 @@ const Home = () => {
             <div className="container">
               <div className="row">
                 <div className="col-md-6">
-                  <h2>
-                    Lorem ipsum is a dummy
-                  </h2>
+                  <h2>Lorem ipsum is a dummy</h2>
                   <p>
-                    Lorem ipsum is a dummy text for the dummy Lorem ipsum is a dummy text for the Lorem ipsum is a dummy text for the test.
+                    Lorem ipsum is a dummy text for the dummy Lorem ipsum is a
+                    dummy text for the Lorem ipsum is a dummy text for the test.
                   </p>
                   <button className="btn btn-landing">SEE MORE</button>
                 </div>
@@ -56,7 +58,6 @@ const Home = () => {
                       </span> */}
                     </h3>
                   </div>
-
 
                   <div className="company_list_wrapper ">
                     <div className="row">
@@ -186,8 +187,6 @@ const Home = () => {
               </div>
             </div>
           </section>
-
-
 
           <section className="features_wrapper section-gap">
             <div className="container">
@@ -330,13 +329,14 @@ const Home = () => {
             </div>
           </section>
 
-
-
           <section className="signup_wrapper section-gap">
             <div className="container">
               <div className="section-title">
                 <h3>Where can I get some?</h3>
-                <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
+                <p>
+                  Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                  amet, consectetur, adipisci velit...
+                </p>
                 <button className="btn btn-landing">SIGN UP</button>
               </div>
             </div>
@@ -344,13 +344,14 @@ const Home = () => {
           <section className="footer">
             <div className="container">
               <div className="copyright">
-                <p className="mb-0">  © Copyright WishTrax 2022. All rights reserved.</p>
+                <p className="mb-0">
+                  {" "}
+                  © Copyright WishTrax 2022. All rights reserved.
+                </p>
               </div>
             </div>
           </section>
-
         </div>
-
       </div>
     </>
   );
