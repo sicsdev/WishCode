@@ -876,6 +876,7 @@ span.mt-2.company-label {
   font-size: 40px;
   margin-bottom: 0;
 }
+
 .card-body-content h5 {
   font-size: 24px;
   font-weight: bold;
@@ -884,9 +885,11 @@ span.mt-2.company-label {
   padding: 20px 0 0;
   margin-bottom: 0;
 }
-.features_content_iinner .card-body-content p{
+
+.features_content_iinner .card-body-content p {
   padding: 15px 0 0;
 }
+
 .or span {
   position: relative;
   top: 2px;
@@ -1311,5 +1314,9 @@ input.form-check-input:checked:after {
     border-top: 1px solid #e5e5e5;
     margin-bottom: 20px !important;
     padding-bottom: 10px;
+  }
+
+  .features_wrapper .card-body-content h5 {
+    min-height: 0px;
   }
 }

@@ -152,6 +152,10 @@
     min-height: 100px;
 }
 
+.features_wrapper .card-body-content h5 {
+    min-height: 80px;
+}
+
 section.top-banner-wrapper {
     text-align: left;
     height: 100%;
