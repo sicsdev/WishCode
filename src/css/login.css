@@ -70,6 +70,7 @@ li {
 .btn-link {
   color: #6e474a;
 }
+
 .text-lg-primary {
   color: #6e474a;
 }
@@ -148,15 +149,15 @@ li {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #aa504f;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #aa504f;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -199,13 +200,13 @@ input:checked + .slider:before {
 
 /* On mouse-over, add a grey background color */
 
-.custom-radio:hover input ~ .checkmark {
+.custom-radio:hover input~.checkmark {
   background-color: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
 
-.custom-radio input:checked ~ .checkmark {
+.custom-radio input:checked~.checkmark {
   background-color: #aa504f;
 }
 
@@ -219,7 +220,7 @@ input:checked + .slider:before {
 
 /* Show the indicator (dot/circle) when checked */
 
-.custom-radio input:checked ~ .checkmark:after {
+.custom-radio input:checked~.checkmark:after {
   display: block;
 }
 
@@ -352,6 +353,7 @@ input:checked + .slider:before {
 .bold-text-600 {
   font-weight: 500;
 }
+
 .bg--header {
   background-color: #cc4545;
 }
@@ -359,9 +361,11 @@ input:checked + .slider:before {
 .button-checkbox button.bg-danger {
   background: #aa504f !important;
 }
+
 .button-checkbox button.bg-danger:hover {
   background: #aa504f !important;
 }
+
 .swal-button--danger {
   background: #aa504f !important;
 }
@@ -505,19 +509,15 @@ ol.breadcrumb li a {
 }
 
 .dashboard .card-header {
-  background: linear-gradient(
-    90deg,
-    #6e474a 20.87%,
-    rgba(110, 71, 74, 0) 82.85%
-  );
+  background: linear-gradient(90deg,
+      #6e474a 20.87%,
+      rgba(110, 71, 74, 0) 82.85%);
 }
 
 .dashboard .card-body {
-  background: radial-gradient(
-    75.31% 75.31% at 50% 50%,
-    rgba(170, 80, 79, 0.29) 9.2%,
-    rgba(184, 176, 176, 0) 100%
-  );
+  background: radial-gradient(75.31% 75.31% at 50% 50%,
+      rgba(170, 80, 79, 0.29) 9.2%,
+      rgba(184, 176, 176, 0) 100%);
   filter: drop-shadow(0px 4px 18px rgba(134, 161, 181, 0.33));
 }
 
@@ -828,12 +828,14 @@ span.mt-2.company-label {
   position: absolute;
   right: 0;
 }
+
 .company-post-wrapper {
   box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
   padding: 20px;
   position: relative;
   margin-bottom: 30px;
 }
+
 .company-post-wrapper:before {
   content: "";
   position: absolute;
@@ -841,6 +843,7 @@ span.mt-2.company-label {
   border-bottom: 3px solid #aa504f;
   width: 100px;
 }
+
 .company-post-wrapper .actions-links a {
   padding-right: 10px;
 }
@@ -867,28 +870,45 @@ span.mt-2.company-label {
 }
 
 .brand-nam h3 {
-  color: #aa504f;
+  color: #062a4d;
   font-family: "Libre Baskerville", serif;
+  cursor: pointer;
+  font-size: 40px;
+  margin-bottom: 0;
 }
-
+.card-body-content h5 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #062a4d;
+  text-transform: capitalize;
+  padding: 20px 0 0;
+  margin-bottom: 0;
+}
+.features_content_iinner .card-body-content p{
+  padding: 15px 0 0;
+}
 .or span {
   position: relative;
   top: 2px;
   z-index: 1;
   font-weight: 600;
 }
+
 .line_wrapper {
   display: flex;
   align-items: center;
 }
+
 .line_child {
   width: 100%;
   height: 1px;
   border: 1px solid #aa504fed;
 }
+
 .or {
   padding: 15px;
 }
+
 .or:after {
   content: "";
   position: absolute;
@@ -897,6 +917,7 @@ span.mt-2.company-label {
   border-bottom: 1px solid #e5e5e5;
   bottom: 10px;
 }
+
 .no-of-vote-card {
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   padding: 20px;
@@ -905,10 +926,12 @@ span.mt-2.company-label {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
 .no-of-vote-card h4 {
   font-size: 50px;
   color: #fff;
 }
+
 .no-of-vote-card span {
   color: #fff;
   font-size: 18px;
@@ -952,6 +975,7 @@ a.text-secondary.vote {
 .view-count {
   cursor: pointer;
 }
+
 .single-product-link {
   cursor: pointer;
 }
@@ -969,6 +993,7 @@ button.input-group-text.vote {
 .reply-icon {
   cursor: pointer;
 }
+
 .vote-count-modal .voting-option label {
   font-size: 16px;
 }
@@ -1001,10 +1026,12 @@ dialog.dialog.img-dialog {
   z-index: 9999999;
   top: -500px;
 }
+
 dialog.dialog.img-dialog img {
   width: 100%;
   height: 100%;
 }
+
 .released-msg {
   font-size: 16px;
 }
@@ -1115,46 +1142,58 @@ button.page-link,
 button.page-link:hover {
   color: #aa504f;
 }
+
 .filter-table-link {
   color: rgba(0, 0, 0, 0.87);
   cursor: pointer;
 }
+
 .filter-table-link:hover {
   color: rgba(0, 0, 0, 0.87);
 }
+
 .rdt_TableHeadRow {
   font-weight: 600;
 }
+
 .password-hint-wrapper {
   display: flex;
   padding-bottom: 10px;
 }
+
 .alert-red {
   color: #aa504f;
 }
+
 .alert-green {
   color: green;
 }
+
 .login-form h3,
 .forget-form h3 {
   color: #6e474a;
 }
+
 .login-form button,
 .forget-form button {
   background-color: #aa504f;
 }
+
 .forget-password a,
 .forget-password span {
   color: #6e474a !important;
   font-weight: 600;
 }
+
 .forget-password a:hover {
   color: #6e474a !important;
 }
+
 input.form-control,
 textarea.form-control {
   border-radius: 10px;
 }
+
 label.form-check-label {
   font-size: 17px;
 }
@@ -1167,17 +1206,21 @@ label.form-check-label {
   padding-left: 10px;
   font-weight: 500;
 }
+
 .form-check.form-check-inline {
   margin-bottom: 20px;
 }
+
 input.form-check-input {
   -ms-transform: scale(1.5);
   -webkit-transform: scale(1.5);
   transform: scale(1.5);
 }
+
 .form-check-inline .form-check-input {
   margin-right: 0.6rem;
 }
+
 input.form-check-input:after {
   width: 15px;
   height: 15px;
@@ -1205,51 +1248,64 @@ input.form-check-input:checked:after {
   visibility: visible;
   border: 2px solid white;
 }
+
 /* END:: Card Counter */
 
 @media screen and (max-width: 768px) {
   .hide-desktop {
     display: block;
   }
+
   .btn-lg-primary {
     padding: 12px 15px;
   }
+
   .mobile-menu-icon {
     display: block !important;
   }
+
   body .hide-mobile {
     display: none !important;
   }
+
   .close-mobile-menu {
     font-size: 21px;
     position: relative;
     top: -3px;
     display: block;
   }
+
   .title-bar {
     display: flex;
   }
+
   .body-wrapper {
     margin-left: 0px !important;
   }
+
   .dashboard .card-header h5 {
     font-size: 16px;
   }
+
   .body-content-inner {
     padding: 30px 0px;
   }
+
   .sidebar-menu {
     width: 0px;
   }
+
   .post-comments-reply {
     margin-left: 0;
   }
+
   .user-img {
     border-right: none;
     border-bottom: 1px solid #e5e5e5;
     margin-bottom: 20px !important;
     padding-bottom: 10px;
   }
+
   .no-of-vote {
     border-left: none;
     border-top: 1px solid #e5e5e5;

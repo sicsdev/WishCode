@@ -33,6 +33,7 @@ import CompanyDetails from "../pages/CompanyDetails";
 import ForgetPassword from "../pages/ForgetPassword";
 import ResetPassword from "../pages/ResetPassword";
 import Profile from "../pages/Profile";
+import Home from "../pages/Home";
 
 const RouteCom = () => {
   return (
@@ -42,6 +43,7 @@ const RouteCom = () => {
       <Route path="/register" element={<UserRegister />} />
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset/:token" element={<ResetPassword />} />
+      <Route exact path="/" element={<Home />} />
       {/* END */}
 
       <Route exact path="/" element={<PrivateRoute />}>
