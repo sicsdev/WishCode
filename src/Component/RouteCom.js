@@ -34,6 +34,7 @@ import ForgetPassword from "../pages/ForgetPassword";
 import ResetPassword from "../pages/ResetPassword";
 import Profile from "../pages/Profile";
 import Home from "../pages/Home";
+import FeatureWishes from "../pages/FeatureWishes";
 
 const RouteCom = () => {
   return (
@@ -44,6 +45,7 @@ const RouteCom = () => {
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset/:token" element={<ResetPassword />} />
       <Route exact path="/" element={<Home />} />
+      <Route exact path="/feature-wishes" element={<FeatureWishes />} />
       {/* END */}
 
       <Route exact path="/" element={<PrivateRoute />}>
