@@ -290,14 +290,14 @@ const UserRegister = () => {
               {disableButton == false ? (
                 <ButtonCom
                   name={"Register"}
-                  class={"btn btn-lg-primary w-100"}
+                  className={"btn btn-lg-primary w-100"}
                   type={"submit"}
                   disable={true}
                 />
               ) : (
                 <ButtonCom
                   name={"Register"}
-                  class={"btn btn-lg-primary w-100"}
+                  className={"btn btn-lg-primary w-100"}
                   type={"submit"}
                   disable={false}
                 />

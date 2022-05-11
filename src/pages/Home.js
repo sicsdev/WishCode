@@ -5,30 +5,37 @@ import FrontPageBanner from "../Component/front/FrontPageBanner";
 import HomeCompanies from "../Component/front/HomeCompanies";
 import HomeFeatures from "../Component/front/HomeFeatures";
 import HomeBottom from "../Component/front/HomeBottom";
+import FeatureSearch from "../Component/front/FeatureSearch";
 import { getRequestApi } from "../helper/Helper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../Component/Loader";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
   const [loader, setloader] = useState(false);
   const [companyList, setCompanyList] = useState([]);
   const [featureList, setFeatureList] = useState([]);
+  const [featuresWishes, setFeaturesWishes] = useState([]);
+  const [filterWishList, setFilterWishList] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
+
+  const [searchParams] = useSearchParams();
+  let companyName = searchParams.get("company");
 
   useEffect(() => {
-    getCompanyLists();
-    getFeaturesList();
+    getHomePageData();
   }, []);
 
-  const getCompanyLists = async () => {
-    // setloader(true);
-    let response = await getRequestApi(`/front/company_list`);
+  const getHomePageData = async () => {
+    let response = await getRequestApi(`/front/dashboard`);
     if (response) {
-      // setloader(false);
       if (response.data.data) {
-        setCompanyList(response.data.data);
+        setFeatureList(response.data.data.posts);
+        setCompanyList(response.data.data.companies);
+        setFeaturesWishes(response.data.data.featureWishList);
       } else {
-        // setloader(false);
         toast.error(response.message, {
           position: "bottom-right",
           autoClose: 2000,
@@ -39,15 +46,16 @@ const Home = () => {
     }
   };
 
-  const getFeaturesList = async () => {
-    // setloader(true);
-    let response = await getRequestApi(`/front/feature_list`);
+  const getFeaturesWishes = async (keyword) => {
+    let response = await getRequestApi(
+      `/front/feature_wishes?keyword=${keyword}`
+    );
+
     if (response) {
-      // setloader(false);
       if (response.data.data) {
-        setFeatureList(response.data.data);
+        setIsSearch(true);
+        setFilterWishList(response.data.data);
       } else {
-        // setloader(false);
         toast.error(response.message, {
           position: "bottom-right",
           autoClose: 2000,
@@ -57,6 +65,16 @@ const Home = () => {
       setloader(false);
     }
   };
+
+  const searchHandler = async (val) => {
+    if (val.length >= 3) {
+      getFeaturesWishes(val);
+    } else if (val.length === 0) {
+      setIsSearch(false);
+    } else {
+    }
+  };
+
   return (
     <>
       <div className="main-body">
@@ -66,6 +84,14 @@ const Home = () => {
           <HomeCompanies companyList={companyList} />
           <HomeFeatures featureList={featureList} />
           <HomeBottom />
+          <FeatureSearch
+            featureWishes={featuresWishes}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+            searchHandler={searchHandler}
+            filterWishList={filterWishList}
+            isSearch={isSearch}
+          />
           <FrontFooter />
         </div>
       </div>

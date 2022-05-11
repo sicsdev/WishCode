@@ -120,7 +120,7 @@ const ProfileCom = (props) => {
                 <ButtonCom
                   name={"Update Profile"}
                   type={"submit"}
-                  class={"btn btn-lg-primary"}
+                  className={"btn btn-lg-primary"}
                 />
               </form>
             </div>
