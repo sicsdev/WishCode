@@ -70,7 +70,7 @@ const ResetPasswordCom = (props) => {
           <span className="errorMessage">{errorMessage}</span>
           <ButtonCom
             name={"Reset"}
-            class={"btn btn-lg-primary w-100"}
+            className={"btn btn-lg-primary w-100"}
             type={"submit"}
             disable={props.isReset}
           />

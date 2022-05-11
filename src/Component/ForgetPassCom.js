@@ -65,7 +65,7 @@ const ForgetPassCom = () => {
           />
           <ButtonCom
             name={"Submit"}
-            class={"btn btn-lg-primary w-100"}
+            className={"btn btn-lg-primary w-100"}
             type={"submit"}
             disable={false}
           />

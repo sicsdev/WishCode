@@ -10,8 +10,8 @@ function FeatureWishes() {
         <div className="featured-search margin-header">
           <div className="container">
 
-            <div class="input-group input-group-sm mb-3">
-              <input type="search" class="form-control py-3" placeholder='Seach..' />
+            <div className="input-group input-group-sm mb-3">
+              <input type="search" className="form-control py-3" placeholder='Seach..' />
             </div>
 
 

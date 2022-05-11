@@ -128,7 +128,7 @@ const StripeSetting = () => {
                         <ButtonCom
                           name={"Submit"}
                           type={"submit"}
-                          class={"btn btn-lg-primary"}
+                          className={"btn btn-lg-primary"}
                         />
                       </form>
                       <div className="subscription-wrapper mt-5">
