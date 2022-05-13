@@ -7,7 +7,9 @@ const FrontHeader = () => {
       <nav className="navbar navbar-expand-lg navbar-light header_navbar">
         <div className="container">
           <div className="brand-nam brand navbar-left">
-            <h3 className="">WishTrax</h3>
+            <Link className="header-top_logo" to="/">
+              <h3 className="">WishTrax</h3>
+            </Link>
           </div>
           <ul className="nav navbar-nav navbar-right">
             <li>

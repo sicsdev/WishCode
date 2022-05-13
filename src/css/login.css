@@ -877,6 +877,10 @@ span.mt-2.company-label {
   margin-bottom: 0;
 }
 
+.header-top_logo:hover {
+  text-decoration: none;
+}
+
 .card-body-content h5 {
   font-size: 24px;
   font-weight: bold;
