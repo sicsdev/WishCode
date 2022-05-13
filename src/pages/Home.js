@@ -20,16 +20,25 @@ const Home = () => {
   const [filterWishList, setFilterWishList] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [isSearch, setIsSearch] = useState(false);
+  const [isCompanyFilter, setIsCompanyFilter] = useState(false);
 
   const [searchParams] = useSearchParams();
   let companyName = searchParams.get("company");
 
   useEffect(() => {
-    getHomePageData();
-  }, []);
+    getHomePageData(companyName);
+  }, [companyName]);
 
-  const getHomePageData = async () => {
-    let response = await getRequestApi(`/front/dashboard`);
+  const getHomePageData = async (companyName) => {
+    let webApiUrl;
+    if (companyName !== null) {
+      setIsCompanyFilter(true);
+      webApiUrl = `/front/dashboard?company_name=${companyName}`;
+    } else {
+      setIsCompanyFilter(false);
+      webApiUrl = `/front/dashboard`;
+    }
+    let response = await getRequestApi(webApiUrl);
     if (response) {
       if (response.data.data) {
         setFeatureList(response.data.data.posts);
@@ -48,7 +57,7 @@ const Home = () => {
 
   const getFeaturesWishes = async (keyword) => {
     let response = await getRequestApi(
-      `/front/feature_wishes?keyword=${keyword}`
+      `/front/feature_wishes?keyword=${keyword}&company_slug=${companyName}`
     );
 
     if (response) {
@@ -81,7 +90,8 @@ const Home = () => {
         <FrontHeader />
         <div className="home_wrapper">
           <FrontPageBanner />
-          <HomeCompanies companyList={companyList} />
+          {!isCompanyFilter ? <HomeCompanies companyList={companyList} /> : ""}
+
           <HomeFeatures featureList={featureList} />
           <HomeBottom />
           <FeatureSearch

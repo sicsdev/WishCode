@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const FeatureSearch = (props) => {
   return (
@@ -39,7 +40,11 @@ const FeatureSearch = (props) => {
                       props.filterWishList?.map((feature, key) => (
                         <tr key={key}>
                           <td>{feature.title}</td>
-                          <td>{feature.company_name} </td>
+                          <td className="asd">
+                            <Link to={`/?company=${feature.company_slug}`}>
+                              {feature.company_name}
+                            </Link>
+                          </td>
                           <td>Product 1</td>
                           <td>{feature.user_name}</td>
                         </tr>
@@ -82,7 +87,11 @@ const FeatureSearch = (props) => {
                   {props.featureWishes?.map((feature, key) => (
                     <tr key={key}>
                       <td>{feature.title}</td>
-                      <td>{feature.company_name} </td>
+                      <td>
+                        <Link to={`/?company=${feature.company_slug}`}>
+                          {feature.company_name}
+                        </Link>
+                      </td>
                       <td>Product 1</td>
                       <td>{feature.user_name}</td>
                     </tr>
