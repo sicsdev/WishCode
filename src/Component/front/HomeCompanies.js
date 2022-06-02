@@ -25,10 +25,6 @@ const HomeCompanies = (props) => {
                         />
                         <div className="card-body-content">
                           <h5>{company.company_name}</h5>
-                          {/* <p>
-                          With supporting text below as a natural lead-in to
-                          additional content.
-                        </p> */}
                         </div>
                       </div>
                     </Link>

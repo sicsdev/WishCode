@@ -17,6 +17,7 @@ const SearchFeature = (props) => {
                     <tr>
                       <th>Title</th>
                       <th>Feedbacks</th>
+                      <th>Product Name</th>
                       <th>Votes</th>
                       <th>Created On</th>
                     </tr>
@@ -26,6 +27,7 @@ const SearchFeature = (props) => {
                       props.featureList.map((feature, key) => (
                         <tr key={key}>
                           <td>{feature.title}</td>
+                          <td>{feature.product_name}</td>
                           <td>{feature.comments_count}</td>
                           <td>{feature.post_votes_count}</td>
                           <td>{moment(feature.created_at).format("LL")}</td>

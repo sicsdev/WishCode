@@ -1,5 +1,5 @@
 import { Modal, Button, Form } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axiosConfig from "../../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,6 +23,7 @@ const AddFeatureModel = ({
 }) => {
   const [rangevalue, setRangevalue] = useState({ values: [0] });
   const [developmentURL, setDevelopmentURL] = useState("");
+  const [productName, setProductName] = useState("");
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -41,6 +42,7 @@ const AddFeatureModel = ({
     formData.append("development_url", developmentURL);
     formData.append("image", selectedFile);
     formData.append("companyID", companyId);
+    formData.append("product_name", productName);
 
     try {
       const { data } = await axiosConfig.post(
@@ -53,6 +55,7 @@ const AddFeatureModel = ({
       getPageData();
       setfeatureTitle("");
       setfeatureDescription("");
+      setProductName("");
       toast.success("Feature Added Successfully!", {
         position: "bottom-right",
         autoClose: 2000,
