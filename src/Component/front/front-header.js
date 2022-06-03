@@ -24,7 +24,7 @@ const FrontHeader = () => {
               </li>
             ) : (
               <li>
-                <Link to="/login" className="btn btn-small sign_in_btn">
+                <Link to="/logout" className="btn btn-small sign_in_btn">
                   Logout
                 </Link>
               </li>
