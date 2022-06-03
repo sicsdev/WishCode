@@ -38,19 +38,15 @@ const ApproveFeatureReqCom = ({
           );
           setloader(false);
           getPageData();
-          return toast.success(
-            `Feature Status ${status} Successfully!`,
-            {
-              position: "bottom-right",
-              autoClose: 2000,
-            }
-          );
+          return toast.success(`Feature Status ${status} Successfully!`, {
+            position: "bottom-right",
+            autoClose: 2000,
+          });
         } catch (error) {
           setloader(false);
           return toast.error(
             `${
-              error.response.data.message &&
-              error.response.data.message.post_id
+              error.response.data.message && error.response.data.message.post_id
                 ? error.response.data.message.post_id[0]
                 : error.response.data.message
             }`,
@@ -78,6 +74,7 @@ const ApproveFeatureReqCom = ({
                     <tr>
                       <th scope="col">Feature Title</th>
                       <th scope="col">Feature Description</th>
+                      <th scope="col">Product Name</th>
                       <th scope="col">Created On</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -93,6 +90,7 @@ const ApproveFeatureReqCom = ({
                             {feature.content}
                           </p>
                         </td>
+                        <td>{feature.product_name}</td>
                         <td>
                           <p>{moment(feature.created_at).format("LL")}</p>
                         </td>
@@ -102,7 +100,10 @@ const ApproveFeatureReqCom = ({
                               type="button"
                               className="btn btn-lg-primary debny-btn w-100 mr-3"
                               onClick={(e) =>
-                                updateFeatureStatusHandler(feature.id, "rejected")
+                                updateFeatureStatusHandler(
+                                  feature.id,
+                                  "rejected"
+                                )
                               }
                             >
                               Deny
@@ -112,7 +113,10 @@ const ApproveFeatureReqCom = ({
                               type="button"
                               className="btn btn-success approv-btn w-100"
                               onClick={(e) =>
-                                updateFeatureStatusHandler(feature.id, "publish")
+                                updateFeatureStatusHandler(
+                                  feature.id,
+                                  "publish"
+                                )
                               }
                             >
                               Approve

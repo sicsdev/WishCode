@@ -21,12 +21,13 @@
 
 .home_wrapper {
     background-image: url(../images/home-bg.png);
-    height: 100vh;
+    height: auto;
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 22;
     position: relative;
     width: 100%;
+    min-height: 92vh;
 }
 
 .top-banner-wrapper h2 {

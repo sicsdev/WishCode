@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import SuggestFeatureModel from "./models/SuggestFeatureModel";
+import Loader from "../Loader";
+import { ToastContainer } from "react-toastify";
 
 const FeatureSearch = (props) => {
+  const [showModel, setShowModel] = useState(false);
+  const handleClose = () => setShowModel(false);
+  const [loader, setLoader] = useState(false);
+
   return (
     <div className="featured-search section-gap">
       <div className="container">
@@ -30,7 +37,7 @@ const FeatureSearch = (props) => {
                   <thead>
                     <tr>
                       <th scope="col">Feature Wishes</th>
-                      <th scope="col">Company Name</th>
+                      <th scope="col">Company</th>
                       <th scope="col">Product</th>
                       <th scope="col">Submitted By</th>
                     </tr>
@@ -45,7 +52,7 @@ const FeatureSearch = (props) => {
                               {feature.company_name}
                             </Link>
                           </td>
-                          <td>Product 1</td>
+                          <td>{feature.product_name}</td>
                           <td>{feature.user_name}</td>
                         </tr>
                       ))
@@ -72,13 +79,20 @@ const FeatureSearch = (props) => {
               <h5 className="text-white text-uppercase">
                 latest Feature Wishes
               </h5>
+              <button
+                type="button"
+                className="btn btn-lg-primary text-white"
+                onClick={(e) => setShowModel(true)}
+              >
+                New Feature
+              </button>
             </div>
             <div className="table-responsive custom-table approve-table">
               <table className="table table-hover mb-0">
                 <thead>
                   <tr>
                     <th scope="col">Feature Wishes</th>
-                    <th scope="col">Company Name</th>
+                    <th scope="col">Company</th>
                     <th scope="col">Product</th>
                     <th scope="col">Submitted By</th>
                   </tr>
@@ -92,7 +106,7 @@ const FeatureSearch = (props) => {
                           {feature.company_name}
                         </Link>
                       </td>
-                      <td>Product 1</td>
+                      <td>{feature.product_name}</td>
                       <td>{feature.user_name}</td>
                     </tr>
                   ))}
@@ -102,6 +116,15 @@ const FeatureSearch = (props) => {
           </div>
         </div>
       </div>
+      <SuggestFeatureModel
+        show={showModel}
+        setShow={setShowModel}
+        close={handleClose}
+        loader={loader}
+        setLoader={setLoader}
+      />
+      {loader === true ? <Loader /> : <></>}
+      <ToastContainer />
     </div>
   );
 };

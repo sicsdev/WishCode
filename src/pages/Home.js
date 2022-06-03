@@ -89,11 +89,10 @@ const Home = () => {
       <div className="main-body">
         <FrontHeader />
         <div className="home_wrapper">
-          <FrontPageBanner />
-          {!isCompanyFilter ? <HomeCompanies companyList={companyList} /> : ""}
+          {/* <FrontPageBanner /> */}
+          {/* {!isCompanyFilter ? <HomeCompanies companyList={companyList} /> : ""} */}
 
-          <HomeFeatures featureList={featureList} />
-          <HomeBottom />
+          {/* <HomeFeatures featureList={featureList} /> */}
           <FeatureSearch
             featureWishes={featuresWishes}
             searchValue={searchValue}
@@ -102,8 +101,9 @@ const Home = () => {
             filterWishList={filterWishList}
             isSearch={isSearch}
           />
-          <FrontFooter />
+          {/* <HomeBottom /> */}
         </div>
+        <FrontFooter />
       </div>
       {loader === true ? <Loader /> : <></>}
       <ToastContainer />

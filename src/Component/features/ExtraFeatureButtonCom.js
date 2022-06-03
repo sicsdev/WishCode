@@ -123,7 +123,13 @@ const ExtraFeatureButtonCom = ({
     <>
       <p>
         <b>Development URL: </b>
-        {featureData.development_url}
+        <a
+          className="text-dark"
+          href={featureData.development_url}
+          target="_blank"
+        >
+          {featureData.development_url}
+        </a>
         <span className="btn pl-2" onClick={(e) => openDevURLModel()}>
           <i className="fa fa-edit"></i>
         </span>

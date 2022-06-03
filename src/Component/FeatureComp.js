@@ -249,7 +249,6 @@ const FeatureComp = ({
           </Modal.Footer>
         </form>
       </Modal>
-      { features?.length == 0  ? <Loader /> : <></>}
       <ToastContainer />
     </>
   );
