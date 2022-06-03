@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,8 +13,6 @@ const SuggestFeatureModel = (props) => {
   const [modelLoginText, setModelLoginText] = useState(false);
   const [suggestedComapnies, setSuggestedComapnies] = useState([]);
   const [suggestedProducts, setSuggestedProducts] = useState([]);
-  // const [existCompanyName, setExistCompanyName] = useState("");
-  // const [existedProductName, setExistedProductName] = useState("");
 
   const tokens = localStorage.getItem("token");
   const config = {
@@ -23,6 +21,10 @@ const SuggestFeatureModel = (props) => {
       Authorization: `Bearer ${tokens}`,
     },
   };
+
+  useEffect(() => {
+    setCompanyName(props.searchedCompanyName);
+  }, [props.searchedCompanyName]);
 
   const submitFormData = async (e) => {
     e.preventDefault();
@@ -148,6 +150,7 @@ const SuggestFeatureModel = (props) => {
                       className="form-control"
                       placeholder="Enter Title"
                       value={companyName}
+                      disabled={props.searchedCompanyName !== "" ? true : false}
                       required
                       onChange={(e) => {
                         setCompanyName(e.target.value);

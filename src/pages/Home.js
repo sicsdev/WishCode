@@ -25,6 +25,8 @@ const Home = () => {
   const [searchParams] = useSearchParams();
   let companyName = searchParams.get("company");
 
+  const [searchedCompanyName, setSearchedCompanyName] = useState("");
+
   useEffect(() => {
     getHomePageData(companyName);
   }, [companyName]);
@@ -40,10 +42,16 @@ const Home = () => {
     }
     let response = await getRequestApi(webApiUrl);
     if (response) {
-      if (response.data.data) {
+      if (response?.data?.data) {
         setFeatureList(response.data.data.posts);
         setCompanyList(response.data.data.companies);
         setFeaturesWishes(response.data.data.featureWishList);
+
+        if (response?.data?.data?.companyName) {
+          setSearchedCompanyName(response.data.data.companyName);
+        } else {
+          setSearchedCompanyName("");
+        }
       } else {
         toast.error(response.message, {
           position: "bottom-right",
@@ -100,6 +108,7 @@ const Home = () => {
             searchHandler={searchHandler}
             filterWishList={filterWishList}
             isSearch={isSearch}
+            searchedCompanyName={searchedCompanyName}
           />
           {/* <HomeBottom /> */}
         </div>

@@ -122,6 +122,7 @@ const FeatureSearch = (props) => {
         close={handleClose}
         loader={loader}
         setLoader={setLoader}
+        searchedCompanyName={props?.searchedCompanyName}
       />
       {loader === true ? <Loader /> : <></>}
       <ToastContainer />
