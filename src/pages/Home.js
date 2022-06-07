@@ -24,6 +24,7 @@ const Home = () => {
 
   const [searchParams] = useSearchParams();
   let companyName = searchParams.get("company");
+  let postStatus = searchParams.get("status");
 
   const [searchedCompanyName, setSearchedCompanyName] = useState("");
 
@@ -35,7 +36,7 @@ const Home = () => {
     let webApiUrl;
     if (companyName !== null) {
       setIsCompanyFilter(true);
-      webApiUrl = `/front/dashboard?company_name=${companyName}`;
+      webApiUrl = `/front/dashboard?company_name=${companyName}&status=${postStatus}`;
     } else {
       setIsCompanyFilter(false);
       webApiUrl = `/front/dashboard`;

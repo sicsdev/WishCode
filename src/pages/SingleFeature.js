@@ -334,6 +334,42 @@ const SingleFeature = () => {
     });
   };
 
+  const completeFeatureStatus = (id, val) => {
+    let apVal = "";
+    if (val == "completed") {
+      apVal = "publish";
+    } else {
+      apVal = "completed";
+    }
+    swal({
+      title: "Are you sure?",
+      text: "You want to Complete this Feature?",
+      icon: "warning",
+      dangerMode: true,
+    }).then(async (willApprove) => {
+      if (willApprove) {
+        try {
+          const { data } = await axiosConfig.post(
+            `/admin/post/change-status`,
+            {
+              post_id: id,
+              status: apVal,
+            },
+            config
+          );
+          swal("Updated!", "You Completed a Feature successfully!", "success");
+          getFeatureData();
+        } catch (error) {
+          swal(
+            "Error!",
+            "Enable to update the Feature status to Complete!",
+            "error"
+          );
+        }
+      }
+    });
+  };
+
   const completeComment = (id, val) => {
     let apVal = "";
     if (val == "1") {
@@ -524,18 +560,41 @@ const SingleFeature = () => {
                               )}
                               {featureData.user_id == current_user_id ||
                               current_user_id == 1 ? (
-                                <button
-                                  className="btn input-group-text vote"
-                                  onClick={(e) => {
-                                    viewVoteCount(
-                                      featureData.id,
-                                      "post",
-                                      "all"
-                                    );
-                                  }}
-                                >
-                                  View Count
-                                </button>
+                                <>
+                                  <button
+                                    className="btn input-group-text vote"
+                                    onClick={(e) => {
+                                      viewVoteCount(
+                                        featureData.id,
+                                        "post",
+                                        "all"
+                                      );
+                                    }}
+                                  >
+                                    View Count
+                                  </button>
+                                  <div className="switch-btn-wrapper mt-3">
+                                    <span className="mt-2 company-label">
+                                      Complete
+                                    </span>
+                                    <label className="switch">
+                                      <input
+                                        type="checkbox"
+                                        name="completeFeature"
+                                        checked={
+                                          featureData.status == "completed"
+                                        }
+                                        onChange={(e) => {
+                                          completeFeatureStatus(
+                                            featureData.id,
+                                            featureData.status
+                                          );
+                                        }}
+                                      />
+                                      <span className="slider round"></span>
+                                    </label>
+                                  </div>
+                                </>
                               ) : (
                                 ""
                               )}

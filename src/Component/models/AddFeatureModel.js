@@ -4,6 +4,7 @@ import axiosConfig from "../../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RangeCom from "../rangeSlider/RangeCom";
+import { getRequestApi } from "../../helper/Helper";
 
 const AddFeatureModel = ({
   show,
@@ -24,6 +25,7 @@ const AddFeatureModel = ({
   const [rangevalue, setRangevalue] = useState({ values: [0] });
   const [developmentURL, setDevelopmentURL] = useState("");
   const [productName, setProductName] = useState("");
+  const [suggestedProducts, setSuggestedProducts] = useState([]);
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -65,6 +67,39 @@ const AddFeatureModel = ({
       console.log("error", error);
       setloader(false);
     }
+  };
+
+  const searchHandler = async (val) => {
+    if (val.length >= 3) {
+      let res = await getSuggestedItems(val);
+      if (res) {
+        setSuggestedProducts(res);
+      }
+    } else if (val.length == 0) {
+      setSuggestedProducts([]);
+    } else {
+    }
+  };
+
+  const getSuggestedItems = async (keyword) => {
+    let response = await getRequestApi(
+      `/feature/filter/company_product?keyword=${keyword}&filterType=product`
+    );
+    if (response) {
+      if (response?.data?.success) {
+        return response.data.data;
+      } else {
+        return toast.error(response.message, {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+      }
+    } else {
+    }
+  };
+
+  const updateFieldValue = (val) => {
+    setProductName(val);
   };
 
   return (
@@ -121,6 +156,36 @@ const AddFeatureModel = ({
                   value={developmentURL}
                   onChange={(e) => setDevelopmentURL(e.target.value)}
                 />
+              </div>
+              <div className="input-form">
+                <label> Product Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Title"
+                  value={productName}
+                  required
+                  onChange={(e) => {
+                    setProductName(e.target.value);
+                    searchHandler(e.target.value);
+                  }}
+                />
+                {suggestedProducts.length > 0 &&
+                  suggestedProducts?.map((value, key) => (
+                    <div className="mb-3" key={key}>
+                      <span
+                        role={"button"}
+                        className={
+                          value.product_name === productName
+                            ? "badge badge-primary mr-2 p-2"
+                            : "badge badge-dark mr-2 p-2"
+                        }
+                        onClick={(e) => updateFieldValue(value.product_name)}
+                      >
+                        {value.product_name}
+                      </span>
+                    </div>
+                  ))}
               </div>
               <div className="input-form">
                 <label>Image</label>

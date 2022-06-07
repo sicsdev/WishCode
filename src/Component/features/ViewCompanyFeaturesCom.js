@@ -25,6 +25,7 @@ const ViewCompanyFeaturesCom = ({
   const [featureTitle, setfeatureTitle] = useState("");
   const [featureDescription, setfeatureDescription] = useState("");
   const [loader, setloader] = useState(false);
+  const [productName, setProductName] = useState("");
 
   const tokens = localStorage.getItem("token");
   const config = {
@@ -46,6 +47,7 @@ const ViewCompanyFeaturesCom = ({
     setfeatureTitle(val.title);
     setfeatureDescription(val.content);
     setfeatureId(val.id);
+    setProductName(val.product_name);
   };
 
   const deleteCompanyFeature = (id) => {
@@ -201,6 +203,8 @@ const ViewCompanyFeaturesCom = ({
         setfeatureDescription={setfeatureDescription}
         featureId={featureId}
         setfeatureId={setfeatureId}
+        setProductName={setProductName}
+        productName={productName}
       />
       {loader === true ? <Loader /> : <></>}
       <ToastContainer />

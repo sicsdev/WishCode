@@ -67,7 +67,7 @@ const SubscriptionModal = (props) => {
               {props.subscriptionStatus === "paid" ? (
                 "View Subscription"
               ) : (
-                <>{`${props.modalHeading} ($${process.env.REACT_APP_MONTHLY_PRICE} / Month)`}</>
+                <>{`${props.modalHeading}`}</>
               )}
             </h5>
           </Modal.Title>
@@ -90,7 +90,13 @@ const SubscriptionModal = (props) => {
                       </thead>
                       <tbody>
                         <tr>
-                          <td>{`$${process.env.REACT_APP_MONTHLY_PRICE}`}</td>
+                          <td>
+                            {props.companyData.plan_type === "small"
+                              ? `$${process.env.REACT_APP_SMALL_BUSINESS}`
+                              : props.companyData.plan_type === "medium"
+                              ? `$${process.env.REACT_APP_MEDIUM_BUSINESS}`
+                              : `$${process.env.REACT_APP_ENTERPRISE_BUSINESS}`}
+                          </td>
                           <td>
                             {moment(props.companyData.start_date).format("LL")}
                           </td>
@@ -120,7 +126,7 @@ const SubscriptionModal = (props) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {props.cardDetails.map((card, key) => (
+                        {props?.cardDetails.map((card, key) => (
                           <tr>
                             <td>{`**** **** **** ${card.last4}`}</td>
                             <td>
