@@ -4,6 +4,8 @@ import axiosConfig from "../../base_url/config";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import swal from "sweetalert";
+import { useState } from "react";
+import EditFeatureModel from "../models/EditFeatureModel";
 
 const ApproveFeatureReqCom = ({
   pendingFeatureList,
@@ -11,6 +13,14 @@ const ApproveFeatureReqCom = ({
   setloader,
   getPageData,
 }) => {
+  const handleEditFeatureModelClose = () => setShowEditFeatureModel(false);
+  const [showEditFeatureModel, setShowEditFeatureModel] = useState(false);
+  const [featureTitle, setfeatureTitle] = useState("");
+  const [featureDescription, setfeatureDescription] = useState("");
+  const [featureId, setfeatureId] = useState();
+  const [selectedFile, setselectedFile] = useState(null);
+  const [companyID, setCompanyID] = useState("");
+  const [productName, setProductName] = useState("");
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -58,6 +68,14 @@ const ApproveFeatureReqCom = ({
         }
       }
     });
+  };
+  const editViewFeature = (val) => {
+    setCompanyID(val.company_id);
+    setShowEditFeatureModel(true);
+    setfeatureTitle(val.title);
+    setfeatureDescription(val.content);
+    setfeatureId(val.id);
+    setProductName(val.product_name);
   };
   return (
     <>
@@ -111,6 +129,16 @@ const ApproveFeatureReqCom = ({
 
                             <button
                               type="button"
+                              className="btn btn-success approv-btn w-100 mr-3"
+                              onClick={(e) => {
+                                editViewFeature(feature);
+                              }}
+                            >
+                              Edit
+                            </button>
+
+                            <button
+                              type="button"
                               className="btn btn-success approv-btn w-100"
                               onClick={(e) =>
                                 updateFeatureStatusHandler(
@@ -132,6 +160,24 @@ const ApproveFeatureReqCom = ({
           </div>
         </div>
       </div>
+      <EditFeatureModel
+        showModal={showEditFeatureModel}
+        handleCloseModal={handleEditFeatureModelClose}
+        setshowModal={setShowEditFeatureModel}
+        setloader={setloader}
+        companyId={companyID}
+        getPageData={getPageData}
+        featureTitle={featureTitle}
+        featureDescription={featureDescription}
+        selectedFile={selectedFile}
+        setselectedFile={setselectedFile}
+        setfeatureTitle={setfeatureTitle}
+        setfeatureDescription={setfeatureDescription}
+        featureId={featureId}
+        setfeatureId={setfeatureId}
+        setProductName={setProductName}
+        productName={productName}
+      />
     </>
   );
 };

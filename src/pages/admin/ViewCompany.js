@@ -46,6 +46,7 @@ const ViewCompany = () => {
   const [featureTitle, setfeatureTitle] = useState("");
   const [featureDescription, setfeatureDescription] = useState("");
   const [showFeatureModel, setShowFeatureModel] = useState(false);
+  const [productName, setProductName] = useState("");
   const handleFeatureModelClose = () => setShowFeatureModel(false);
 
   const [showEditFeatureModel, setShowEditFeatureModel] = useState(false);
@@ -185,6 +186,7 @@ const ViewCompany = () => {
     setfeatureTitle(val.title);
     setfeatureDescription(val.content);
     setfeatureId(val.id);
+    setProductName(val.product_name);
   };
 
   const deleteCompanyFeature = (id) => {
@@ -596,6 +598,8 @@ const ViewCompany = () => {
         setfeatureDescription={setfeatureDescription}
         featureId={featureId}
         setfeatureId={setfeatureId}
+        setProductName={setProductName}
+        productName={productName}
       />
       {loader === true ? <Loader /> : <></>}
       <ToastContainer />

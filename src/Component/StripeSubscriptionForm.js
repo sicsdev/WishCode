@@ -16,6 +16,11 @@ const StripeSubscriptionForm = (props) => {
   const elements = useElements();
   const [loader, setloader] = useState(false);
   const tokens = localStorage.getItem("token");
+  const [planType, setPlanType] = useState(
+    process.env.REACT_APP_MEDIUM_BUSINESS_PRICE_ID
+  );
+  const [planName, setPlanName] = useState("medium");
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -72,6 +77,8 @@ const StripeSubscriptionForm = (props) => {
         "/company-admin/subscription/create",
         {
           token_id: card_token.token.id,
+          planType: planType,
+          planName: planName,
         },
         config
       );
@@ -97,8 +104,42 @@ const StripeSubscriptionForm = (props) => {
       );
     }
   };
+
   return (
     <div className="stripecard-container">
+      <div className="input-form">
+        <label>Select Plan</label>
+        <select
+          className="form-control"
+          onChange={(e) => {
+            setPlanType(e.target.value);
+            setPlanName(
+              e.target[e.target.selectedIndex].getAttribute("data-type")
+            );
+          }}
+          defaultValue={planType}
+        >
+          <option
+            data-type="small"
+            value={process.env.REACT_APP_SMALL_BUSINESS_PRICE_ID}
+          >
+            Small Business ($100 / mo)
+          </option>
+          <option
+            data-type="medium"
+            value={process.env.REACT_APP_MEDIUM_BUSINESS_PRICE_ID}
+          >
+            Medium Business ($250 / mo)
+          </option>
+          <option
+            data-type="enterprise"
+            value={process.env.REACT_APP_ENTERPRISE_BUSINESS_PRICE_ID}
+          >
+            Enterprise ($500 / mo)
+          </option>
+        </select>
+      </div>
+
       <div className="stripe_card_number">
         <CardNumberElement options={cardStyle} className="form-control" />
       </div>

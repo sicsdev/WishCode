@@ -21,7 +21,8 @@ const SubscriptionCom = (props) => {
             className="ml-2 badge badge-pill badge-danger font-lg-12 p-2 text-uppercase btn"
             onClick={(e) => subscriptionModalHandler()}
           >
-            {`Upgrade Subscription ($${process.env.REACT_APP_MONTHLY_PRICE})`}
+            {/* {`Upgrade Subscription ($${process.env.REACT_APP_MONTHLY_PRICE})`} */}
+            {`Get Subscription`}
           </span>
         ) : props.companyData.subscription_status === "paid" ? (
           <span

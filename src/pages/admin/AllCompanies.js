@@ -18,6 +18,7 @@ const AllCompanies = () => {
   const handleClose = () => setShow(false);
   const [loader, setloader] = useState(false);
   const [pageLoad, setPageLoad] = useState(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState("");
 
   const editViewUser = (val) => {
     setShow(true);
@@ -25,6 +26,7 @@ const AllCompanies = () => {
     setuser(val.name);
     setuserEmail(val.email);
     setcompanyId(val.id);
+    setSubscriptionStatus(val.subscription_status);
   };
 
   const [totalCompanies, settotalCompanies] = useState([]);
@@ -69,6 +71,7 @@ const AllCompanies = () => {
         {
           company_name: company,
           name: user,
+          subscription_status: subscriptionStatus,
         },
         config
       );
@@ -275,6 +278,38 @@ const AllCompanies = () => {
                   value={userEmail}
                   disabled
                 />
+              </div>
+              <div className="input-form">
+                <label>Subscription Status</label>
+                <select
+                  className="form-control"
+                  onChange={(e) => setSubscriptionStatus(e.target.value)}
+                >
+                  <option
+                    value="trial"
+                    selected={subscriptionStatus === "trial" ? true : false}
+                  >
+                    Trial
+                  </option>
+                  <option
+                    value="paid"
+                    selected={subscriptionStatus === "paid" ? true : false}
+                  >
+                    Paid
+                  </option>
+                  <option
+                    value="unpaid"
+                    selected={subscriptionStatus === "unpaid" ? true : false}
+                  >
+                    UnPaid
+                  </option>
+                  <option
+                    value="canceled"
+                    selected={subscriptionStatus === "canceled" ? true : false}
+                  >
+                    Cancelled
+                  </option>
+                </select>
               </div>
             </>
           </Modal.Body>
