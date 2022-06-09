@@ -71,7 +71,7 @@ const ViewCompanyFeaturesCom = ({
       });
     }
   };
-  console.log("totalCompanyFeatures: ", totalCompanyFeatures);
+
   return (
     <>
       <div className="dashboard card">
