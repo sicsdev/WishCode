@@ -29,7 +29,7 @@ const ViewCompanyFeatures = () => {
 
   const getAllCompanyFeatures = async () => {
     setloader(true);
-    let response = await getRequestApi(`/products/company/${id}`);
+    let response = await getRequestApi(`/dashboard/feature/company/${id}`);
     if (response) {
       settotalCompanyFeatures(response.data.data);
     }

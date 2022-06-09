@@ -87,7 +87,8 @@ const RouteCom = () => {
 
       <Route exact path="/" element={<PrivateRoute />}>
         <Route exact path="/products" element={<Products />} />
-        <Route exact path="/products/:id" element={<ViewProduct />} />
+        {/* <Route exact path="/products/:id" element={<ViewProduct />} /> */}
+        <Route exact path="/dashboard/:filter_type/:id" element={<ViewProduct />} />
         <Route exact path="/feedback" element={<Feedbacks />} />
         <Route exact path="/feedback/add" element={<AddFeedback />} />
         <Route exact path="/feature/:id" element={<SingleFeature />} />
@@ -106,7 +107,7 @@ const RouteCom = () => {
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/search" element={<SearchArea />} />
       </Route>
-      <Route exact path="/:company_slug" element={<CompanyDetails />} />
+      {/* <Route exact path="/:company_slug" element={<CompanyDetails />} /> */}
       <Route exact path="/404" element={<NotFound />} />
       <Route path="*" element={<Navigate replace to="/404" />} />
     </Routes>

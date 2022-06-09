@@ -69,20 +69,24 @@ const Products = () => {
       .get(`/products/${keyword}`, config)
       .then((response) => {
         setloader(false);
-        if (
-          response.data &&
-          response.data.data &&
-          response.data.data.length > 0
-        ) {
+        if (response?.data && response?.data?.data) {
           let cData = [];
+          let pData = [];
           alphabets.forEach((element) => {
-            const filterData = response.data.data.filter(
+            const filterData = response?.data?.data?.companies.filter(
               (x) => x.company_name.charAt(0).toLowerCase() == element
             );
-            if (filterData && filterData.length > 0) {
+            const productFilterData = response?.data?.data?.products.filter(
+              (x) => x.product_name.charAt(0).toLowerCase() === element
+            );
+            if (
+              (filterData && filterData.length > 0) ||
+              (productFilterData && productFilterData.length > 0)
+            ) {
               let payload = {
                 alpha: element,
                 companies: filterData,
+                products: productFilterData,
               };
               cData.push(payload);
             }
@@ -135,7 +139,7 @@ const Products = () => {
         },
         config
       );
-      getAllCompanyList('all');
+      getAllCompanyList("all");
       setSearchValue("");
       setCompanySiteUrl("");
       toast.success("Company Added Successfully!", {
@@ -215,25 +219,36 @@ const Products = () => {
                           </div>
                           <div className="company-list">
                             <div className="row">
+                              <p className="search_heading">Companies</p>
                               {element.companies.map((company, index) => (
                                 <div className="col-md-3" key={index}>
                                   <span className="d-block py-3 text-uppercase company-nameing">
-                                    <a
+                                    <Link
                                       className="link-secondary single-product-link"
-                                      onClick={(e) => {
-                                        sendToProduct(company.id);
-                                      }}
+                                      to={`/dashboard/company/${company.id}`}
                                     >
                                       {company.company_name}
-                                    </a>
+                                    </Link>
                                   </span>
                                 </div>
                               ))}
-
-                              <div
-                                className="col-md-12 load-more-btn py-3"
-                                id="load-more-comp-A-alphalbets"
-                              ></div>
+                            </div>
+                          </div>
+                          <div className="product-list">
+                            <div className="row">
+                              <p className="search_heading">Products</p>
+                              {element.products.map((product, index) => (
+                                <div className="col-md-3" key={index}>
+                                  <span className="d-block py-3 text-uppercase company-nameing">
+                                    <Link
+                                      className="link-secondary single-product-link"
+                                      to={`/dashboard/product/${product.id}`}
+                                    >
+                                      {product.product_name}
+                                    </Link>
+                                  </span>
+                                </div>
+                              ))}
                             </div>
                           </div>
                         </div>

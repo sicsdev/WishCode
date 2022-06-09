@@ -1,9 +1,7 @@
 import React from "react";
 import Header from "../Component/Header";
 import Sidebar from "../Component/Sidebar";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import CryptoJS from "crypto-js";
 import { useState, useEffect } from "react";
 import axiosConfig from "../base_url/config";
 import FeatureComp from "../Component/FeatureComp";
@@ -13,19 +11,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { getRequestApi } from "../helper/Helper";
 
 const ViewProduct = () => {
-  let { id } = useParams();
+  const { id } = useParams();
+  const { filter_type } = useParams();
   const [companyFeatures, setCompanyFeatures] = useState([]);
   const [errorMessage, seterrorMessage] = useState("");
   const [loader, setloader] = useState(false);
   const [companyData, setCompanyData] = useState("");
+  const [productData, setProductData] = useState("");
 
-  let ciphertext = id
-    .replace(/p1L2u3S/g, "+")
-    .replace(/s1L2a3S4h/g, "/")
-    .replace(/e1Q2u3A4l/g, "=");
-  let bytes = CryptoJS.AES.decrypt(ciphertext, "secret key 123");
-  let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-  id = decryptedData;
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -42,7 +35,7 @@ const ViewProduct = () => {
   const getProductData = () => {
     setloader(true);
     axiosConfig
-      .get(`/products/company/${id}`, config)
+      .get(`/dashboard/feature/${filter_type}/${id}`, config)
       .then((response) => setCompanyFeatures(response.data.data))
       .catch((error) => {
         setloader(false);
@@ -53,12 +46,22 @@ const ViewProduct = () => {
   };
   const getCompanyData = async () => {
     setloader(true);
-    let response = await getRequestApi(`/company/get/${id}`);
-    if (response) {
-      setloader(false);
-      setCompanyData(response.data.data);
+    if (filter_type === "company") {
+      let response = await getRequestApi(`/company/get/${id}`);
+      if (response) {
+        setloader(false);
+        setCompanyData(response.data.data);
+      } else {
+        setloader(false);
+      }
     } else {
-      setloader(false);
+      let response = await getRequestApi(`/product/get/${id}`);
+      if (response) {
+        setloader(false);
+        setProductData(response.data.data);
+      } else {
+        setloader(false);
+      }
     }
   };
 
@@ -78,6 +81,8 @@ const ViewProduct = () => {
                     suggestFeature={true}
                     getPageData={getProductData}
                     companyData={companyData}
+                    filter_type={filter_type}
+                    productData={productData}
                   />
                 }
               </div>
