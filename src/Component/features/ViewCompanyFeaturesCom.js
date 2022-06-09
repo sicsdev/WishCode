@@ -71,7 +71,7 @@ const ViewCompanyFeaturesCom = ({
       });
     }
   };
-
+  console.log("totalCompanyFeatures: ", totalCompanyFeatures);
   return (
     <>
       <div className="dashboard card">
@@ -112,6 +112,32 @@ const ViewCompanyFeaturesCom = ({
                         )}
                       </div>
                       <div className="actions-links position-relative py-2 pt-4 ">
+                        {feature?.company_id && feature?.company_name ? (
+                          <Link
+                            className="text-secondary mr-3"
+                            to={`/dashboard/company/${feature.company_id}`}
+                          >
+                            <span className="font-weight-bold">
+                              Company Name:
+                            </span>{" "}
+                            {feature?.company_name}{" "}
+                          </Link>
+                        ) : (
+                          ""
+                        )}
+                        {feature?.product_id ? (
+                          <Link
+                            className="text-secondary"
+                            to={`/dashboard/product/${feature.product_id}`}
+                          >
+                            <span className="font-weight-bold">
+                              Product Name:
+                            </span>{" "}
+                            {feature?.product_name}
+                          </Link>
+                        ) : (
+                          ""
+                        )}
                         <Link
                           to={`/feature/${feature.id}`}
                           className="text-secondary"
