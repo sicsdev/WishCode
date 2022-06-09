@@ -235,6 +235,8 @@ const FeatureComp = ({
         setfeatureDescription={setfeatureDescription}
         featureId={featureId}
         setfeatureId={setfeatureId}
+        productData={productData?.product_name}
+        companyData={companyData?.company_name}
       />
       <Modal show={showClaimModal} onHide={handleClaimCloseModal}>
         <Modal.Header>

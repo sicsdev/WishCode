@@ -1,5 +1,5 @@
 import { Modal, Button, Form } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axiosConfig from "../../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,6 +21,8 @@ const AddFeatureModel = ({
   setfeatureDescription,
   featureId,
   setfeatureId,
+  productData,
+  companyData,
 }) => {
   const [rangevalue, setRangevalue] = useState({ values: [0] });
   const [developmentURL, setDevelopmentURL] = useState("");
@@ -33,6 +35,10 @@ const AddFeatureModel = ({
       Authorization: `Bearer ${tokens}`,
     },
   };
+
+  useEffect(() => {
+    setProductName(productData);
+  }, [productData]);
 
   const addCompanyFeature = async (e) => {
     e.preventDefault();
@@ -117,6 +123,20 @@ const AddFeatureModel = ({
         >
           <Modal.Body>
             <>
+              {companyData && companyData !== "" ? (
+                <div className="input-form">
+                  <label> Company Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder=""
+                    value={companyData}
+                    disabled={true}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
               <div className="input-form">
                 <label> Title</label>
                 <input
