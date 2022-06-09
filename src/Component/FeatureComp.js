@@ -16,6 +16,8 @@ const FeatureComp = ({
   suggestFeature,
   getPageData,
   companyData,
+  filter_type,
+  productData,
 }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -36,13 +38,6 @@ const FeatureComp = ({
       Authorization: `Bearer ${tokens}`,
     },
   };
-
-  // useEffect(() => {
-  //   if (features !== undefined) {
-  //     setFeatures(features);
-
-  //   }
-  // }, [features]);
 
   const addFeature = (val) => {
     setShow(true);
@@ -95,7 +90,15 @@ const FeatureComp = ({
     <>
       <div className="card-header d-flex justify-content-between align-items-center">
         <h5 className="text-white text-uppercase">
-          {companyData ? (
+          {filter_type && filter_type === "company" ? (
+            <>
+              {`${filter_type} Posts: `} {companyData.company_name}
+            </>
+          ) : filter_type && filter_type === "product" ? (
+            <>
+              {`${filter_type} Posts: `} {productData?.product_name}
+            </>
+          ) : companyData ? (
             <>Company Posts: {companyData.company_name}</>
           ) : (
             "Company Posts"
@@ -159,6 +162,32 @@ const FeatureComp = ({
                         )}
                       </div>
                       <div className="actions-links position-relative py-2 pt-4 ">
+                        {feature?.company_id && feature?.company_name ? (
+                          <Link
+                            className="text-secondary mr-3"
+                            to={`/dashboard/company/${feature.company_id}`}
+                          >
+                            <span className="font-weight-bold">
+                              Company Name:
+                            </span>{" "}
+                            {feature?.company_name}{" "}
+                          </Link>
+                        ) : (
+                          ""
+                        )}
+                        {feature?.product_id ? (
+                          <Link
+                            className="text-secondary"
+                            to={`/dashboard/product/${feature.product_id}`}
+                          >
+                            <span className="font-weight-bold">
+                              Product Name:
+                            </span>{" "}
+                            {feature?.product_name}
+                          </Link>
+                        ) : (
+                          ""
+                        )}
                         <Link
                           to={`/feature/${feature.id}`}
                           className="text-secondary"

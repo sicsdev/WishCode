@@ -506,10 +506,37 @@ const SingleFeature = () => {
                       <div className="post-content pt-3">
                         <div className="row">
                           <div className="col-md-10">
+                            {featureData?.company_id &&
+                            featureData?.company_name ? (
+                              <Link
+                                className="text-secondary mr-3"
+                                to={`/dashboard/company/${featureData.company_id}`}
+                              >
+                                <span className="font-weight-bold">
+                                  Company Name:
+                                </span>{" "}
+                                {featureData?.company_name}{" "}
+                              </Link>
+                            ) : (
+                              ""
+                            )}
+                            {featureData?.product_id ? (
+                              <Link
+                                className="text-secondary"
+                                to={`/dashboard/product/${featureData.product_id}`}
+                              >
+                                <span className="font-weight-bold">
+                                  Product Name:
+                                </span>{" "}
+                                {featureData?.product_name}
+                              </Link>
+                            ) : (
+                              ""
+                            )}
                             <h4>{featureData.title}</h4>
                             <p>{featureData.content}</p>
 
-                            {userRole !== 4 ? (
+                            {userRole != 4 ? (
                               <>
                                 <ExtraFeatureButtonCom
                                   featureData={featureData}

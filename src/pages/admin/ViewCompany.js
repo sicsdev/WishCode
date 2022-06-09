@@ -84,7 +84,7 @@ const ViewCompany = () => {
   };
 
   const getCompanyFeatures = async () => {
-    let response = await getRequestApi(`/products/company/${id}/5`);
+    let response = await getRequestApi(`/dashboard/feature/company/${id}/5`);
     if (response) {
       setAllFeatures(response.data.data);
     }
