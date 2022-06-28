@@ -75,6 +75,10 @@ const Sidebar = () => {
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Search</span>
                 </Link>
+                <Link to="/admin/subscription/manage" className="theme-color1">
+                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  &nbsp;<span>Manage Plans</span>
+                </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
