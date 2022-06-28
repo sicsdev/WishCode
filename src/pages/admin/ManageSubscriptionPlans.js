@@ -9,7 +9,6 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { Modal, Button, Form } from "react-bootstrap";
 import swal from "sweetalert";
-import Select from 'react-select'
 
 const ManageSubscriptionPlans = () => {
   const [pageLoad, setPageLoad] = useState(false);
