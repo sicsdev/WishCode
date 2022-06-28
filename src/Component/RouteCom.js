@@ -35,6 +35,7 @@ import ResetPassword from "../pages/ResetPassword";
 import Profile from "../pages/Profile";
 import Home from "../pages/Home";
 import FeatureWishes from "../pages/FeatureWishes";
+import ManageSubscriptionPlans from "../pages/admin/ManageSubscriptionPlans";
 
 const RouteCom = () => {
   return (
@@ -70,6 +71,11 @@ const RouteCom = () => {
           path="/admin/company-features/:id"
           element={<ViewCompanyFeatures />}
         />
+        <Route
+          exact
+          path="/admin/subscription/manage"
+          element={<ManageSubscriptionPlans />}
+        />
       </Route>
       {/* END:: Super Admin Routes */}
       <Route exact path="/" element={<PrivateRoute />}>
@@ -88,7 +94,11 @@ const RouteCom = () => {
       <Route exact path="/" element={<PrivateRoute />}>
         <Route exact path="/products" element={<Products />} />
         {/* <Route exact path="/products/:id" element={<ViewProduct />} /> */}
-        <Route exact path="/dashboard/:filter_type/:id" element={<ViewProduct />} />
+        <Route
+          exact
+          path="/dashboard/:filter_type/:id"
+          element={<ViewProduct />}
+        />
         <Route exact path="/feedback" element={<Feedbacks />} />
         <Route exact path="/feedback/add" element={<AddFeedback />} />
         <Route exact path="/feature/:id" element={<SingleFeature />} />
