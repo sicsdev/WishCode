@@ -84,7 +84,7 @@ const RouteCom = () => {
         <Route exact path="/company/roles" element={<Role />} />
         <Route exact path="/company/features" element={<Features />} />
         <Route
-          exact
+          exact 
           path="/company/approve-requests"
           element={<CompanyRequest />}
         />

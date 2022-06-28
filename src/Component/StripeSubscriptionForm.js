@@ -10,12 +10,14 @@ import axiosConfig from "../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./Loader";
+import { useEffect } from "react";
 
 const StripeSubscriptionForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const [loader, setloader] = useState(false);
   const tokens = localStorage.getItem("token");
+  const [subscriptionpaln, setSubscriptionplan] = useState()
   const [planType, setPlanType] = useState(
     process.env.REACT_APP_MEDIUM_BUSINESS_PRICE_ID
   );
@@ -92,10 +94,9 @@ const StripeSubscriptionForm = (props) => {
     } catch (error) {
       setloader(false);
       return toast.error(
-        `${
-          error.response.data.message && error.response.data.message.token_id
-            ? error.response.data.message.token_id[0]
-            : error.response.data.message
+        `${error.response.data.message && error.response.data.message.token_id
+          ? error.response.data.message.token_id[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -104,7 +105,24 @@ const StripeSubscriptionForm = (props) => {
       );
     }
   };
+  useEffect(() => {
+    getAllsubscription();
+  }, []);
+  const getAllsubscription = async (e) => {
+    try {
+      const { data } = await axiosConfig.get(
+        "company-admin/subscription/get_plans",
+        config
+      );
+      console.log("data", subscriptionpaln)
 
+      setSubscriptionplan(data.data);
+
+    } catch (error) {
+
+    }
+
+  };
   return (
     <div className="stripecard-container">
       <div className="input-form">
@@ -119,24 +137,9 @@ const StripeSubscriptionForm = (props) => {
           }}
           defaultValue={planType}
         >
-          <option
-            data-type="small"
-            value={process.env.REACT_APP_SMALL_BUSINESS_PRICE_ID}
-          >
-            Small Business ($100 / mo)
-          </option>
-          <option
-            data-type="medium"
-            value={process.env.REACT_APP_MEDIUM_BUSINESS_PRICE_ID}
-          >
-            Medium Business ($250 / mo)
-          </option>
-          <option
-            data-type="enterprise"
-            value={process.env.REACT_APP_ENTERPRISE_BUSINESS_PRICE_ID}
-          >
-            Enterprise ($500 / mo)
-          </option>
+          {subscriptionpaln?.map(plans =>
+            <option key={plans.key} value={plans.key}>{plans.nickname}(${plans.amount/100}/{plans.interval})</option>
+          )};
         </select>
       </div>
 

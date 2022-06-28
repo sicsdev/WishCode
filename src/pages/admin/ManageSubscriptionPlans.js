@@ -37,6 +37,7 @@ const ManageSubscriptionPlans = () => {
         "/admin/subscription/plans/all",
         config
       );
+      
       setTotalPlans(data.data);
 
     } catch (error) {
@@ -134,7 +135,7 @@ const ManageSubscriptionPlans = () => {
                   </Link>
 
                 </div>
-                {pageLoad === true ? (
+                {/* {pageLoad === true ? ( */}
                 <div className="card-body">
                   <div className="row">
                     <div className="col-md-12">
@@ -191,9 +192,9 @@ const ManageSubscriptionPlans = () => {
                     </div>
                   </div>
                 </div>
-                 ) : (
+                 {/* ) : (
                   ""
-                )} 
+                )}  */}
               </div>
             </div>
           </section>
