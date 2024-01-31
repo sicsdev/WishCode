@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
+import axiosConfig from "../base_url/config";
 
 const FilterDatatableCom = (props) => {
+  const [isFeatureChecked, SetIsFeatureChecked] = useState([]);
+
+  useEffect(() => {
+    SetIsFeatureChecked(props?.data);
+  }, [props?.data]);
+
+  console.log(props.data);
   function getNumberOfPages(rowCount, rowsPerPage) {
     return Math.ceil(rowCount / rowsPerPage);
   }
@@ -15,6 +24,54 @@ const FilterDatatableCom = (props) => {
     }
 
     return results;
+  }
+  const tokens = localStorage.getItem("token");
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${tokens}`,
+    },
+  };
+  function handleFeatureStatus(FeatureId, FeatureStatus) {
+    let apVal = "";
+    if (FeatureStatus == "completed") {
+      apVal = "publish";
+    } else {
+      apVal = "completed";
+    }
+    swal({
+      title: "Are you sure?",
+      text: "You want to Change status this Feature?",
+      icon: "warning",
+      dangerMode: true,
+    }).then(async (willApprove) => {
+      if (willApprove) {
+        try {
+          await axiosConfig.post(
+            `/admin/post/change-status`,
+            {
+              post_id: FeatureId,
+              status: apVal,
+            },
+            config
+          );
+          SetIsFeatureChecked((prevCheckboxes) =>
+            prevCheckboxes.map((checkbox) =>
+              checkbox.id === FeatureId ? { ...checkbox, status: checkbox.status == "completed" ? "publish" : "completed" } : checkbox
+            )
+          );
+          swal("Updated!", "You Completed a Feature successfully!", "success");
+
+        } catch (error) {
+          swal(
+            "Error!",
+            "Enable to update the Feature status to Complete!",
+            "error"
+          );
+        }
+      }
+    });
+
   }
   const columns = [
     {
@@ -48,6 +105,29 @@ const FilterDatatableCom = (props) => {
       selector: (row) => row.internal_priority,
       sortable: true,
       right: true,
+    },
+    {
+      name: "Status",
+      selector: (row) => (
+        <div className="switch-btn-wrapper mt-3">
+          <label className="switch">
+            <input
+              type="checkbox"
+              name="completeFeature"
+              checked={
+                row.status == "completed"
+              }
+              onChange={(e) => {
+                handleFeatureStatus(
+                  row.id,
+                  row.status
+                );
+              }}
+            />
+            <span className="slider round"></span>
+          </label>
+        </div>
+      )
     },
   ];
   const BootyPagination = ({
@@ -131,10 +211,10 @@ const FilterDatatableCom = (props) => {
             <DataTable
               title={""}
               columns={columns}
-              data={props.data}
+              data={isFeatureChecked}
               defaultSortFieldID={1}
               pagination
-              // paginationComponent={BootyPagination}
+            // paginationComponent={BootyPagination}
             />
           </div>
         </div>

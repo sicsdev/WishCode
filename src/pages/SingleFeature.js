@@ -909,7 +909,7 @@ const SingleFeature = () => {
                                         "approve-feedback"
                                       ) == true ? (
                                         <>
-                                          <div className="switch-btn-wrapper">
+                                          {/* <div className="switch-btn-wrapper">
                                             <span className="mt-2 company-label">
                                               Approve
                                             </span>
@@ -930,7 +930,7 @@ const SingleFeature = () => {
                                               />
                                               <span className="slider round"></span>
                                             </label>
-                                          </div>
+                                          </div> */}
                                         </>
                                       ) : (
                                         ""
@@ -942,7 +942,7 @@ const SingleFeature = () => {
                                         "complete-feedback"
                                       ) == true ? (
                                         <>
-                                          <div className="switch-btn-wrapper">
+                                          {/* <div className="switch-btn-wrapper">
                                             <span className="mt-2 company-label">
                                               Completed
                                             </span>
@@ -962,7 +962,7 @@ const SingleFeature = () => {
                                               />
                                               <span className="slider round"></span>
                                             </label>
-                                          </div>
+                                          </div> */}
                                         </>
                                       ) : (
                                         ""

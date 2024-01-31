@@ -36,6 +36,7 @@ import Profile from "../pages/Profile";
 import Home from "../pages/Home";
 import FeatureWishes from "../pages/FeatureWishes";
 import ManageSubscriptionPlans from "../pages/admin/ManageSubscriptionPlans";
+import ShowCase from "../pages/company/ShowCase";
 
 const RouteCom = () => {
   return (
@@ -104,6 +105,7 @@ const RouteCom = () => {
         <Route exact path="/feature/:id" element={<SingleFeature />} />
         <Route exact path="/features" element={<AllFeatures />} />
         <Route exact path="/feature/all" element={<FeatureDatatable />} />
+        <Route exact path="/smartinfo-care-solution/showcase" element={<ShowCase />} />
         <Route
           exact
           path="/feature-report/:id"

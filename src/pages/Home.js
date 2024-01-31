@@ -21,6 +21,7 @@ const Home = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [isCompanyFilter, setIsCompanyFilter] = useState(false);
+  const [showcaseSection,setShowCaseSection]=useState(false)
 
   const [searchParams] = useSearchParams();
   let companyName = searchParams.get("company");
@@ -47,9 +48,9 @@ const Home = () => {
         setFeatureList(response.data.data.posts);
         setCompanyList(response.data.data.companies);
         setFeaturesWishes(response.data.data.featureWishList);
-
         if (response?.data?.data?.companyName) {
           setSearchedCompanyName(response.data.data.companyName);
+          setShowCaseSection(response.data.data.showCaseData)
         } else {
           setSearchedCompanyName("");
         }
@@ -105,6 +106,7 @@ const Home = () => {
           <FeatureSearch
             featureWishes={featuresWishes}
             searchValue={searchValue}
+            showcaseSection={showcaseSection}
             setSearchValue={setSearchValue}
             searchHandler={searchHandler}
             filterWishList={filterWishList}
