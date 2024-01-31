@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SubscriptionModal from "../Component/models/SubscriptionModal";
+import React from "react";
 
 const SubscriptionCom = (props) => {
   const [show, setShow] = useState(false);
