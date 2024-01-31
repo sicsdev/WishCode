@@ -76,6 +76,10 @@
 .latest-wishes-table .dashboard table tr td:nth-child(3) {
   background: white;
 }
-.latest-wishes-table .dashboard table tr td:nth-child(4) {
+.latest-wishes-table .dashboard table tr td:nth-child(4),.latest-wishes-table .dashboard table tr td:nth-child(5) {
   background: white;
+}
+
+.show-case .table tr:before {
+  display: none;
 }

@@ -95,6 +95,7 @@ const FeatureSearch = (props) => {
                     <th scope="col">Company</th>
                     <th scope="col">Product</th>
                     <th scope="col">Submitted By</th>
+
                   </tr>
                 </thead>
                 <tbody>
@@ -115,6 +116,41 @@ const FeatureSearch = (props) => {
             </div>
           </div>
         </div>
+        {props.showcaseSection ?
+          <div className="latest-wishes-table show-case">
+            <div className="dashboard card mt-5">
+              <div className="card-header d-flex justify-content-between align-items-center">
+                <h5 className="text-white text-uppercase">
+                  Showcase of Completed Items
+                </h5>
+
+              </div>
+              <div className="table-responsive custom-table approve-table">
+                <table className="table table-hover mb-2">
+                  <thead>
+                    <tr>
+                      <th scope="col">Feature Wishes</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {props.showcaseSection.length > 0 ? (
+                      props.showcaseSection?.map((ShowCase, key) => (
+                        <tr key={key}>
+                          <td>{ShowCase.title}</td>
+                          <td>{ShowCase.status}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        No Result Found...
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div> : ""}
       </div>
       <SuggestFeatureModel
         show={showModel}

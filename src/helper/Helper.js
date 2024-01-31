@@ -12,7 +12,7 @@ export const getRequestApi = async (ep) => {
     let response = await axiosConfig.get(ep, config);
     return response;
   } catch (error) {
-    return error.response.data;
+    return error.response;
   }
 };
 
