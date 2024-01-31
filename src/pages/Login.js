@@ -76,7 +76,7 @@ const Login = ({}) => {
             <h3 className="pb-3">WishTrax</h3>
           </div>
           <div className="login-form">
-            <h3 className="pb-3">Login to your account</h3>
+            <h3 className="pb-3">.Login to your account.</h3>
             <form onSubmit={loginhandler}>
               <div className="input-form">
                 <input
