@@ -126,7 +126,7 @@ const SubscriptionModal = (props) => {
                         </tr>
                       </thead>
                       <tbody>
-                        {props?.cardDetails.map((card, key) => (
+                        {props?.cardDetails?.map((card, key) => (
                           <tr>
                             <td>{`**** **** **** ${card.last4}`}</td>
                             <td>
