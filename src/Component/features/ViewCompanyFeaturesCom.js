@@ -27,6 +27,12 @@ const ViewCompanyFeaturesCom = ({
   const [loader, setloader] = useState(false);
   const [productName, setProductName] = useState("");
 
+  const [searchFeature, setSearchFeature] = useState([]);
+
+  useEffect(() => {
+    setSearchFeature(totalCompanyFeatures);
+  }, [totalCompanyFeatures])
+
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -72,11 +78,26 @@ const ViewCompanyFeaturesCom = ({
     }
   };
 
+  const searchRandomFeature = (e) => {
+    const filterdata = searchFeature?.filter((data) => data?.title?.toLowerCase().includes(e.target.value.toLowerCase()));
+    if (e.target.value) {
+      setSearchFeature(filterdata);
+    } else {
+      setSearchFeature(totalCompanyFeatures);
+    }
+  }
+  
   return (
     <>
+      <div class="row justify-content-end">
+        <div class="col-md-4">
+          <input type="text" class="form-control" placeholder="Search Feature" onChange={(e) => searchRandomFeature(e)} />
+        </div>
+      </div>
       <div className="dashboard card">
+
         <div className="card-header d-flex justify-content-between align-items-center">
-          <h5 className="text-white text-uppercase">Company Features</h5>
+          <h5 className="text-white text-uppercase">Company Feature</h5>
           <Link
             to=""
             className="btn btn-lg-primary text-white"
@@ -90,7 +111,8 @@ const ViewCompanyFeaturesCom = ({
         <div className="card-body">
           <div className="row">
             <div className="col-md-12">
-              {totalCompanyFeatures.map((feature, key) => (
+              {searchFeature ? console.log("isArray") : console.log("notarray")}
+              {searchFeature?.map((feature, key) => (
                 <div className="company-post-wrapper" key={key}>
                   <Link to={`/feature/${feature.id}`}>
                     <div className="comp-post">

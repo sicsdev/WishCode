@@ -29,7 +29,7 @@ const Features = () => {
     axiosConfig
       .get("/company-admin/post/all", config)
       .then((response) => {
-        settotalCompanyFeatures(response.data.data.data);
+        settotalCompanyFeatures(response?.data?.data);
         setloader(false);
       })
       .catch((data) => {
