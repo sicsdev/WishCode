@@ -12,7 +12,7 @@ const AllFeatures = () => {
   useEffect(async () => {
     let response = await getRequestApi("/features");
     if (response) {
-      setAllFeatures(response.data.data.data);
+      setAllFeatures(response.data.data);
     }
   }, []);
 
