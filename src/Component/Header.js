@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  // console.log(localStorage.getItem("userName"))
+  const [userRole, setUserRole] = useState("");
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    let getUserRole = parseInt(localStorage.getItem("role"));
+    let getUserName = localStorage.getItem("userName");
+    setUserName(getUserName);
+    switch (getUserRole) {
+      case 1:
+        setUserRole('super-admin');
+        break;
+      case 2:
+        setUserRole('company-admin')
+        break;
+      case 3:
+        setUserRole('company-user');
+        break;
+      case 4:
+        setUserRole('end-user');
+        break;
+      default:
+        // Handle any other cases here
+        setUserRole('default');
+        break;
+    }
+  }, []);
   return (
     <>
       <nav className="bg--header">
@@ -13,15 +40,17 @@ const Header = () => {
                 <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
               </button>
             </div>
-            {/* <div id="navbar-custom">
+            <div id="navbar-custom">
               <ul className="d-flex justify-content-center align-items-center mb-0">
                 <li className="nav-item pl-lg-4 pr-2">
-                  <a className="account-name d-inline-block">
-                    <i className="fa fa-user-circle" aria-hidden="true"></i>
-                  </a>
+                  <div className="d-flex  align-items-center">
+                    <div><i className="fa fa-user-circle" aria-hidden="true"></i></div>
+                    <p className="mb-0" style={{ paddingLeft: "4px" }}>{userName}</p>
+                    <p className="mb-0" style={{ fontSize: "12px", paddingLeft: "4px" }}>({userRole})</p>
+                  </div>
                 </li>
               </ul>
-            </div> */}
+            </div>
           </div>
         </div>
       </nav>

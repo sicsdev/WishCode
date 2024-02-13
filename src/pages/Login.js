@@ -40,7 +40,8 @@ const Login = ({}) => {
         },
         config
       );
-      localStorage.setItem("role", data.data.role_id);
+      localStorage.setItem("role", data?.data?.role_id);
+      localStorage.setItem("userName", data?.data?.name);
       localStorage.setItem("token", data.token);
       setEmail("");
       setPassword("");
