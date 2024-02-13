@@ -5,13 +5,9 @@ const Header = () => {
   const navigate = useNavigate();
   // console.log(localStorage.getItem("userName"))
   const [userRole, setUserRole] = useState("");
-  const [userName, setUserName] = useState("");
-
   useEffect(() => {
     let getUserRole = parseInt(localStorage.getItem("role"));
-    let getUserName = localStorage.getItem("userName");
-    setUserName(getUserName);
-    switch (getUserRole) {
+    switch (getUserRole) { 
       case 1:
         setUserRole('super-admin');
         break;
@@ -45,7 +41,7 @@ const Header = () => {
                 <li className="nav-item pl-lg-4 pr-2">
                   <div className="d-flex  align-items-center">
                     <div><i className="fa fa-user-circle" aria-hidden="true"></i></div>
-                    <p className="mb-0" style={{ paddingLeft: "4px" }}>{userName}</p>
+                    <p className="mb-0" style={{ paddingLeft: "4px" }}>{localStorage.getItem("userName")}</p>
                     <p className="mb-0" style={{ fontSize: "12px", paddingLeft: "4px" }}>({userRole})</p>
                   </div>
                 </li>
