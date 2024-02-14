@@ -125,10 +125,9 @@ const SingleFeature = () => {
       });
     } catch (error) {
       return toast.error(
-        `${
-          error.response.data.message && error.response.data.message.comment
-            ? error.response.data.message.comment[0]
-            : error.response.data.message
+        `${error.response.data.message && error.response.data.message.comment
+          ? error.response.data.message.comment[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -243,10 +242,9 @@ const SingleFeature = () => {
       });
     } catch (error) {
       return toast.error(
-        `${
-          error.response.data.message && error.response.data.message.comment
-            ? error.response.data.message.comment[0]
-            : error.response.data.message
+        `${error.response.data.message && error.response.data.message.comment
+          ? error.response.data.message.comment[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -285,10 +283,9 @@ const SingleFeature = () => {
       });
     } catch (error) {
       return toast.error(
-        `${
-          error.response.data.message && error.response.data.message.type
-            ? error.response.data.message.type[0]
-            : error.response.data.message
+        `${error.response.data.message && error.response.data.message.type
+          ? error.response.data.message.type[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -478,10 +475,9 @@ const SingleFeature = () => {
       });
     } catch (error) {
       return toast.error(
-        `${
-          error.response.data.message && error.response.data.message.type
-            ? error.response.data.message.type[0]
-            : error.response.data.message
+        `${error.response.data.message && error.response.data.message.type
+          ? error.response.data.message.type[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -507,7 +503,7 @@ const SingleFeature = () => {
                         <div className="row">
                           <div className="col-md-10">
                             {featureData?.company_id &&
-                            featureData?.company_name ? (
+                              featureData?.company_name ? (
                               <Link
                                 className="text-secondary mr-3"
                                 to={`/dashboard/company/${featureData.company_id}`}
@@ -574,10 +570,10 @@ const SingleFeature = () => {
                                       aria-hidden="true"
                                     ></i>
                                     {featureData &&
-                                    featureData.post_votes &&
-                                    featureData.post_votes.find(
-                                      (x) => x.user_id == current_user_id
-                                    ) != undefined
+                                      featureData.post_votes &&
+                                      featureData.post_votes.find(
+                                        (x) => x.user_id == current_user_id
+                                      ) != undefined
                                       ? "Update Vote"
                                       : "Add Vote"}
                                   </button>
@@ -586,7 +582,7 @@ const SingleFeature = () => {
                                 ""
                               )}
                               {featureData.user_id == current_user_id ||
-                              current_user_id == 1 ? (
+                                current_user_id == 1 ? (
                                 <>
                                   <button
                                     className="btn input-group-text vote"
@@ -638,8 +634,8 @@ const SingleFeature = () => {
                                   <div className="col-md-2">
                                     <span className="d-block user-img text-center m-auto">
                                       {feedback.user &&
-                                      feedback.user.profile_pic &&
-                                      feedback.user.role_id == "3" ? (
+                                        feedback.user.profile_pic &&
+                                        feedback.user.role_id == "3" ? (
                                         <>
                                           <img
                                             src={`${imageBaseUrl}/${feedback.user.profile_pic}`}
@@ -676,7 +672,7 @@ const SingleFeature = () => {
                                       </h5>
                                       <p className="mb-0">{feedback.comment}</p>
                                       {feedback.comment_image &&
-                                      feedback.comment_image != null ? (
+                                        feedback.comment_image != null ? (
                                         <div className="user-img">
                                           <ImageComponent
                                             imageUrl={feedback.comment_image}
@@ -839,7 +835,7 @@ const SingleFeature = () => {
                                           : feedback.votes.length}
                                       </a>
                                       {feedback.comment_approved == "1" &&
-                                      (userRole == 3 || userRole == 4) ? (
+                                        (userRole == 3 || userRole == 4) ? (
                                         <img
                                           src={
                                             window.location.origin +
@@ -854,7 +850,7 @@ const SingleFeature = () => {
                                       )}
 
                                       {feedback.is_completed == "1" &&
-                                      (userRole == 3 || userRole == 4) ? (
+                                        (userRole == 3 || userRole == 4) ? (
                                         <div className="font-lg-14 pt-2 mb-0">
                                           <p className="badge badge-pill badge-secondary released-msg">
                                             Released
@@ -864,11 +860,11 @@ const SingleFeature = () => {
                                         ""
                                       )}
                                       {featureData.user_id == current_user_id ||
-                                      current_user_id == 1 ||
-                                      isUserPermission(
-                                        userPermissions,
-                                        "vote-count"
-                                      ) == true ? (
+                                        current_user_id == 1 ||
+                                        isUserPermission(
+                                          userPermissions,
+                                          "vote-count"
+                                        ) == true ? (
                                         <>
                                           {feedback.is_completed === "1" ? (
                                             <a
@@ -903,11 +899,11 @@ const SingleFeature = () => {
                                       )}
 
                                       {featureData.user_id == current_user_id ||
-                                      current_user_id == 1 ||
-                                      isUserPermission(
-                                        userPermissions,
-                                        "approve-feedback"
-                                      ) == true ? (
+                                        current_user_id == 1 ||
+                                        isUserPermission(
+                                          userPermissions,
+                                          "approve-feedback"
+                                        ) == true ? (
                                         <>
                                           {/* <div className="switch-btn-wrapper">
                                             <span className="mt-2 company-label">
@@ -936,11 +932,11 @@ const SingleFeature = () => {
                                         ""
                                       )}
                                       {featureData.user_id == current_user_id ||
-                                      current_user_id == 1 ||
-                                      isUserPermission(
-                                        userPermissions,
-                                        "complete-feedback"
-                                      ) == true ? (
+                                        current_user_id == 1 ||
+                                        isUserPermission(
+                                          userPermissions,
+                                          "complete-feedback"
+                                        ) == true ? (
                                         <>
                                           {/* <div className="switch-btn-wrapper">
                                             <span className="mt-2 company-label">
@@ -980,7 +976,7 @@ const SingleFeature = () => {
                                     <div className="col-md-2">
                                       <span className="d-block user-img text-center m-auto">
                                         {reply.user &&
-                                        reply.user.profile_pic ? (
+                                          reply.user.profile_pic ? (
                                           <img
                                             src={`${imageBaseUrl}/${reply.user.profile_pic}`}
                                             alt=""
@@ -1157,7 +1153,9 @@ const SingleFeature = () => {
                 <div className="col-md-4">
                   <div className="voting-option mb-2">
                     <label className="custom-radio">
-                      Yes
+                      <i className="fa fa-thumbs-up"
+                        style={{ color: toggleVal == "yes" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                        aria-hidden="true"></i>
                       <input
                         type="radio"
                         checked="checked"
@@ -1168,14 +1166,17 @@ const SingleFeature = () => {
                           setValRadio("yes");
                         }}
                       />
-                      <span className="checkmark"></span>
+                      <span className="checkmark bg-white">
+                      </span>
                     </label>
                   </div>
                 </div>
                 <div className="col-md-4">
                   <div className="voting-option mb-2">
                     <label className="custom-radio">
-                      No
+                      <i className="fa fa-thumbs-down"
+                        style={{ color: toggleVal == "no" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                        aria-hidden="true"></i>
                       <input
                         type="radio"
                         name="vote_type"
@@ -1185,14 +1186,16 @@ const SingleFeature = () => {
                           setValRadio("no");
                         }}
                       />
-                      <span className="checkmark"></span>
+                      <span className="checkmark bg-white"></span>
                     </label>
                   </div>
                 </div>
                 <div className="col-md-4">
                   <div className="voting-option mb-2">
                     <label className="custom-radio">
-                      Optional
+                      <i className="fa fa-question"
+                        style={{ color: toggleVal == "optional" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                        aria-hidden="true"></i>
                       <input
                         type="radio"
                         name="vote_type"
@@ -1202,7 +1205,7 @@ const SingleFeature = () => {
                           setValRadio("optional");
                         }}
                       />
-                      <span className="checkmark"></span>
+                      <span className="checkmark bg-white"></span>
                     </label>
                   </div>
                 </div>
