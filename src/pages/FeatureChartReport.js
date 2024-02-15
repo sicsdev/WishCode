@@ -21,7 +21,10 @@ const FeatureChartReport = () => {
     "NO",
     "OPTIONAL",
   ]);
-
+  const [totalComments,setTotalComments]=useState('');
+  const [ProductName,setProductName]=useState('');
+  const [description,setDescription]=useState('');
+  const [developmentUrl,setDevelopmentUrl]=useState('');
   useEffect(() => {
     getFeatureReportData();
   }, []);
@@ -32,6 +35,10 @@ const FeatureChartReport = () => {
 
     if (response) {
       setloader(false);
+      setTotalComments(response?.data?.data?.commentCount);
+      setProductName(response?.data?.data?.ProductName);
+      setDescription(response?.data?.data?.content?.content);
+      setDevelopmentUrl(response?.data?.data?.content?.development_url)
       if (response.data.data && response.data.data.publicVotes) {
         setTotalPublicVotes(response.data.data.publicVotes.length);
         constPieChartDataHandler(response.data.data.publicVotes, "public");
@@ -106,6 +113,35 @@ const FeatureChartReport = () => {
                       ) : (
                         ""
                       )}
+                    </div>
+                    <div className="col-md-12 mt-5">
+                      <div className="card-counter primary" style={{height:"auto"}}>
+                      <p className="bd-highlight text-uppercase">Description</p>
+                        <p className="">
+                        {description}
+                        </p>
+                        <p className="mt-2 mb-1">
+                           Development Url : <a href={developmentUrl??"#"} target={developmentUrl?"_blank":"_self"}>{developmentUrl??"Not Available"}</a> 
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-md-6 mt-5">
+                      <div className="card-counter primary">
+                        <i className="fa fa-commenting"></i>
+                        <span className="count-numbers">
+                          {totalComments}
+                        </span>
+                        <span className="count-name">Total Comments</span>
+                      </div>
+                    </div>
+                    <div className="col-md-6 mt-5">
+                      <div className="card-counter primary">
+                        <i className="fa fa-product-hunt"></i>
+                        <span className="count-numbers">
+                          {ProductName??0}
+                        </span>
+                        <span className="count-name">Product Name</span>
+                      </div>
                     </div>
                     <div className="col-md-6 mt-5">
                       <div className="card-counter primary">
