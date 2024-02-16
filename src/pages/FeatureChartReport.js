@@ -21,10 +21,10 @@ const FeatureChartReport = () => {
     "NO",
     "OPTIONAL",
   ]);
-  const [totalComments,setTotalComments]=useState('');
-  const [ProductName,setProductName]=useState('');
-  const [description,setDescription]=useState('');
-  const [developmentUrl,setDevelopmentUrl]=useState('');
+  const [totalComments, setTotalComments] = useState('');
+  const [ProductName, setProductName] = useState('');
+  const [description, setDescription] = useState('');
+  const [developmentUrl, setDevelopmentUrl] = useState('');
   useEffect(() => {
     getFeatureReportData();
   }, []);
@@ -89,6 +89,12 @@ const FeatureChartReport = () => {
                   <h5 className="text-white text-uppercase">
                     View Feature Report
                   </h5>
+                  <Link
+                    to={`/feature/${id}`}
+                    className="btn btn-lg-primary text-white"
+                  >
+                    View Feature
+                  </Link>
                 </div>
                 <div className="card-body">
                   <div className="row">
@@ -115,13 +121,13 @@ const FeatureChartReport = () => {
                       )}
                     </div>
                     <div className="col-md-12 mt-5">
-                      <div className="card-counter primary" style={{height:"auto"}}>
-                      <p className="bd-highlight text-uppercase">Description</p>
+                      <div className="card-counter primary" style={{ height: "auto" }}>
+                        <p className="bd-highlight text-uppercase">Description</p>
                         <p className="">
-                        {description}
+                          {description}
                         </p>
                         <p className="mt-2 mb-1">
-                           Development Url : <a href={developmentUrl??"#"} target={developmentUrl?"_blank":"_self"}>{developmentUrl??"Not Available"}</a> 
+                          Development Url : <a href={developmentUrl ?? "#"} target={developmentUrl ? "_blank" : "_self"}>{developmentUrl ?? "Not Available"}</a>
                         </p>
                       </div>
                     </div>
@@ -138,7 +144,7 @@ const FeatureChartReport = () => {
                       <div className="card-counter primary">
                         <i className="fa fa-product-hunt"></i>
                         <span className="count-numbers">
-                          {ProductName??0}
+                          {ProductName ?? 0}
                         </span>
                         <span className="count-name">Product Name</span>
                       </div>
