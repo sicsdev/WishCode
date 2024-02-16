@@ -1,8 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const FrontHeader = () => {
   const tokens = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const logOut = async (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    setTimeout(() => {
+      navigate("/login");
+    }, 1000);
+    toast.success("Logout Successfully!!", {
+      position: "bottom-right",
+      autoClose: 2000,
+    });
+
+  };
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-light header_navbar">
@@ -23,11 +38,18 @@ const FrontHeader = () => {
                 </Link>
               </li>
             ) : (
-              <li>
-                <Link to="/dashboard" className="btn btn-small sign_in_btn">
-                  Logout
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link to="" onClick={logOut} className="btn btn-small sign_in_btn">
+                    Logout
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard" className="btn btn-small sign_in_btn">
+                    Dashboard
+                  </Link>
+                </li>
+              </>
             )}
           </ul>
         </div>
