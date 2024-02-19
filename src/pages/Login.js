@@ -4,10 +4,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import axiosConfig from "../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import "react-toastify/dist/ReactToastify.css";
+import { GoogleLogin ,useGoogleLogin} from '@react-oauth/google';
+import GoogleLoginComp from "../Component/SocialLogins/GoogleLoginComp";
 
-const Login = ({}) => {
+
+
+const Login = ({ }) => {
+  const myGoogleAppId = process.env.REACT_APP_GOOGLE_APP_ID;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -71,6 +76,8 @@ const Login = ({}) => {
 
   return (
     <>
+    <GoogleOAuthProvider clientId={myGoogleAppId}>
+    {/* <GoogleOAuthProvider clientId="876531998857-3i66ib7vq31qm1v7g6pgi1hu02pvqrq3.apps.googleusercontent.com"> */}
       <div className="auth-wrapper">
         <div className="login-form-inner">
           <div className="brand-nam">
@@ -131,10 +138,18 @@ const Login = ({}) => {
                 </Link>
               </div>
             </form>
+                <GoogleLoginComp />
+              {/* <GoogleLogin
+                onSuccess={login}
+                onError={() => {
+                  console.log('Login Failed');
+                }}
+              />; */}
           </div>
         </div>
         <ToastContainer />
       </div>
+      </GoogleOAuthProvider>
     </>
   );
 };
