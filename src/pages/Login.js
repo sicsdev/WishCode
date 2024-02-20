@@ -6,10 +6,8 @@ import axiosConfig from "../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import "react-toastify/dist/ReactToastify.css";
-import { GoogleLogin ,useGoogleLogin} from '@react-oauth/google';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import GoogleLoginComp from "../Component/SocialLogins/GoogleLoginComp";
-
-
 
 const Login = ({ }) => {
   const myGoogleAppId = process.env.REACT_APP_GOOGLE_APP_ID;
@@ -76,79 +74,73 @@ const Login = ({ }) => {
 
   return (
     <>
-    <GoogleOAuthProvider clientId={myGoogleAppId}>
-    {/* <GoogleOAuthProvider clientId="876531998857-3i66ib7vq31qm1v7g6pgi1hu02pvqrq3.apps.googleusercontent.com"> */}
-      <div className="auth-wrapper">
-        <div className="login-form-inner">
-          <div className="brand-nam">
-            <h3 className="pb-3">WishTrax</h3>
-          </div>
-          <div className="login-form">
-            <h3 className="pb-3">.Login to your account.</h3>
-            <form onSubmit={loginhandler}>
-              <div className="input-form">
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Username"
-                  value={email}
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="input-form">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Password"
-                  required
-                  value={password}
-                  autoComplete="off"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="input-form">
-                <button type="submit" className="btn btn-lg-primary w-100">
-                  {isloader ? (
-                    <i
-                      className="fa fa-refresh fa-spin"
-                      style={{ marginRight: "5px" }}
-                    />
-                  ) : (
-                    ""
-                  )}
-                  Login
-                </button>
-              </div>
-
-              <div className="forget-password pt-3">
-                <Link to="/forget-password" className="btn-link d-block pt-1">
-                  Forget Password?
-                </Link>
-                <div className="line_wrapper">
-                  <div className="line_child"></div>
-                  <div className="or position-relative pt-1">
-                    <span>OR</span>
-                  </div>
-                  <div className="line_child"></div>
+      <GoogleOAuthProvider clientId={myGoogleAppId}>
+        {/* <GoogleOAuthProvider clientId="876531998857-3i66ib7vq31qm1v7g6pgi1hu02pvqrq3.apps.googleusercontent.com"> */}
+        <div className="auth-wrapper">
+          <div className="login-form-inner">
+            <div className="brand-nam">
+              <h3 className="pb-3">WishTrax</h3>
+            </div>
+            <div className="login-form">
+              <h3 className="pb-3">.Login to your account.</h3>
+              <form onSubmit={loginhandler}>
+                <div className="input-form">
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="Username"
+                    value={email}
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="input-form">
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Password"
+                    required
+                    value={password}
+                    autoComplete="off"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="input-form">
+                  <button type="submit" className="btn btn-lg-primary w-100">
+                    {isloader ? (
+                      <i
+                        className="fa fa-refresh fa-spin"
+                        style={{ marginRight: "5px" }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    Login
+                  </button>
                 </div>
 
-                <Link to="/register" className="btn-link pt-1 d-block">
-                  Sign Up
-                </Link>
-              </div>
-            </form>
-                <GoogleLoginComp />
-              {/* <GoogleLogin
-                onSuccess={login}
-                onError={() => {
-                  console.log('Login Failed');
-                }}
-              />; */}
+                <div className="forget-password pt-3">
+                  <Link to="/forget-password" className="btn-link d-block pt-1">
+                    Forget Password?
+                  </Link>
+                  <div className="line_wrapper">
+                    <div className="line_child"></div>
+                    <div className="or position-relative pt-1">
+                      <span>OR</span>
+                    </div>
+                    <div className="line_child"></div>
+                  </div>
+
+                  <Link to="/register" className="btn-link pt-1 d-block">
+                    Sign Up
+                  </Link>
+                </div>
+              </form>
+              <GoogleLoginComp />
+            </div>
           </div>
+          <ToastContainer />
         </div>
-        <ToastContainer />
-      </div>
       </GoogleOAuthProvider>
     </>
   );

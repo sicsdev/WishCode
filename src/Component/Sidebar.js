@@ -80,7 +80,7 @@ const Sidebar = () => {
                   &nbsp;<span>Manage Plans</span>
                 </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
                 </Link>
               </>
@@ -115,7 +115,7 @@ const Sidebar = () => {
                   &nbsp;<span>Company Profile</span>
                 </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
                 </Link>
               </>
@@ -129,16 +129,20 @@ const Sidebar = () => {
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Dashboard</span>
                 </Link>
-                <Link to="/feedback" className="theme-color1">
+                {/* <Link to="/feedback" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Feedback</span>
-                </Link>
+                </Link> */}
                 <Link to="/features" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Features</span>
                 </Link>
-                <Link to="" className="theme-color1" onClick={logOut}>
+                <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  &nbsp;<span>View Features</span>
+                </Link>
+                <Link to="" className="theme-color1" onClick={logOut}>
+                  <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
                 </Link>
               </>
@@ -148,10 +152,10 @@ const Sidebar = () => {
 
             {user_role == 4 ? (
               <>
-                <Link to="/dashboard" className="theme-color1">
+                {/* <Link to="/dashboard" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Dashboard</span>
-                </Link>
+                </Link> */}
                 <Link to="/products" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Products</span>
@@ -165,7 +169,7 @@ const Sidebar = () => {
                   &nbsp;<span>Search</span>
                 </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
                 </Link>
               </>
