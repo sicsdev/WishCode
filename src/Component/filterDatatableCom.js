@@ -11,7 +11,6 @@ const FilterDatatableCom = (props) => {
     SetIsFeatureChecked(props?.data);
   }, [props?.data]);
 
-  console.log(props.data);
   function getNumberOfPages(rowCount, rowsPerPage) {
     return Math.ceil(rowCount / rowsPerPage);
   }
@@ -73,6 +72,48 @@ const FilterDatatableCom = (props) => {
     });
 
   }
+  function handleFeatureType(FeatureId, FeatureType) {
+    let apVal = "";
+    if (FeatureType == "private") {
+      apVal = "public";
+    } else {
+      apVal = "private";
+    }
+    swal({
+      title: "Are you sure?",
+      text: `You want to Change Type ${apVal} Feature?`,
+      icon: "warning",
+      dangerMode: true,
+    }).then(async (willApprove) => {
+      if (willApprove) {
+        try {
+          const responseData = await axiosConfig.post(
+            `/admin/post/change-type`,
+            {
+              post_id: FeatureId,
+              type: apVal,
+            },
+            config
+          );
+          if (responseData?.status == 200) {
+            SetIsFeatureChecked((prevCheckboxes) =>
+              prevCheckboxes.map((checkbox) =>
+                checkbox.id === FeatureId ? { ...checkbox, type: checkbox.type == "private" ? "public" : "private" } : checkbox
+              )
+            );
+          }
+          swal("Updated!", "You Feature Type is updated!", "success");
+
+        } catch (error) {
+          swal(
+            "Error!",
+            "Enable to update the Feature status to Complete!",
+            "error"
+          );
+        }
+      }
+    });
+  }
   const columns = [
     {
       name: "Feature Title",
@@ -87,24 +128,26 @@ const FilterDatatableCom = (props) => {
       name: "Total Votes",
       selector: (row) => row.post_votes_count,
       sortable: true,
+      center: true,
     },
     {
       name: "Public/external votes",
       selector: (row) => row.post_public_vote_count,
       sortable: true,
-      right: true,
+      center: true,
     },
     {
       name: "Private/company/internal votes",
       selector: (row) => row.post_private_vote_count,
       sortable: true,
-      right: true,
+      center: true,
     },
     {
       name: "Internal Priority",
       selector: (row) => row.internal_priority,
       sortable: true,
-      right: true,
+      center: true,
+
     },
     {
       name: "Status",
@@ -127,78 +170,37 @@ const FilterDatatableCom = (props) => {
             <span className="slider round"></span>
           </label>
         </div>
-      )
+      ),
+      center: true,
+
+    },
+    {
+      name: "Type",
+      selector: (row) => <div className="switch-btn-wrapper mt-3">
+ 
+        <label className="switch type_switch">
+          <input type="checkbox" name="typeFeature"
+            checked={
+              row.type == "private"
+            }
+            onChange={(e) => {
+              handleFeatureType(
+                row.id,
+                row.type
+              );
+            }}
+            />
+          <div className="slider round">
+            <span className="on">Private</span>
+            <span className="off">Public</span>
+          </div>
+        </label>
+
+      </div>,
+      center: true,
     },
   ];
-  const BootyPagination = ({
-    rowsPerPage,
-    rowCount,
-    onChangePage,
-    onChangeRowsPerPage, // available but not used here
-    currentPage,
-  }) => {
-    const handleBackButtonClick = () => {
-      onChangePage(currentPage - 1);
-    };
 
-    const handleNextButtonClick = () => {
-      onChangePage(currentPage + 1);
-    };
-
-    const handlePageNumber = (e) => {
-      onChangePage(Number(e.target.value));
-    };
-
-    const pages = getNumberOfPages(rowCount, rowsPerPage);
-    const pageItems = toPages(pages);
-    const nextDisabled = currentPage === pageItems.length;
-    const previosDisabled = currentPage === 1;
-
-    return (
-      <nav>
-        <ul className="pagination">
-          <li className="page-item">
-            <button
-              className="page-link"
-              onClick={handleBackButtonClick}
-              disabled={previosDisabled}
-              aria-disabled={previosDisabled}
-              aria-label="previous page"
-            >
-              Previous
-            </button>
-          </li>
-          {pageItems.map((page) => {
-            const className =
-              page === currentPage ? "page-item active" : "page-item";
-
-            return (
-              <li key={page} className={className}>
-                <button
-                  className="page-link"
-                  onClick={handlePageNumber}
-                  value={page}
-                >
-                  {page}
-                </button>
-              </li>
-            );
-          })}
-          <li className="page-item">
-            <button
-              className="page-link"
-              onClick={handleNextButtonClick}
-              disabled={nextDisabled}
-              aria-disabled={nextDisabled}
-              aria-label="next page"
-            >
-              Next
-            </button>
-          </li>
-        </ul>
-      </nav>
-    );
-  };
 
   return (
     <>
@@ -207,7 +209,7 @@ const FilterDatatableCom = (props) => {
       </div>
       <div className="card-body">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 all_features">
             <DataTable
               title={""}
               columns={columns}

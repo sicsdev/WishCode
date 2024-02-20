@@ -1,8 +1,12 @@
 import React from "react";
 import moment from "moment";
 import { imageBaseUrl } from "../../base_url/config";
-
+import { useNavigate } from "react-router-dom";
 const SearchCompany = (props) => {
+  const navigate = new useNavigate();
+  const onClickCompany = (companyId) => {
+    navigate(``);
+  }
   return (
     <>
       <div className="dashboard card mt-3">
@@ -25,7 +29,7 @@ const SearchCompany = (props) => {
                   <tbody>
                     {props.companyList.length !== 0 ? (
                       props.companyList.map((company, key) => (
-                        <tr key={key}>
+                        <tr key={key} style={{ cursor: "pointer" }} onClick={(e) => onClickCompany(company?.id)}>
                           <td>{company.company_name}</td>
                           <td>
                             <img

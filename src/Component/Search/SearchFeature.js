@@ -1,7 +1,12 @@
 import React from "react";
 import moment from "moment";
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const SearchFeature = (props) => {
+  const navigate = useNavigate();
+  const onClickItem = (itemId) => {
+    navigate(`/feature/${itemId}`);
+  }
   return (
     <>
       <div className="dashboard card mt-3">
@@ -25,13 +30,14 @@ const SearchFeature = (props) => {
                   <tbody>
                     {props.featureList.length !== 0 ? (
                       props.featureList.map((feature, key) => (
-                        <tr key={key}>
+                        <tr key={key} style={{cursor:"pointer"}} onClick={(e) => onClickItem(feature?.id)}>
                           <td>{feature.title}</td>
                           <td>{feature.product_name}</td>
                           <td>{feature.comments_count}</td>
                           <td>{feature.post_votes_count}</td>
                           <td>{moment(feature.created_at).format("LL")}</td>
                         </tr>
+
                       ))
                     ) : (
                       <tr>

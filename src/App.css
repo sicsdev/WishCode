@@ -83,3 +83,63 @@
 .show-case .table tr:before {
   display: none;
 }
+
+
+
+.switch.type_switch{
+  width: 82px;
+}
+.switch.type_switch::before{
+  left: 25px;
+}
+.type_switch input:checked + .slider {
+  background-color: #2ab934 ;
+}
+/*------ ADDED CSS ---------*/
+.type_switch .on
+{
+  display: none;
+}
+
+.type_switch .on, .off
+{
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  font-size: 10px;
+  font-family: Verdana, sans-serif;
+}
+.type_switch .off
+{
+  left: 63%;
+}
+.type_switch .on
+{
+  left: 32%;
+}
+/* .type_switch .slider::before {
+  right: 31px;
+} */
+.type_switch input:checked+ .slider .on
+{display: block;
+}
+
+.type_switch input:checked + .slider .off
+{display: none;}
+
+/*--------- END --------*/
+
+/* Rounded sliders */
+.type_switch .slider.round {
+  border-radius: 34px;
+}
+
+.type_switch .slider.round:before {
+  border-radius: 50%;
+  /* transform: translateX(47px); */
+}
+
+.type_switch input:checked + .slider::before {
+	transform: translateX(47px);
+}

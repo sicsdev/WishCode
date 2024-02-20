@@ -66,13 +66,19 @@ const SearchArea = () => {
                   searchHandler={searchHandler}
                 />
                 {loadPageData && (
-                  <div className="row">
-                    <div className="col-md-12">
-                      <SearchCompany companyList={companyList} />
-                    </div>
-                    <div className="col-md-12">
-                      <SearchFeature featureList={featureList} />
-                    </div>
+                  <div className="row">{
+                    companyList == "" && featureList == "" ? <div className="col-md-12 text-center font-bold font-weight-bold">
+                     No Data Found 
+                    </div> :
+                      <>
+                        <div className="col-md-12">
+                          {companyList != "" ? <SearchCompany companyList={companyList} /> : ""}
+                        </div>
+                        <div className="col-md-12">
+                          {featureList != "" ? <SearchFeature featureList={featureList} /> : ""}
+                        </div>
+                      </>
+                  }
                   </div>
                 )}
               </div>
