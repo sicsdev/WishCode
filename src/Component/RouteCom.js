@@ -37,6 +37,7 @@ import Home from "../pages/Home";
 import FeatureWishes from "../pages/FeatureWishes";
 import ManageSubscriptionPlans from "../pages/admin/ManageSubscriptionPlans";
 import ShowCase from "../pages/company/ShowCase";
+import SearchCompanyFeatureComp from "./Search/SearchCompanyFeatureComp";
 
 const RouteCom = () => {
   return (
@@ -118,6 +119,7 @@ const RouteCom = () => {
         />
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/search" element={<SearchArea />} />
+        <Route exact path="/dashboard/company/:id" element={<SearchCompanyFeatureComp />} />
       </Route>
       {/* <Route exact path="/:company_slug" element={<CompanyDetails />} /> */}
       <Route exact path="/404" element={<NotFound />} />

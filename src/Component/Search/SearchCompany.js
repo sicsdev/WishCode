@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const SearchCompany = (props) => {
   const navigate = new useNavigate();
   const onClickCompany = (companyId) => {
-    navigate(``);
+    navigate(`/dashboard/company/${companyId}`);
   }
   return (
     <>
