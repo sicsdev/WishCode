@@ -531,6 +531,7 @@ const SingleFeature = () => {
                             )}
                             <h4>{featureData.title}</h4>
                             <p>{featureData.content}</p>
+                            <a href={`${imageBaseUrl}/${featureData?.image}`} target="_blank">
                             <div className="user-img">
                               {featureData.image ? (
                                 <img
@@ -541,6 +542,7 @@ const SingleFeature = () => {
                                 ""
                               )}
                             </div>
+                            </a>
                             {userRole != 4 ? (
                               <>
                                 <ExtraFeatureButtonCom

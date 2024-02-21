@@ -25,7 +25,7 @@ const AddFeatureModel = ({
   productData,
   companyData,
 }) => {
-  const [rangevalue, setRangevalue] = useState({ values: [0] });
+  const [rangevalue, setRangevalue] = useState({ values: [1] });
   const [developmentURL, setDevelopmentURL] = useState("");
   const [productName, setProductName] = useState("");
   const [suggestedProducts, setSuggestedProducts] = useState([]);
@@ -162,7 +162,7 @@ const AddFeatureModel = ({
                 ></textarea>
               </div>
               <div className="input-form">
-                <label className="mb-3">Internal Priority</label>
+                <label className="mb-3">Priority</label>
                 <RangeCom
                   rangevalue={rangevalue}
                   setRangevalue={setRangevalue}

@@ -6,7 +6,7 @@ const RangeCom = ({ rangevalue, setRangevalue }) => {
     <>
       <Range
         step={1}
-        min={0}
+        min={1}
         max={10}
         values={rangevalue.values}
         onChange={(values) => setRangevalue({ values })}
