@@ -531,7 +531,16 @@ const SingleFeature = () => {
                             )}
                             <h4>{featureData.title}</h4>
                             <p>{featureData.content}</p>
-
+                            <div className="user-img">
+                              {featureData.image ? (
+                                <img
+                                  src={`${imageBaseUrl}/${featureData.image}`}
+                                  alt=""
+                                />
+                              ) : (
+                                ""
+                              )}
+                            </div>
                             {userRole != 4 ? (
                               <>
                                 <ExtraFeatureButtonCom
