@@ -11,13 +11,16 @@ const ImageComponent = ({ imageUrl }) => {
 
   return (
     <>
-      <img
-        className="small"
-        src={`${imageBaseUrl}/${imageUrl}`}
-        onClick={handleShowDialog}
-        alt="no image"
-      />
-      {state.isOpen && (
+      <a href={`${imageBaseUrl}/${imageUrl}`} target="_blank">
+        <img
+          className="small"
+          src={`${imageBaseUrl}/${imageUrl}`}
+          onClick={handleShowDialog}
+          alt="no image"
+        />
+      </a>
+
+      {/* {state.isOpen && (
         <dialog
           className="dialog img-dialog"
           style={{ position: "absolute" }}
@@ -31,7 +34,7 @@ const ImageComponent = ({ imageUrl }) => {
             alt="no image"
           />
         </dialog>
-      )}
+      )} */}
     </>
   );
 };

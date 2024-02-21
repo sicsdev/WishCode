@@ -52,7 +52,7 @@ const Sidebar = () => {
             {user_role == 1 ? (
               <>
                 <Link to="/dashboard" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  <i className="fa fa-tachometer" aria-hidden="true"></i>
                   &nbsp;<span>Dashboard</span>
                 </Link>
                 <Link to="/admin/companies" className="theme-color1">
@@ -91,7 +91,7 @@ const Sidebar = () => {
             {user_role == 2 ? (
               <>
                 <Link to="/dashboard" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  <i className="fa fa-tachometer" aria-hidden="true"></i>
                   &nbsp;<span>Dashboard</span>
                 </Link>
                 <Link to="/company/all-users" className="theme-color1">
@@ -126,7 +126,7 @@ const Sidebar = () => {
             {user_role == 3 ? (
               <>
                 <Link to="/dashboard" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  <i className="fa fa-tachometer" aria-hidden="true"></i>
                   &nbsp;<span>Dashboard</span>
                 </Link>
                 {/* <Link to="/feedback" className="theme-color1">

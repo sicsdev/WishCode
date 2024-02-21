@@ -62,7 +62,7 @@ const ResetPasswordCom = (props) => {
             label={""}
             className={"form-control"}
             placeholder={"Confirm Password"}
-            type={"text"}
+            type={"password"}
             value={confirmPassword}
             setValue={setConfirmPassword}
             required={true}
