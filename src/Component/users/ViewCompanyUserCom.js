@@ -14,6 +14,13 @@ const ViewCompanyUserCom = ({
   companyName
 }) => {
   const [loader, setloader] = useState(false);
+
+  const [userRole, setUserRole] = useState([]);
+
+  useEffect(() => {
+    setUserRole(totalCompanyUsers);
+  }, [totalCompanyUsers,
+  ]);
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -21,6 +28,7 @@ const ViewCompanyUserCom = ({
       Authorization: `Bearer ${tokens}`,
     },
   };
+
 
   const deleteCompanyUser = (id) => {
     swal({
@@ -52,7 +60,51 @@ const ViewCompanyUserCom = ({
       }
     });
   };
+  //for promate the user
+  const handleUserPromote = (companyId, userId, roleId) => {
+    let type = "";
+    if (roleId == 2) {
+      type = "demote";
+    } else {
+      type = "promote";
+    }
+    swal({
+      title: "Are you sure?",
+      text: `You want to Change User to ${roleId == 2 ? "Company User" : "Company Admin"} Role?`,
+      icon: "warning",
+      dangerMode: true,
+    }).then(async (willApprove) => {
+      if (willApprove) {
+        try {
+          const responseData = await axiosConfig.post(
+            `/company-admin/user-role`,
+            {
+              company_id: companyId,
+              user_id: userId,
+              type: type,
+            },
+            config
+          );
+          if (responseData?.status == 200) {
+            setUserRole((prevCheckboxes) =>
+              prevCheckboxes.map((checkbox) =>
+                checkbox.id === userId ? { ...checkbox, ['company_id']: checkbox?.company_id ? null : companyId, ['role_id']: roleId == 2 ? 3 : 2 } : checkbox
+              )
+            );
+          }
+          swal("Updated!", "You User Type Role is updated!", "success");
 
+        } catch (error) {
+          swal(
+            "Error!",
+            "Enable to update the Feature status to Complete!",
+            "error"
+          );
+        }
+      }
+    });
+
+  }
   return (
     <>
       <div className="dashboard card">
@@ -83,18 +135,47 @@ const ViewCompanyUserCom = ({
                         Role
                       </th>
                       <th scope="col" className="text-center">
+                        Promote Status
+                      </th>
+                      <th scope="col" className="text-center">
                         Action
                       </th>
+
                     </tr>
                   </thead>
                   <tbody>
-                    {totalCompanyUsers.map((user, key) => (
+                    {userRole.map((user, key) => (
                       <tr key={key}>
                         <td>{user.name}</td>
                         <td className="text-center">
                           <a href={`mailto: ${user.email}`}>{user.email}</a>
                         </td>
-                        <td className="text-center">Company User</td>
+                        <td className="text-center">{user.role_id == 2 ? "Company Admin" : "Company User"}</td>
+                        <td className="text-center">
+                          <div className="switch-btn-wrapper mt-3">
+
+                            <label className="switch type_switch">
+                              <input type="checkbox" name="changeUserType"
+
+                                checked={
+                                  user.company_id != null
+                                }
+                                onChange={(e) => {
+                                  handleUserPromote(
+                                    user.user_added_by,
+                                    user.id,
+                                    user.role_id,
+                                  );
+                                }}
+                              />
+                              <div className="slider round">
+                                <span className="on">Promote</span>
+                                <span className="off">Demote</span>
+                              </div>
+                            </label>
+
+                          </div>
+                        </td>
                         <td className="text-center">
                           <div className="action-btn">
                             <Link to={`/company/user/${user.id}`}>
@@ -136,6 +217,7 @@ const ViewCompanyUserCom = ({
                             </a>
                           </div>
                         </td>
+
                       </tr>
                     ))}
                   </tbody>

@@ -87,7 +87,7 @@
 
 
 .switch.type_switch{
-  width: 82px;
+  width: 90px;
 }
 .switch.type_switch::before{
   left: 25px;
@@ -112,11 +112,11 @@
 }
 .type_switch .off
 {
-  left: 63%;
+  left: 67%;
 }
 .type_switch .on
 {
-  left: 32%;
+  left: 35%;
 }
 /* .type_switch .slider::before {
   right: 31px;
@@ -141,5 +141,5 @@
 }
 
 .type_switch input:checked + .slider::before {
-	transform: translateX(47px);
+	transform: translateX(55px);
 }
