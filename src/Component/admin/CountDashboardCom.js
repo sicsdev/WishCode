@@ -78,10 +78,57 @@ const CountDashboardCom = ({ dashBoardData }) => {
             </Link>
           </div>
         </div>
-      ) : dashBoardData?.data_type === "company" ? (
-        ""
+      ) : dashBoardData?.data_type === "company_user" ? (
+        <div className="row">
+        <div className="col-md-3">
+          <Link to="/features">
+            <div className="card-counter primary">
+              <i className="fa fa-clock-o"></i>
+              <span className="count-numbers">
+                {dashBoardData?.total_not_completed_features}
+              </span>
+              <span className="count-name">Pending Features</span>
+            </div>
+          </Link>
+        </div>
+        <div className="col-md-3">
+          <Link to="">
+            <div className="card-counter primary">
+              <i className="fa fa-building"></i>
+              <span className="count-numbers">
+                {dashBoardData?.total_votes_on_company}
+              </span>
+              <span className="count-name">Total Votes Features</span>
+            </div>
+          </Link>
+        </div>
+      </div>
       ) : (
-        ""
+      //   <div className="row">
+      //   <div className="col-md-3">
+      //     <Link to="/company/all-users">
+      //       <div className="card-counter primary">
+      //         <i className="fa fa-clock-o"></i>
+      //         <span className="count-numbers">
+      //           {dashBoardData?.total_not_completed_features}
+      //         </span>
+      //         <span className="count-name">Pending Features</span>
+      //       </div>
+      //     </Link>
+      //   </div>
+      //   <div className="col-md-3">
+      //     <Link to="/company/approve-requests">
+      //       <div className="card-counter primary">
+      //         <i className="fa fa-clock-o"></i>
+      //         <span className="count-numbers">
+      //           {dashBoardData?.total_pending_features}
+      //         </span>
+      //         <span className="count-name">Pending Features</span>
+      //       </div>
+      //     </Link>
+      //   </div>
+      // </div>
+      ""
       )}
     </>
   );
