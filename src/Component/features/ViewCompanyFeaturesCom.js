@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "../Loader";
 import AddFeatureModel from "../models/AddFeatureModel";
 import EditFeatureModel from "../models/EditFeatureModel";
+import swal from "sweetalert";
 
 const ViewCompanyFeaturesCom = ({
   totalCompanyFeatures,
@@ -57,26 +58,34 @@ const ViewCompanyFeaturesCom = ({
   };
 
   const deleteCompanyFeature = (id) => {
-    try {
-      setloader(true);
-      const { data } = axiosConfig.delete(
-        `/company-admin/post/delete/${id}`,
-        config
-      );
-      toast.success("Feature Deleted Successfully!", {
-        position: "bottom-right",
-        autoClose: 2000,
-      });
-      setloader(false);
-      getPageData();
-    } catch {
-      setloader(false);
-      toast.error("Unable to delete the Feature!", {
-        position: "bottom-right",
-        autoClose: 2000,
-      });
-    }
+    swal({
+      title: "Are you sure?",
+      text: "You want to Delete this Feature?",
+      icon: "warning",
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        setloader(true);
+        axiosConfig.delete(`/company-admin/post/delete/${id}`, config)
+          .then((response) => {
+            toast.success("Feature Deleted Successfully!", {
+              position: "bottom-right",
+              autoClose: 2000,
+            });
+            setloader(false);
+            getPageData();
+          })
+          .catch((error) => {
+            setloader(false);
+            toast.error("Unable to delete the Feature!", {
+              position: "bottom-right",
+              autoClose: 2000,
+            });
+          });
+      }
+    });
   };
+
 
   const searchRandomFeature = (e) => {
     const filterdata = searchFeature?.filter((data) => data?.title?.toLowerCase().includes(e.target.value.toLowerCase()));
@@ -86,7 +95,7 @@ const ViewCompanyFeaturesCom = ({
       setSearchFeature(totalCompanyFeatures);
     }
   }
-  
+
   return (
     <>
       <div class="row justify-content-end">
