@@ -24,9 +24,9 @@ const AllFeatures = () => {
           <Header />
           <section className="body-content-inner">
             <div className="container">
-              <div className="dashboard card">
+             
                 {<FeatureComp features={allFeatures} />}
-              </div>
+              
             </div>
           </section>
         </div>

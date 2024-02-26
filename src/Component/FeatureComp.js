@@ -29,7 +29,12 @@ const FeatureComp = ({
   const [featureTitle, setfeatureTitle] = useState("");
   const [featureDescription, setfeatureDescription] = useState("");
   const [claimEmail, setClaimEmail] = useState("");
-  // const [Features, setFeatures] = useState(features);
+  const [searchFeature, setSearchFeatures] = useState([]);
+
+  useEffect(() => {
+    setSearchFeatures(features);
+  }, [features])
+
 
   const tokens = localStorage.getItem("token");
   const config = {
@@ -85,9 +90,23 @@ const FeatureComp = ({
       );
     }
   };
-
+  const searchRandomFeature = (e) => {
+    const filterdata = searchFeature?.filter((data) => data?.title?.toLowerCase().includes(e.target.value.toLowerCase()));
+    if (e.target.value) {
+      setSearchFeatures(filterdata);
+    } else {
+      setSearchFeatures(features);
+    }
+  }
+  
   return (
     <>
+     <div class="row justify-content-end">
+        <div class="col-md-4">
+          <input type="text" class="form-control" placeholder="Search Feature" onChange={(e)=>searchRandomFeature(e)} />
+        </div>
+      </div>
+      <div className="dashboard card">
       <div className="card-header d-flex justify-content-between align-items-center">
         <h5 className="text-white text-uppercase">
           {filter_type && filter_type === "company" ? (
@@ -139,8 +158,8 @@ const FeatureComp = ({
       <div className="card-body">
         <div className="row">
           <div className="col-md-12">
-            {features !== undefined ? (
-              features?.map((feature, key) => (
+            {searchFeature !== undefined ? (
+              searchFeature?.map((feature, key) => (
                 <div className="company-post-wrapper" key={key}>
                   <Link to={`/feature/${feature.id}`}>
                     <div className="comp-post">
@@ -219,6 +238,7 @@ const FeatureComp = ({
             )}
           </div>
         </div>
+      </div>
       </div>
       <AddFeatureModel
         show={show}

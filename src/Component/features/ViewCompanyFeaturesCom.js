@@ -120,7 +120,6 @@ const ViewCompanyFeaturesCom = ({
         <div className="card-body">
           <div className="row">
             <div className="col-md-12">
-              {searchFeature ? console.log("isArray") : console.log("notarray")}
               {searchFeature?.map((feature, key) => (
                 <div className="company-post-wrapper" key={key}>
                   <Link to={`/feature/${feature.id}`}>
