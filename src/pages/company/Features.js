@@ -12,6 +12,7 @@ import Loader from "../../Component/Loader";
 const Features = () => {
   const [totalCompanyFeatures, settotalCompanyFeatures] = useState([]);
   const [loader, setloader] = useState(false);
+  const [completeFeature, setCompleteFeature] = useState("all");
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -21,16 +22,17 @@ const Features = () => {
   };
 
   useEffect(() => {
-    getAllCompanyFeatures();
+    getAllCompanyFeatures(completeFeature);
   }, []);
 
-  const getAllCompanyFeatures = () => {
+  const getAllCompanyFeatures = (featureType) => {
     setloader(true);
     axiosConfig
-      .get("/company-admin/post/all", config)
+      .get(`/company-admin/post/all?feature_type=${featureType}`, config)
       .then((response) => {
         settotalCompanyFeatures(response?.data?.data);
         setloader(false);
+        setCompleteFeature(featureType)
       })
       .catch((data) => {
         setloader(false);
@@ -40,7 +42,10 @@ const Features = () => {
         });
       });
   };
-
+  const handeCompleteToggle = (featureType) => {
+    console.log(featureType);
+    getAllCompanyFeatures(featureType);
+  }
   return (
     <>
       <div className="main-body">
@@ -48,6 +53,22 @@ const Features = () => {
         <div className="body-wrapper" id="body-content">
           <Header />
           <section className="body-content-inner">
+          <div className="container">
+              <div className="row text-right align-items-center">
+                <div className="switch-btn-wrapper mt-3 w-100 justify-content-end d-flex pr-3">
+                  <b>Show/Hide Completed:</b>
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      name="completeFeature"
+                      checked={completeFeature == "completed"}
+                      onChange={(e) => handeCompleteToggle(completeFeature == "all" ? "completed" : "all")}
+                    />
+                    <span className="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
             <div className="container">
               <ViewCompanyFeaturesCom
                 totalCompanyFeatures={totalCompanyFeatures}
