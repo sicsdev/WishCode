@@ -161,14 +161,14 @@ const AddFeatureModel = ({
                   onChange={(e) => setfeatureDescription(e.target.value)}
                 ></textarea>
               </div>
-              <div className="input-form">
+              {localStorage.getItem('role') == 4 ? "": <div className="input-form">
                 <label className="mb-3">Priority</label>
                 <RangeCom
                   rangevalue={rangevalue}
                   setRangevalue={setRangevalue}
                 />
-              </div>
-              <div className="input-form">
+              </div>}
+             {localStorage.getItem('role') == 4 ? "" :<div className="input-form">
                 <label>Development URL</label>
                 <input
                   type="text"
@@ -177,7 +177,8 @@ const AddFeatureModel = ({
                   value={developmentURL}
                   onChange={(e) => setDevelopmentURL(e.target.value)}
                 />
-              </div>
+              </div>}
+              
               <div className="input-form">
                 <label> Product Name</label>
                 <input

@@ -11,16 +11,18 @@ import FilterDatatableCom from "../Component/filterDatatableCom";
 const FeatureDatatable = () => {
   const [allFeatures, setAllFeatures] = useState([]);
   const [loader, setloader] = useState(false);
+  const [completeFeature, setCompleteFeature] = useState("all");
 
   useEffect(() => {
-    getAllfeatureData();
+    getAllfeatureData(completeFeature);
   }, []);
-
-  const getAllfeatureData = async () => {
+  const getAllfeatureData = async (featureType) => {
     setloader(true);
-    let response = await getRequestApi("/feature/filter/all");
+    console.log(featureType);
+    let response = await getRequestApi(`/feature/filter/all?feature_type=${featureType}`);
     if (response && response.data && response.data.data) {
       setAllFeatures(response.data.data);
+      setCompleteFeature(featureType)
       setloader(false);
     } else {
       setloader(false);
@@ -30,14 +32,36 @@ const FeatureDatatable = () => {
       });
     }
   };
+  const handeCompleteToggle = (featureType) => {
+    console.log(featureType);
+    getAllfeatureData(featureType);
+  }
   return (
     <>
       <div className="main-body">
         <Sidebar />
         <div className="body-wrapper" id="body-content">
+
           <Header />
           <section className="body-content-inner">
             <div className="container">
+              <div className="row text-right align-items-center">
+                <div className="switch-btn-wrapper mt-3 w-100 justify-content-end d-flex pr-3">
+                  <b>Show/Hide Completed:</b>
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      name="completeFeature"
+                      checked={completeFeature == "completed"}
+                      onChange={(e) => handeCompleteToggle(completeFeature == "all" ? "completed" : "all")}
+                    />
+                    <span className="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div className="container">
+
               <div className="dashboard card">
                 <FilterDatatableCom data={allFeatures} title={"All Features"} />
               </div>
