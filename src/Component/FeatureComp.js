@@ -124,6 +124,7 @@ const FeatureComp = ({
           )}
         </h5>
         <div className="header-btns">
+          
           {suggestFeature === true ? (
             <button
               type="button"

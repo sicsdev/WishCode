@@ -605,7 +605,24 @@ const SingleFeature = () => {
                           </div>
                           <div className="col-md-3">
                             <div className="no-of-vote custom-grid">
-                              <div className="d-flex font-weight-bold">
+                              {userRole == 2 || userRole == 1 ?(
+                                <>
+                                  <a className="text-secondary d-block mb-2">
+                                <img
+                                  src={window.location.origin + "/img/up.png"}
+                                  width="20"
+                                  className="img-fluid"
+                                />
+                                {featureData && featureData.post_votes
+                                  ? featureData.post_votes.length
+                                  : ""}
+                              </a>
+                                 </>
+                              ):""}
+                            
+                              {userRole == 3 || userRole == 4 ? (
+                                <>
+                                 <div className="d-flex font-weight-bold">
                                 <span className="text-secondary d-block mb-2">
 
                                   <span>Total Vote : </span>
@@ -613,8 +630,6 @@ const SingleFeature = () => {
                                   {totalVote}
                                 </span>
                               </div>
-                              {userRole == 3 || userRole == 4 ? (
-                                <>
                                   {/* <button
                                     className="input-group-text vote"
                                     onClick={(e) => {
@@ -706,8 +721,9 @@ const SingleFeature = () => {
                               ) : (
                                 ""
                               )}
-                              {featureData.user_id == current_user_id ||
-                                current_user_id == 1 ? (
+                              { (featureData.user_id == current_user_id && userRole == 2 ) || 
+                               (featureData.user_id == current_user_id && userRole == 3 )||
+                                current_user_id == 1 || userRole == 2?(
                                 <>
                                   <button
                                     className="btn input-group-text vote"

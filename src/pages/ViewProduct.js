@@ -18,7 +18,7 @@ const ViewProduct = () => {
   const [loader, setloader] = useState(false);
   const [companyData, setCompanyData] = useState("");
   const [productData, setProductData] = useState("");
-
+  const [companyId,setCompanyId]= useState("");
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -36,13 +36,16 @@ const ViewProduct = () => {
     setloader(true);
     axiosConfig
       .get(`/dashboard/feature/${filter_type}/${id}`, config)
-      .then((response) => setCompanyFeatures(response.data.data))
+      .then((response) => {
+        setCompanyId(response?.data?.data[0]?.company_id);
+        setCompanyFeatures(response.data.data);
+      })
       .catch((error) => {
+        console.error("Error fetching product data:", error.message);
+      })
+      .finally(() => {
         setloader(false);
-        seterrorMessage(error.message);
-        console.error("There was an error!", error);
       });
-    setloader(false);
   };
   const getCompanyData = async () => {
     setloader(true);
@@ -50,7 +53,7 @@ const ViewProduct = () => {
       let response = await getRequestApi(`/company/get/${id}`);
       if (response) {
         setloader(false);
-        setCompanyData(response.data.data);
+        setCompanyData(response?.data?.data);
       } else {
         setloader(false);
       }
@@ -58,7 +61,8 @@ const ViewProduct = () => {
       let response = await getRequestApi(`/product/get/${id}`);
       if (response) {
         setloader(false);
-        setProductData(response.data.data);
+        setProductData(response?.data?.data);
+        
       } else {
         setloader(false);
       }
@@ -73,11 +77,10 @@ const ViewProduct = () => {
           <Header />
           <section className="body-content-inner">
             <div className="container">
-              <div className="dashboard card">
                 {
                   <FeatureComp
                     features={companyFeatures}
-                    companyID={id}
+                    companyID={companyId}
                     suggestFeature={true}
                     getPageData={getProductData}
                     companyData={companyData}
@@ -85,7 +88,7 @@ const ViewProduct = () => {
                     productData={productData}
                   />
                 }
-              </div>
+             
             </div>
           </section>
         </div>
