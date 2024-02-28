@@ -143,3 +143,26 @@
 .type_switch input:checked + .slider::before {
 	transform: translateX(55px);
 }
+
+.voting-row {
+	background: #fff;
+	padding: 10px 0;
+	box-shadow: 0 0 2px 0 #0000002b;
+}
+.voting-row p {
+	font-size: 13px;
+	font-weight: 600;padding: 0 7px 7px;
+	border-bottom: 1px solid #22222224;
+}
+.voting-row .custom-radio .fa {
+	font-size: 30px !important;
+}
+.voting.row .custom-radio {
+	padding: 0 10px;
+}
+.no-of-vote.custom-grid {
+	display: block;
+}
+.voting-row .voting.row {
+	margin: 0;	border-bottom: 1px solid #22222224;
+}

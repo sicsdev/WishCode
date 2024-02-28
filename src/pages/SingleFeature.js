@@ -27,7 +27,7 @@ const SingleFeature = () => {
   const [featureData, setFeatureData] = useState([]);
   const [reply, setReply] = useState(false);
   const [show, setShow] = useState(false);
-  const [toggleVal, setToggleVal] = useState("yes");
+  const [toggleVal, setToggleVal] = useState("");
   const [commentId, setCommentId] = useState("");
   const [voteableType, setVoteableType] = useState("");
   const [current_user_id, setCurrent_userId] = useState("");
@@ -54,6 +54,8 @@ const SingleFeature = () => {
   const [releaseVoteFilterVal, setReleaseVoteFilterVal] = useState("all");
   const [userPermissions, setUserPermissions] = useState([]);
   const [ipAddress, setIpAddress] = useState("");
+  const [totalVote, setTotalVote] = useState("");
+  const [userVote, setUserVote] = useState("");
 
   const tokens = localStorage.getItem("token");
   const config = {
@@ -69,18 +71,30 @@ const SingleFeature = () => {
     getIpAddrees();
   }, []);
 
+  useEffect(() => {
+    if (current_user_id) {
+      const findVal = featureData?.post_votes?.find((x) => x.user_id === current_user_id);
+      if (findVal) {
+        setUserVote(findVal.type);
+      } else {
+        setUserVote("");
+      }
+    }
+  }, [current_user_id])
+
   const getFeatureData = () => {
     setloader(true);
     axiosConfig
       .get(`/post/${id}`, config)
       .then((response) => {
         setloader(false);
-        setFeatureData(response.data.data);
-        setCurrent_userId(response.data.current_id);
+        setFeatureData(response?.data?.data);
+        setCurrent_userId(response?.data?.current_id);
+        setTotalVote(response?.data?.data?.post_votes?.length)
       })
       .catch((data) => {
         setloader(false);
-        toast.success(data.response.data.message, {
+        toast.success(data?.response?.data?.message, {
           position: "bottom-right",
           autoClose: 2000,
         });
@@ -98,7 +112,6 @@ const SingleFeature = () => {
 
   const getIpAddrees = async () => {
     const res = await axios.get("https://geolocation-db.com/json/");
-    // console.log(res.data);
     setIpAddress(res.data.IPv4);
   };
 
@@ -294,7 +307,41 @@ const SingleFeature = () => {
       );
     }
   };
-
+  // add vote handler on change
+  const addChangeVotehandler = async (e, type) => {
+    e.preventDefault();
+    try {
+      const { data } = await axiosConfig.post(
+        "/vote/store",
+        {
+          voteable_id: featureData?.id,
+          type: type,
+          voteable_type: "post",
+          ipAddress: ipAddress,
+        },
+        config
+      );
+      setShow(false);
+      setUserVote(type);
+      getFeatureData();
+      setTotalVote(featureData?.post_votes?.length)
+      toast.success(data.message, {
+        position: "bottom-right",
+        autoClose: 2000,
+      });
+    } catch (error) {
+      return toast.error(
+        `${error.response.data.message && error.response.data.message.type
+          ? error.response.data.message.type[0]
+          : error.response.data.message
+        }`,
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+        }
+      );
+    }
+  };
   const approveComment = (id, val) => {
     let apVal = "";
     if (val == "1") {
@@ -501,7 +548,7 @@ const SingleFeature = () => {
                     <div className="post-main">
                       <div className="post-content pt-3">
                         <div className="row">
-                          <div className="col-md-10">
+                          <div className="col-md-9">
                             {featureData?.company_id &&
                               featureData?.company_name ? (
                               <Link
@@ -532,16 +579,16 @@ const SingleFeature = () => {
                             <h4>{featureData.title}</h4>
                             <p>{featureData.content}</p>
                             <a href={`${imageBaseUrl}/${featureData?.image}`} target="_blank">
-                            <div className="user-img">
-                              {featureData.image ? (
-                                <img
-                                  src={`${imageBaseUrl}/${featureData.image}`}
-                                  alt=""
-                                />
-                              ) : (
-                                ""
-                              )}
-                            </div>
+                              <div className="user-img">
+                                {featureData.image ? (
+                                  <img
+                                    src={`${imageBaseUrl}/${featureData.image}`}
+                                    alt=""
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </div>
                             </a>
                             {userRole != 4 ? (
                               <>
@@ -556,38 +603,105 @@ const SingleFeature = () => {
                               ""
                             )}
                           </div>
-                          <div className="col-md-2">
-                            <div className="no-of-vote">
-                              <a className="text-secondary d-block mb-2">
-                                <img
-                                  src={window.location.origin + "/img/up.png"}
-                                  width="20"
-                                  className="img-fluid"
-                                />
-                                {featureData && featureData.post_votes
-                                  ? featureData.post_votes.length
-                                  : ""}
-                              </a>
+                          <div className="col-md-3">
+                            <div className="no-of-vote custom-grid">
+                              <div className="d-flex font-weight-bold">
+                                <span className="text-secondary d-block mb-2">
+
+                                  <span>Total Vote : </span>
+
+                                  {totalVote}
+                                </span>
+                              </div>
                               {userRole == 3 || userRole == 4 ? (
                                 <>
-                                  <button
+                                  {/* <button
                                     className="input-group-text vote"
                                     onClick={(e) => {
                                       voteComment(featureData, "post");
                                     }}
-                                  >
-                                    <i
-                                      className="fa fa-arrow-up mr-1"
-                                      aria-hidden="true"
-                                    ></i>
-                                    {featureData &&
-                                      featureData.post_votes &&
-                                      featureData.post_votes.find(
-                                        (x) => x.user_id == current_user_id
-                                      ) != undefined
-                                      ? "Update Vote"
-                                      : "Add Vote"}
-                                  </button>
+                                  > */}
+                                  <i
+                                    className="fa mr-1"
+                                    aria-hidden="true"
+                                  ></i>
+                                  {/* {featureData &&
+                                    featureData.post_votes &&
+                                    featureData.post_votes.find(
+                                      (x) => x.user_id == current_user_id
+                                    ) != undefined
+                                    ? "Total Vote"
+                                    : "Total Vote"} */}
+                                  {/* </button> */}
+                                  {/* <div> */}
+                                  <div className="voting-row">
+                                    <p>Your Vote:</p>
+                                    <div className="voting row">
+                                      <div className="col-md-4">
+                                        <div className="voting-option mb-2">
+                                          <label className="custom-radio">
+                                            <i className="fa fa-thumbs-up"
+                                              style={{ color: userVote == "yes" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                                              aria-hidden="true"></i>
+                                            <input
+                                              type="radio"
+                                              checked="checked"
+                                              name="vote_type"
+                                              checked={userVote === "yes"}
+                                              value={userVote}
+                                              onChange={(e) => {
+                                                addChangeVotehandler(e, "yes")
+                                                // setValRadio("yes");
+                                              }}
+                                            />
+                                            {/* <span className="checkmark bg-white">
+                      </span> */}
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <div className="col-md-4">
+                                        <div className="voting-option mb-2">
+                                          <label className="custom-radio">
+                                            <i className="fa fa-thumbs-down"
+                                              style={{ color: userVote == "no" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                                              aria-hidden="true"></i>
+                                            <input
+                                              type="radio"
+                                              name="vote_type"
+                                              value={userVote}
+                                              checked={userVote === "no"}
+                                              onChange={(e) => {
+                                                addChangeVotehandler(e, "no");
+                                                // setValRadio("no");
+                                              }}
+                                            />
+                                            {/* <span className="checkmark bg-white"></span> */}
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <div className="col-md-4">
+                                        <div className="voting-option mb-2">
+                                          <label className="custom-radio">
+                                            <i className="fa fa-question"
+                                              style={{ color: userVote == "optional" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                                              aria-hidden="true"></i>
+                                            <input
+                                              type="radio"
+                                              name="vote_type"
+                                              value={userVote}
+                                              checked={userVote === "optional"}
+                                              onChange={(e) => {
+                                                addChangeVotehandler(e, "optional")
+                                                // setValRadio("optional");
+                                              }}
+                                            />
+                                            {/* <span className="checkmark bg-white"></span> */}
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {/* </div> */}
                                 </>
                               ) : (
                                 ""
@@ -1177,8 +1291,8 @@ const SingleFeature = () => {
                           setValRadio("yes");
                         }}
                       />
-                      <span className="checkmark bg-white">
-                      </span>
+                      {/* <span className="checkmark bg-white">
+                      </span> */}
                     </label>
                   </div>
                 </div>
@@ -1197,7 +1311,7 @@ const SingleFeature = () => {
                           setValRadio("no");
                         }}
                       />
-                      <span className="checkmark bg-white"></span>
+                      {/* <span className="checkmark bg-white"></span> */}
                     </label>
                   </div>
                 </div>
@@ -1216,7 +1330,7 @@ const SingleFeature = () => {
                           setValRadio("optional");
                         }}
                       />
-                      <span className="checkmark bg-white"></span>
+                      {/* <span className="checkmark bg-white"></span> */}
                     </label>
                   </div>
                 </div>
