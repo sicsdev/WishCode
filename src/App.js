@@ -4,7 +4,6 @@ import "./App.css";
 import "./css/login.css";
 import "./css/style.css";
 import RouteCom from "./Component/RouteCom";
-import { GoogleOAuthProvider } from '@react-oauth/google';
 function App() {
   return (
     <div>

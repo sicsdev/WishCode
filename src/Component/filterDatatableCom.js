@@ -3,10 +3,10 @@ import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import axiosConfig from "../base_url/config";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const FilterDatatableCom = (props) => {
   const [isFeatureChecked, SetIsFeatureChecked] = useState([]);
-
   useEffect(() => {
     SetIsFeatureChecked(props?.data);
   }, [props?.data]);
@@ -114,15 +114,27 @@ const FilterDatatableCom = (props) => {
       }
     });
   }
+  const renderTooltip = (title) => (
+    <Tooltip id="tooltip">{title}</Tooltip>
+  );
   const columns = [
     {
+
       name: "Feature Title",
       selector: (row) => (
-        <Link to={`/feature-report/${row.id}`} className="filter-table-link">
-          {row.title}
-        </Link>
+        <OverlayTrigger
+          placement="top"
+          overlay={renderTooltip(row.title)}
+        >
+          <Link
+            to={`/feature-report/${row.id}`}
+            className="filter-table-link"
+          >
+            {row.title}
+          </Link>
+        </OverlayTrigger>
       ),
-      sortable: true,
+      sortable: true
     },
     {
       name: "Total Votes",
@@ -177,7 +189,7 @@ const FilterDatatableCom = (props) => {
     {
       name: "Type",
       selector: (row) => <div className="switch-btn-wrapper mt-3">
- 
+
         <label className="switch type_switch">
           <input type="checkbox" name="typeFeature"
             checked={
@@ -189,7 +201,7 @@ const FilterDatatableCom = (props) => {
                 row.type
               );
             }}
-            />
+          />
           <div className="slider round">
             <span className="on">Private</span>
             <span className="off">Public</span>
@@ -221,6 +233,7 @@ const FilterDatatableCom = (props) => {
           </div>
         </div>
       </div>
+      {/* Render the tooltip component */}
     </>
   );
 };
