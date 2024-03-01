@@ -45,9 +45,12 @@ const FrontHeader = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard" className="btn btn-small sign_in_btn">
+                  {localStorage.getItem('role') == 4 ? <Link to="/products" className="btn btn-small sign_in_btn">
                     Dashboard
-                  </Link>
+                  </Link>:<Link to="/dashboard" className="btn btn-small sign_in_btn">
+                    Dashboard
+                  </Link>}
+                  
                 </li>
               </>
             )}

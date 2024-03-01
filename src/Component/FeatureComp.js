@@ -101,11 +101,11 @@ const FeatureComp = ({
   return (
     <>
       <div class="row justify-content-end">
-        {localStorage.getItem('role') == 4 ? "" :
+       
           <div class="col-md-4">
             <input type="text" class="form-control" placeholder="Search Feature" onChange={(e) => searchRandomFeature(e)} />
           </div>
-        }
+        
 
       </div>
       <div className="dashboard card">
