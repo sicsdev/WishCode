@@ -129,10 +129,6 @@ const Sidebar = () => {
                   <i className="fa fa-tachometer" aria-hidden="true"></i>
                   &nbsp;<span>Dashboard</span>
                 </Link>
-                {/* <Link to="/feedback" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Feedback</span>
-                </Link> */}
                 <Link to="/features" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Features</span>
@@ -141,6 +137,10 @@ const Sidebar = () => {
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>View Features</span>
                 </Link>
+                  {/* <Link to="/suggest/feature" className="theme-color1">
+                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  &nbsp;<span>Suggest Features</span>
+                </Link> */}
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>

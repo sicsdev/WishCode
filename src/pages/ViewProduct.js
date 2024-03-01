@@ -38,6 +38,7 @@ const ViewProduct = () => {
       .get(`/dashboard/feature/${filter_type}/${id}`, config)
       .then((response) => {
         setCompanyId(response?.data?.data[0]?.company_id);
+        console.log("company",companyId);
         setCompanyFeatures(response.data.data);
       })
       .catch((error) => {

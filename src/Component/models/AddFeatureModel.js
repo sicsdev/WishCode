@@ -29,6 +29,10 @@ const AddFeatureModel = ({
   const [developmentURL, setDevelopmentURL] = useState("");
   const [productName, setProductName] = useState("");
   const [suggestedProducts, setSuggestedProducts] = useState([]);
+  const [suggestCompany, setSuggestCompany] = useState('');
+  const [suggestCompanyProduct, setSuggestCompanyProducts] = useState("");
+  const [productId, setProductId] = useState("");
+
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -41,6 +45,10 @@ const AddFeatureModel = ({
     setProductName(productData);
   }, [productData]);
 
+  useEffect(() => {
+    getSuggestedCompany();
+  }, "")
+
   const addCompanyFeature = async (e) => {
     e.preventDefault();
     setloader(true);
@@ -52,6 +60,7 @@ const AddFeatureModel = ({
     formData.append("image", selectedFile);
     formData.append("companyID", companyId);
     formData.append("product_name", productName);
+    formData.append("product_id", productId)
 
     try {
       const { data } = await axiosConfig.post(
@@ -104,7 +113,43 @@ const AddFeatureModel = ({
     } else {
     }
   };
+  const getSuggestedCompany = async () => {
+    let response = await getRequestApi(
+      "/company/all/end_user"
+    );
+    if (response) {
+      if (response?.data?.success) {
+        setSuggestCompany(response?.data?.data);
+      } else {
+        return toast.error(response.message, {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+      }
+    } else {
+    }
+  }
 
+  const handleCompanyChange = async (companyId) => {
+    let response = await getRequestApi(
+      `/get/product/?company_id=${companyId}`
+    );
+    if (response) {
+      if (response?.data?.success) {
+        console.log(response?.data?.data)
+        setSuggestCompanyProducts(response?.data?.data);
+      } else {
+        return toast.error(response.message, {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+      }
+    } else {
+    }
+  }
+  const handleProductChange = (productId) => {
+    setProductId(productId);
+  }
   const updateFieldValue = (val) => {
     setProductName(val);
   };
@@ -149,6 +194,22 @@ const AddFeatureModel = ({
                   onChange={(e) => setfeatureTitle(e.target.value)}
                 />
               </div>
+              {localStorage.getItem('role') == 4 ?
+                <div className="input-form">
+                  <label> Select Company</label>
+                  <select
+                    className="form-control"
+                    onChange={(event) => handleCompanyChange(event.target.value)}
+                    required
+                  >
+                    <option value="">Select a company</option>
+                    {suggestCompany ? suggestCompany?.map(company => (
+                      <option key={company.id} value={company.id}>
+                        {company.name}
+                      </option>
+                    )) : ""}
+                  </select>
+                </div> : ""}
               <div className="input-form">
                 <label>Description</label>
                 <textarea
@@ -161,14 +222,15 @@ const AddFeatureModel = ({
                   onChange={(e) => setfeatureDescription(e.target.value)}
                 ></textarea>
               </div>
-              {localStorage.getItem('role') == 4 ? "": <div className="input-form">
+
+              {localStorage.getItem('role') == 4 ? "" : <div className="input-form">
                 <label className="mb-3">Priority</label>
                 <RangeCom
                   rangevalue={rangevalue}
                   setRangevalue={setRangevalue}
                 />
               </div>}
-             {localStorage.getItem('role') == 4 ? "" :<div className="input-form">
+              {localStorage.getItem('role') == 4 ? "" : <div className="input-form">
                 <label>Development URL</label>
                 <input
                   type="text"
@@ -178,20 +240,35 @@ const AddFeatureModel = ({
                   onChange={(e) => setDevelopmentURL(e.target.value)}
                 />
               </div>}
-              
+              { }
               <div className="input-form">
-                <label> Product Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter Title"
-                  value={productName}
-                  required
-                  onChange={(e) => {
-                    setProductName(e.target.value);
-                    searchHandler(e.target.value);
-                  }}
-                />
+                <label> {localStorage.getItem('role') == 4 ? "Select Product" : "Product Name"}</label>
+                {localStorage.getItem('role') == 4 ?
+                  <select
+                    className="form-control"
+                    onChange={(event) => handleProductChange(event.target.value)}
+                    required
+                  >
+                    <option value="">Select a Product</option>
+                    {suggestCompanyProduct ? suggestCompanyProduct?.map(product => (
+                      <option key={product.id} value={product.id}>
+                        {product.product_name}
+                      </option>
+                    )) : ""}
+                  </select> : <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Title"
+                    value={productName}
+                    required
+                    onChange={(e) => {
+                      setProductName(e.target.value);
+                      searchHandler(e.target.value);
+                    }}
+                  />}
+
+
+                { }
                 {suggestedProducts.length > 0 &&
                   suggestedProducts?.map((value, key) => (
                     <div className="mb-3" key={key}>

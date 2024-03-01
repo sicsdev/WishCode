@@ -78,10 +78,9 @@ const FeatureComp = ({
     } catch (error) {
       setloader(false);
       return toast.error(
-        `${
-          error.response.data.message && error.response.data.message.company_id
-            ? error.response.data.message.company_id[0]
-            : error.response.data.message
+        `${error.response.data.message && error.response.data.message.company_id
+          ? error.response.data.message.company_id[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -98,148 +97,151 @@ const FeatureComp = ({
       setSearchFeatures(features);
     }
   }
-  
+
   return (
     <>
-     <div class="row justify-content-end">
-        <div class="col-md-4">
-          <input type="text" class="form-control" placeholder="Search Feature" onChange={(e)=>searchRandomFeature(e)} />
-        </div>
+      <div class="row justify-content-end">
+        {localStorage.getItem('role') == 4 ? "" :
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Search Feature" onChange={(e) => searchRandomFeature(e)} />
+          </div>
+        }
+
       </div>
       <div className="dashboard card">
-      <div className="card-header d-flex justify-content-between align-items-center">
-        <h5 className="text-white text-uppercase">
-          {filter_type && filter_type === "company" ? (
-            <>
-              {`${filter_type} Posts: `} {companyData.company_name}
-            </>
-          ) : filter_type && filter_type === "product" ? (
-            <>
-              {`${filter_type} Posts: `} {productData?.product_name}
-            </>
-          ) : companyData ? (
-            <>Company Posts: {companyData.company_name}</>
-          ) : (
-            "Company Posts"
-          )}
-        </h5>
-        <div className="header-btns">
-          
-          {suggestFeature === true ? (
-            <button
-              type="button"
-              className="btn btn-lg-primary text-white mr-2"
-              onClick={(e) => {
-                addFeature();
-              }}
-            >
-              Suggest Feature
-            </button>
-          ) : (
-            ""
-          )}
-          {companyData &&
-          companyData.is_claimed === "0" &&
-          companyData.requested_by !== null ? (
-            <button
-              type="button"
-              className="btn btn-lg-primary text-white"
-              onClick={(e) => {
-                // claimCompnayHandler(companyData.id);
-                claimCompanyModalHandler(companyData.id);
-              }}
-            >
-              Claim
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
-      <div className="card-body">
-        <div className="row">
-          <div className="col-md-12">
-            {searchFeature !== undefined ? (
-              searchFeature?.map((feature, key) => (
-                <div className="company-post-wrapper" key={key}>
-                  <Link to={`/feature/${feature.id}`}>
-                    <div className="comp-post">
-                      <span className="text-lg-primary">
-                        {moment(feature.created_at).format("DD MMM YYYY")}
-                      </span>
-                      <div className="options">
-                        <h2>{feature.title}</h2>
-                      </div>
-                      <p>{feature.content}</p>
-                      <div className="user-img">
-                        {feature.image ? (
-                          <img
-                            src={`${imageBaseUrl}/${feature.image}`}
-                            alt=""
-                          />
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      <div className="actions-links position-relative py-2 pt-4 ">
-                        {feature?.company_id && feature?.company_name ? (
-                          <Link
-                            className="text-secondary mr-3"
-                            to={`/dashboard/company/${feature.company_id}`}
-                          >
-                            <span className="font-weight-bold">
-                              Company Name:
-                            </span>{" "}
-                            {feature?.company_name}{" "}
-                          </Link>
-                        ) : (
-                          ""
-                        )}
-                        {feature?.product_id ? (
-                          <Link
-                            className="text-secondary"
-                            to={`/dashboard/product/${feature.product_id}`}
-                          >
-                            <span className="font-weight-bold">
-                              Product Name:
-                            </span>{" "}
-                            {feature?.product_name}
-                          </Link>
-                        ) : (
-                          ""
-                        )}
-                        <Link
-                          to={`/feature/${feature.id}`}
-                          className="text-secondary"
-                        >
-                          <i
-                            className="fa fa-comments-o"
-                            aria-hidden="true"
-                          ></i>{" "}
-                          {feature.comments_count}
-                        </Link>
-                        <Link
-                          to={`/feature/${feature.id}`}
-                          className="text-secondary"
-                          data-toggle="modal"
-                          data-target="#view-vote-post"
-                        >
-                          <i className="fa fa-arrow-up" aria-hidden="true"></i>{" "}
-                          {feature.post_votes_count}
-                        </Link>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))
+        <div className="card-header d-flex justify-content-between align-items-center">
+          <h5 className="text-white text-uppercase">
+            {filter_type && filter_type === "company" ? (
+              <>
+                {`${filter_type} Posts: `} {companyData.company_name}
+              </>
+            ) : filter_type && filter_type === "product" ? (
+              <>
+                {`${filter_type} Posts: `} {productData?.product_name}
+              </>
+            ) : companyData ? (
+              <>Company Posts: {companyData.company_name}</>
             ) : (
-              <div className="company-post-wrapper">
-                <h3>No data Found</h3>
-              </div>
+              "Company Posts"
+            )}
+          </h5>
+          <div className="header-btns">
+
+            {suggestFeature === true ? (
+              <button
+                type="button"
+                className="btn btn-lg-primary text-white mr-2"
+                onClick={(e) => {
+                  addFeature();
+                }}
+              >
+                Suggest Feature
+              </button>
+            ) : (
+              ""
+            )}
+            {companyData &&
+              companyData.is_claimed === "0" &&
+              companyData.requested_by !== null ? (
+              <button
+                type="button"
+                className="btn btn-lg-primary text-white"
+                onClick={(e) => {
+                  // claimCompnayHandler(companyData.id);
+                  claimCompanyModalHandler(companyData.id);
+                }}
+              >
+                Claim
+              </button>
+            ) : (
+              ""
             )}
           </div>
         </div>
-      </div>
+        <div className="card-body">
+          <div className="row">
+            <div className="col-md-12">
+              {searchFeature !== undefined ? (
+                searchFeature?.map((feature, key) => (
+                  <div className="company-post-wrapper" key={key}>
+                    <Link to={`/feature/${feature.id}`}>
+                      <div className="comp-post">
+                        <span className="text-lg-primary">
+                          {moment(feature.created_at).format("DD MMM YYYY")}
+                        </span>
+                        <div className="options">
+                          <h2>{feature.title}</h2>
+                        </div>
+                        <p>{feature.content}</p>
+                        <div className="user-img">
+                          {feature.image ? (
+                            <img
+                              src={`${imageBaseUrl}/${feature.image}`}
+                              alt=""
+                            />
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                        <div className="actions-links position-relative py-2 pt-4 ">
+                          {feature?.company_id && feature?.company_name ? (
+                            <Link
+                              className="text-secondary mr-3"
+                              to={`/dashboard/company/${feature.company_id}`}
+                            >
+                              <span className="font-weight-bold">
+                                Company Name:
+                              </span>{" "}
+                              {feature?.company_name}{" "}
+                            </Link>
+                          ) : (
+                            ""
+                          )}
+                          {feature?.product_id ? (
+                            <Link
+                              className="text-secondary"
+                              to={`/dashboard/product/${feature.product_id}`}
+                            >
+                              <span className="font-weight-bold">
+                                Product Name:
+                              </span>{" "}
+                              {feature?.product_name}
+                            </Link>
+                          ) : (
+                            ""
+                          )}
+                          <Link
+                            to={`/feature/${feature.id}`}
+                            className="text-secondary"
+                          >
+                            <i
+                              className="fa fa-comments-o"
+                              aria-hidden="true"
+                            ></i>{" "}
+                            {feature.comments_count}
+                          </Link>
+                          <Link
+                            to={`/feature/${feature.id}`}
+                            className="text-secondary"
+                            data-toggle="modal"
+                            data-target="#view-vote-post"
+                          >
+                            <i className="fa fa-arrow-up" aria-hidden="true"></i>{" "}
+                            {feature.post_votes_count}
+                          </Link>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="company-post-wrapper">
+                  <h3>No data Found</h3>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
       <AddFeatureModel
         show={show}
