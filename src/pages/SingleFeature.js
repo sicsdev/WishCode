@@ -90,7 +90,7 @@ const SingleFeature = () => {
         setloader(false);
         setFeatureData(response?.data?.data);
         setCurrent_userId(response?.data?.current_id);
-        setTotalVote(response?.data?.data?.post_votes?.length)
+        setTotalVote(response?.data?.data?.post_votes.filter(item => item.type === 'yes' ||  item.type === 'optional').length)
       })
       .catch((data) => {
         setloader(false);
@@ -324,7 +324,7 @@ const SingleFeature = () => {
       setShow(false);
       setUserVote(type);
       getFeatureData();
-      setTotalVote(featureData?.post_votes?.length)
+      setTotalVote(featureData?.post_votes?.filter(item => item.type === 'yes' ||  item.type === 'optional').length)
       toast.success(data.message, {
         position: "bottom-right",
         autoClose: 2000,
