@@ -38,7 +38,6 @@ const ViewProduct = () => {
       .get(`/dashboard/feature/${filter_type}/${id}`, config)
       .then((response) => {
         setCompanyId(response?.data?.data[0]?.company_id);
-        console.log("company",companyId);
         setCompanyFeatures(response.data.data);
       })
       .catch((error) => {
@@ -62,6 +61,7 @@ const ViewProduct = () => {
       let response = await getRequestApi(`/product/get/${id}`);
       if (response) {
         setloader(false);
+        
         setProductData(response?.data?.data);
         
       } else {
@@ -69,7 +69,6 @@ const ViewProduct = () => {
       }
     }
   };
-
   return (
     <>
       <div className="main-body">

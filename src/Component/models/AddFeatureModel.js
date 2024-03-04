@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RangeCom from "../rangeSlider/RangeCom";
 import { getRequestApi } from "../../helper/Helper";
-
+import { useParams } from "react-router-dom";
 const AddFeatureModel = ({
   show,
   handleClose,
@@ -25,6 +25,7 @@ const AddFeatureModel = ({
   productData,
   companyData,
 }) => {
+  const { id } = useParams();
   const [rangevalue, setRangevalue] = useState({ values: [1] });
   const [developmentURL, setDevelopmentURL] = useState("");
   const [productName, setProductName] = useState("");
@@ -32,6 +33,8 @@ const AddFeatureModel = ({
   const [suggestCompany, setSuggestCompany] = useState('');
   const [suggestCompanyProduct, setSuggestCompanyProducts] = useState("");
   const [productId, setProductId] = useState("");
+  const [userComID,setUserComID] =useState(companyId);
+  const [userProID,setUserProID] =useState(id);
 
   const tokens = localStorage.getItem("token");
   const config = {
@@ -40,7 +43,6 @@ const AddFeatureModel = ({
       Authorization: `Bearer ${tokens}`,
     },
   };
-
   useEffect(() => {
     setProductName(productData);
   }, [productData]);
@@ -48,6 +50,10 @@ const AddFeatureModel = ({
   useEffect(() => {
     getSuggestedCompany();
   }, "")
+
+  useEffect(() => {
+    handleCompanyChange(companyId)
+  }, [companyId])
 
   const addCompanyFeature = async (e) => {
     e.preventDefault();
@@ -58,9 +64,9 @@ const AddFeatureModel = ({
     formData.append("internal_priority", rangevalue.values);
     formData.append("development_url", developmentURL);
     formData.append("image", selectedFile);
-    formData.append("companyID", companyId);
+    formData.append("companyID", userComID);
     formData.append("product_name", productName);
-    formData.append("product_id", productId)
+    formData.append("product_id", userProID)
 
     try {
       const { data } = await axiosConfig.post(
@@ -131,12 +137,12 @@ const AddFeatureModel = ({
   }
 
   const handleCompanyChange = async (companyId) => {
+    setUserComID(companyId)
     let response = await getRequestApi(
       `/get/product/?company_id=${companyId}`
     );
     if (response) {
       if (response?.data?.success) {
-        console.log(response?.data?.data)
         setSuggestCompanyProducts(response?.data?.data);
       } else {
         return toast.error(response.message, {
@@ -149,6 +155,7 @@ const AddFeatureModel = ({
   }
   const handleProductChange = (productId) => {
     setProductId(productId);
+    setUserProID(productId);
   }
   const updateFieldValue = (val) => {
     setProductName(val);
@@ -200,12 +207,13 @@ const AddFeatureModel = ({
                   <select
                     className="form-control"
                     onChange={(event) => handleCompanyChange(event.target.value)}
+                    value={userComID || ``}
                     required
                   >
                     <option value="">Select a company</option>
                     {suggestCompany ? suggestCompany?.map(company => (
                       <option key={company.id} value={company.id}>
-                        {company.name}
+                        {company.company_name}
                       </option>
                     )) : ""}
                   </select>
@@ -247,6 +255,7 @@ const AddFeatureModel = ({
                   <select
                     className="form-control"
                     onChange={(event) => handleProductChange(event.target.value)}
+                    value={userProID || ``}
                     required
                   >
                     <option value="">Select a Product</option>

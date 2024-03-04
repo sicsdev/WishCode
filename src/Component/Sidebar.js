@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosConfig from "../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import AddFeatureModel from "./models/AddFeatureModel";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const user_role = localStorage.getItem("role");
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-
+  const [show,setShow] =useState(false);
+  const handleClose = () => setShow(false);
+  const [featureTitle,setFeatureTitle]= useState("");
+  const [featureDescription,setFeatureDescription] =useState("")
+  const [selectedFile, setselectedFile] = useState(null);
+  const [loader, setloader] = useState(false);
   const toggleMenu = (e) => {
     setIsToggleOpen((prevState) => !prevState);
   };
@@ -25,7 +31,17 @@ const Sidebar = () => {
       navigate("/login");
     }, 1000);
   };
-
+ const handleSuggestNew=()=>{
+  setShow(true);
+  setFeatureTitle("");
+  setFeatureDescription("")
+ }
+ useEffect(()=>{
+  getProductData();
+ })
+ const getProductData=()=>{
+     return null;
+ }
   return (
     <>
       <div
@@ -152,10 +168,6 @@ const Sidebar = () => {
 
             {user_role == 4 ? (
               <>
-                {/* <Link to="/dashboard" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Dashboard</span>
-                </Link> */}
                 <Link to="/products" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Products</span>
@@ -168,6 +180,10 @@ const Sidebar = () => {
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Search</span>
                 </Link>
+                <Link onClick={handleSuggestNew} className="theme-color1">
+                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  &nbsp;<span>Suggest New</span>
+                </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
@@ -179,6 +195,24 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
+      <AddFeatureModel
+        show={show}
+        handleClose={handleClose}
+        setShow={setShow}
+        companyId={""}
+        setloader={setloader}
+        getPageData={getProductData}
+        featureTitle={featureTitle}
+        featureDescription={featureDescription}
+        selectedFile={""}
+        setselectedFile={setselectedFile}
+        setfeatureTitle={setFeatureTitle}
+        setfeatureDescription={setFeatureDescription}
+        featureId={""}
+        setfeatureId={""}
+        productData={""}
+        companyData={""}
+      />
     </>
   );
 };

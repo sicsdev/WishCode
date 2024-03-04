@@ -243,6 +243,7 @@ const FeatureComp = ({
           </div>
         </div>
       </div>
+
       <AddFeatureModel
         show={show}
         handleClose={handleClose}
