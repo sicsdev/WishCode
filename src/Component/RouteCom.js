@@ -38,6 +38,7 @@ import FeatureWishes from "../pages/FeatureWishes";
 import ManageSubscriptionPlans from "../pages/admin/ManageSubscriptionPlans";
 import ShowCase from "../pages/company/ShowCase";
 import SearchCompanyFeatureComp from "./Search/SearchCompanyFeatureComp";
+import FrontShowCase from "./front/FrontShowCase";
 
 const RouteCom = () => {
   return (
@@ -48,6 +49,7 @@ const RouteCom = () => {
       <Route path="/forget-password" element={<ForgetPassword />} />
       <Route path="/reset/:token" element={<ResetPassword />} />
       <Route exact path="/" element={<Home />} />
+      <Route path="/:company_name/showcase" element={<FrontShowCase/>}/>
       <Route exact path="/feature-wishes" element={<FeatureWishes />} />
       {/* END */}
 
@@ -106,7 +108,6 @@ const RouteCom = () => {
         <Route exact path="/feature/:id" element={<SingleFeature />} />
         <Route exact path="/features" element={<AllFeatures />} />
         <Route exact path="/feature/all" element={<FeatureDatatable />} />
-        <Route exact path="/smartinfo-care-solution/showcase" element={<ShowCase />} />
         <Route
           exact
           path="/feature-report/:id"

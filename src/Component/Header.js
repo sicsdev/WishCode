@@ -7,7 +7,7 @@ const Header = () => {
   const [userRole, setUserRole] = useState("");
   useEffect(() => {
     let getUserRole = parseInt(localStorage.getItem("role"));
-    switch (getUserRole) { 
+    switch (getUserRole) {
       case 1:
         setUserRole('super-admin');
         break;

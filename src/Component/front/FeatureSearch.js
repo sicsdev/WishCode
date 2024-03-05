@@ -137,7 +137,7 @@ const FeatureSearch = (props) => {
                     <tr key={key}>
                       <td>{feature.title}</td>
                       <td>
-                        <Link to={`/?company=${feature.company_slug}`}>
+                        <Link to={`/${feature.company_slug}/showcase`}>
                           {feature.company_name}
                         </Link>
                       </td>
