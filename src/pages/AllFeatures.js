@@ -32,7 +32,6 @@ const AllFeatures = () => {
       });
   };
   const handeCompleteToggle = (featureType) => {
-    console.log(featureType);
     getAllCompanyFeatures(featureType);
   }
   return (
@@ -60,7 +59,7 @@ const AllFeatures = () => {
             </div>
             <div className="container">
 
-              {<FeatureComp features={allFeatures} />}
+              {<FeatureComp features={allFeatures} getAllCompanyFeatures={getAllCompanyFeatures}/>}
 
             </div>
           </section>

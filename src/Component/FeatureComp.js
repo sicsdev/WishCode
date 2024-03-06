@@ -18,6 +18,7 @@ const FeatureComp = ({
   companyData,
   filter_type,
   productData,
+  getAllCompanyFeatures,
 }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -30,6 +31,7 @@ const FeatureComp = ({
   const [featureDescription, setfeatureDescription] = useState("");
   const [claimEmail, setClaimEmail] = useState("");
   const [searchFeature, setSearchFeatures] = useState([]);
+  const [searchParam, setSearchParam] = useState(null);
 
   useEffect(() => {
     setSearchFeatures(features);
@@ -89,24 +91,25 @@ const FeatureComp = ({
       );
     }
   };
-  const searchRandomFeature = (e) => {
-    const filterdata = searchFeature?.filter((data) => data?.title?.toLowerCase().includes(e.target.value.toLowerCase()));
-    if (e.target.value) {
+
+  useEffect(() => {
+    if (searchParam) {
+      const filterdata = searchFeature?.filter((data) => data?.title?.toLowerCase().includes(searchParam.toLowerCase()));
       setSearchFeatures(filterdata);
     } else {
       setSearchFeatures(features);
     }
-  }
+  }, [searchParam])
 
   return (
     <>
       <div class="row justify-content-end">
-       
-          <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="Search Feature" onChange={(e) => searchRandomFeature(e)} />
-          </div>
-        
-
+        <div class="col-md-4">
+          <input type="text" class="form-control" placeholder="Search Feature" value={searchParam} onChange={(e) => setSearchParam(e.target.value)} onFocus={() => {
+            setSearchParam('')
+            getAllCompanyFeatures("all");
+          }} />
+        </div>
       </div>
       <div className="dashboard card">
         <div className="card-header d-flex justify-content-between align-items-center">
