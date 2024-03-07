@@ -59,7 +59,7 @@ const AllFeatures = () => {
             </div>
             <div className="container">
 
-              {<FeatureComp features={allFeatures} getAllCompanyFeatures={getAllCompanyFeatures}/>}
+              {<FeatureComp features={allFeatures} getAllCompanyFeatures={getAllCompanyFeatures} />}
 
             </div>
           </section>

@@ -165,7 +165,7 @@ const FilterDatatableCom = (props) => {
       name: "Status",
       selector: (row) => (
         <div className="switch-btn-wrapper mt-3">
-          <label className="switch">
+          <label className="switch type_switch">
             <input
               type="checkbox"
               name="completeFeature"
@@ -179,7 +179,10 @@ const FilterDatatableCom = (props) => {
                 );
               }}
             />
-            <span className="slider round"></span>
+             <div className="slider round">
+            <span className="on"> Complete</span>
+            <span className="off">In Progress</span>
+          </div>
           </label>
         </div>
       ),
