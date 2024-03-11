@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { HeaderContextApi } from "../commanapi/HeaderContext";
 const Header = () => {
   const navigate = useNavigate();
-  // console.log(localStorage.getItem("userName"))
+  const headerValue = useContext(HeaderContextApi);
   const [userRole, setUserRole] = useState("");
+  console.log("contextapivalue>>",headerValue);
   useEffect(() => {
     let getUserRole = parseInt(localStorage.getItem("role"));
     switch (getUserRole) {
