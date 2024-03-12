@@ -4,15 +4,16 @@ import "./App.css";
 import "./css/login.css";
 import "./css/style.css";
 import RouteCom from "./Component/RouteCom";
+import { ColorProvider } from "./commanapi/ColorProvider";
 function App() {
   return (
-    <div>
+    <ColorProvider>
       <Router>
         <div className="App">
           <RouteCom />
         </div>
       </Router>
-    </div>
+    </ColorProvider>
   );
 }
 export default App;

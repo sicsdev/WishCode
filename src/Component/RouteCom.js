@@ -39,6 +39,7 @@ import ManageSubscriptionPlans from "../pages/admin/ManageSubscriptionPlans";
 import ShowCase from "../pages/company/ShowCase";
 import SearchCompanyFeatureComp from "./Search/SearchCompanyFeatureComp";
 import FrontShowCase from "./front/FrontShowCase";
+import ThemeSettingComp from "./theme/ThemeSettingComp";
 
 const RouteCom = () => {
   return (
@@ -80,6 +81,8 @@ const RouteCom = () => {
           path="/admin/subscription/manage"
           element={<ManageSubscriptionPlans />}
         />
+        {/*for theme Setting */}
+        <Route path="/theme/setting" element={<ThemeSettingComp />} />
       </Route>
       {/* END:: Super Admin Routes */}
       <Route exact path="/" element={<PrivateRoute />}>

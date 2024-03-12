@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { HeaderContextApi } from "../commanapi/HeaderContext";
 const Header = () => {
   const navigate = useNavigate();
-  const headerValue = useContext(HeaderContextApi);
+  // const headerValue = useContext(HeaderContextApi);
   const [userRole, setUserRole] = useState("");
-  console.log("contextapivalue>>",headerValue);
+  // console.log("contextapivalue>>",headerValue);
   useEffect(() => {
     let getUserRole = parseInt(localStorage.getItem("role"));
     switch (getUserRole) {
@@ -33,7 +32,7 @@ const Header = () => {
         <div className="container">
           <div className="d-flex justify-content-between py-3 align-items-center">
             <div className="title-bar">
-              <button onClick={() => navigate(-1)} className="btn back-btn">
+              <button onClick={() => navigate(-1)} className="btn back-btn context-button">
                 <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
               </button>
             </div>

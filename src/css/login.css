@@ -76,8 +76,8 @@ li {
 }
 
 .btn-lg-primary {
-  background: #6e474a;
-  color: #fff;
+  background:var(--button-color);
+  color: var(--text-color);
   font-size: 16px;
   padding: 12px 25px;
   line-height: 1.2;
@@ -355,7 +355,7 @@ input:checked+.slider:before {
 }
 
 .bg--header {
-  background-color: #cc4545;
+  background-color:var(--background-color);;
 }
 
 .button-checkbox button.bg-danger {
@@ -404,7 +404,7 @@ ol.breadcrumb li a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #6e474a;
+  background-color: var(--background-color);
 }
 
 .brand-name h3 {
@@ -440,7 +440,7 @@ ol.breadcrumb li a {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #aa504f;
+  background-color:var(--background-color);
   overflow-x: hidden;
   transition: all 0.5s;
   max-width: 300px;
@@ -1060,7 +1060,7 @@ dialog.dialog.img-dialog img {
 .btn.back-btn {
   color: #6e474a !important;
   font-weight: 600;
-  background: #fff;
+  background-color: var(--button-color);
 }
 
 p.votes-count {

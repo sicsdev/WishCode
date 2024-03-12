@@ -27,6 +27,7 @@ const Sidebar = () => {
       position: "bottom-right",
       autoClose: 2000,
     });
+    window.location.reload();
     setTimeout(() => {
       navigate("/login");
     }, 1000);
@@ -95,6 +96,10 @@ const Sidebar = () => {
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Manage Plans</span>
                 </Link>
+                <Link to="/theme/setting" className="theme-color1">
+                  <i className="fa fa-cog" aria-hidden="true"></i>
+                  &nbsp;<span>Theme Setting</span>
+                </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
@@ -130,6 +135,10 @@ const Sidebar = () => {
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Company Profile</span>
                 </Link>
+                <Link to="/theme/setting" className="theme-color1">
+                  <i className="fa fa-cog" aria-hidden="true"></i>
+                  &nbsp;<span>Theme Setting</span>
+                </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
@@ -153,10 +162,10 @@ const Sidebar = () => {
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>View Features</span>
                 </Link>
-                  {/* <Link to="/suggest/feature" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Suggest Features</span>
-                </Link> */}
+                <Link to="/theme/setting" className="theme-color1">
+                  <i className="fa fa-cog" aria-hidden="true"></i>
+                  &nbsp;<span>Theme Setting</span>
+                </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span>Logout</span>
@@ -183,6 +192,10 @@ const Sidebar = () => {
                 <Link onClick={handleSuggestNew} className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span>Suggest New</span>
+                </Link>
+                <Link to="/theme/setting" className="theme-color1">
+                  <i className="fa fa-cog" aria-hidden="true"></i>
+                  &nbsp;<span>Theme Setting</span>
                 </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>

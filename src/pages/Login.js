@@ -8,6 +8,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import "react-toastify/dist/ReactToastify.css";
 import GoogleLoginComp from "../Component/SocialLogins/GoogleLoginComp";
 import FacebookLoginComp from "../Component/SocialLogins/FacebookLoginComp";
+import { useColor } from "../commanapi/ColorProvider";
 
 const Login = ({ }) => {
   const myGoogleAppId = process.env.REACT_APP_GOOGLE_APP_ID;
@@ -16,7 +17,7 @@ const Login = ({ }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isloader, setIsLoader] = useState(false);
-
+  const { changeColor } = useColor();
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setTimeout(() => {
@@ -46,6 +47,11 @@ const Login = ({ }) => {
       localStorage.setItem("role", data?.data?.role_id);
       localStorage.setItem("userName", data?.data?.name);
       localStorage.setItem("token", data.token);
+      changeColor({
+        backgroundColor: data?.themeColor?.background_color || `#aa504f`,
+        buttonColor: data?.themeColor?.button_color || `#fff`,
+        textColor: data?.themeColor?.text_color || `#000000`,
+    });
       setEmail("");
       setPassword("");
       setIsLoader(false);
