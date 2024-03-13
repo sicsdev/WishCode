@@ -97,38 +97,84 @@ const ThemeSettingComp = () => {
         }
     };
     return (
+        // <>
+        //     <div className="main-body" style={{ backgroundColor: 'white' }}>
+        //         <Sidebar />
+        //         <div className="body-wrapper" id="body-content">
+        //             <Header />
+        //             <form className="post-comment-form mt-5 ml-5" onSubmit={handleSubmit} style={{ backgroundColor: 'white' }}>
+        //                 <div className="row g-3">
+        //                     <div className="col-3">
+        //                         <label htmlFor="buttonInput">Button color</label>
+        //                         <input type="color" id="buttonInput" className="form-control" value={buttonColor} onChange={(e) => setButtonColor(e.target.value)} aria-label="Button" />
+        //                     </div>
+        //                     <div className="col-3">
+        //                         <label htmlFor="backgroundInput">Background color</label>
+        //                         <input type="color" id="backgroundInput" className="form-control" value={backgroundColor} onChange={(e) => setBackgroundColor(e.target.value)} aria-label="Background" />
+        //                     </div>
+        //                     <div className="col-3">
+        //                         <label htmlFor="textInput">Text color</label>
+        //                         <input type="color" id="textInput" className="form-control" value={textColor} onChange={(e) => setTextColor(e.target.value)} aria-label="Text" />
+        //                     </div>
+        //                 </div>
+        //                 <div className="input-group-append " style={{ "width": "75%", justifyContent: "center", marginTop: "23px" }}>
+        //                     <button type="submit" style={{ cursor: 'pointer' }} className="input-group-text context-button back-btn">
+        //                         Set Theme
+        //                     </button>
+        //                     <button type="button" onClick={defaultHandleSubmit} style={{ cursor: 'pointer' }} className="input-group-text context-button ml-2 back-btn">
+        //                         Default Theme
+        //                     </button>
+        //                 </div>
+        //             </form>
+
+        //         </div>
+        //     </div>
+        //     {load === true ? <Loader /> : <></>}
+        //     <ToastContainer />
+        // </>
         <>
-            <div className="main-body" style={{ backgroundColor: 'white' }}>
+            <div className="main-body">
                 <Sidebar />
                 <div className="body-wrapper" id="body-content">
                     <Header />
-                    <form className="post-comment-form mt-5 ml-5" onSubmit={handleSubmit} style={{ backgroundColor: 'white' }}>
-                        <div className="row g-3">
-                            <div className="col-3">
-                                <label htmlFor="buttonInput">Button color</label>
-                                <input type="color" id="buttonInput" className="form-control" value={buttonColor} onChange={(e) => setButtonColor(e.target.value)} aria-label="Button" />
-                            </div>
-                            <div className="col-3">
-                                <label htmlFor="backgroundInput">Background color</label>
-                                <input type="color" id="backgroundInput" className="form-control" value={backgroundColor} onChange={(e) => setBackgroundColor(e.target.value)} aria-label="Background" />
-                            </div>
-                            <div className="col-3">
-                                <label htmlFor="textInput">Text color</label>
-                                <input type="color" id="textInput" className="form-control" value={textColor} onChange={(e) => setTextColor(e.target.value)} aria-label="Text" />
+                    <section className="body-content-inner">
+                        <div className="container">
+                            <div className="dashboard card">
+                                <div className="card-header d-flex justify-content-between align-items-center">
+                                    <h5 className="text-white">THEME SETTING</h5>
+                                </div>
+                                <div className="card-body">
+                                    <div className="row">
+                                        <form className="post-comment-form mt-5 ml-5" onSubmit={handleSubmit} >
+                                            <div className="d-flex gap-4">
+                                                <label className="font-weight-bold w-25  mt-3">Button color : </label>
+                                                <input type="color" id="buttonInput" className="form-control w-25 ml-5 mt-3" value={buttonColor} onChange={(e) => setButtonColor(e.target.value)} aria-label="Button" />
+                                            </div>
+                                            <div className="d-flex gap-4">
+                                                <label className="font-weight-bold w-25 mt-3">Background color : </label>
+                                                <input type="color" id="backgroundInput" className="form-control w-25 ml-5 mt-3" value={backgroundColor} onChange={(e) => setBackgroundColor(e.target.value)} aria-label="Background" />
+                                            </div>
+                                            <div className="d-flex gap-4">
+                                                <label className="font-weight-bold w-25 mt-3">Text color : </label>
+                                                <input type="color" id="textInput" className="form-control w-25 ml-5 mt-3" value={textColor} onChange={(e) => setTextColor(e.target.value)} aria-label="Text" />
+                                            </div>
+                                            <div className="input-group-append " style={{ "width": "75%", justifyContent: "center", marginTop: "23px" }}>
+                                                <button type="submit" style={{ cursor: 'pointer' }} className="input-group-text context-button back-btn">
+                                                    Set Theme
+                                                </button>
+                                                <button type="button" onClick={defaultHandleSubmit} style={{ cursor: 'pointer' }} className="input-group-text context-button ml-2 back-btn">
+                                                    Default Theme
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="input-group-append " style={{ "width": "75%", justifyContent: "center", marginTop: "23px" }}>
-                            <button type="submit" style={{ cursor: 'pointer' }} className="input-group-text context-button back-btn">
-                                Set Theme
-                            </button>
-                            <button type="button" onClick={defaultHandleSubmit} style={{ cursor: 'pointer' }} className="input-group-text context-button ml-2 back-btn">
-                                Default Theme
-                            </button>
-                        </div>
-                    </form>
-
+                    </section>
                 </div>
             </div>
+
             {load === true ? <Loader /> : <></>}
             <ToastContainer />
         </>

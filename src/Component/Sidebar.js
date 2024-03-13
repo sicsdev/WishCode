@@ -70,39 +70,39 @@ const Sidebar = () => {
               <>
                 <Link to="/dashboard" className="theme-color1">
                   <i className="fa fa-tachometer" aria-hidden="true"></i>
-                  &nbsp;<span>Dashboard</span>
+                  &nbsp;<span className="custom-sidebar-span">Dashboard</span>
                 </Link>
                 <Link to="/admin/companies" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>All Companies</span>
+                  &nbsp;<span className="custom-sidebar-span">All Companies</span>
                 </Link>
                 <Link to="/admin/users" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>End Users</span>
+                  &nbsp;<span className="custom-sidebar-span">End Users</span>
                 </Link>
                 <Link to="/admin/approve-request" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Approve Request</span>
+                  &nbsp;<span className="custom-sidebar-span">Approve Request</span>
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>View Features</span>
+                  &nbsp;<span className="custom-sidebar-span">View Features</span>
                 </Link>
                 <Link to="/search" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Search</span>
+                  &nbsp;<span className="custom-sidebar-span">Search</span>
                 </Link>
                 <Link to="/admin/subscription/manage" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Manage Plans</span>
+                  &nbsp;<span className="custom-sidebar-span">Manage Plans</span>
                 </Link>
                 <Link to="/theme/setting" className="theme-color1">
                   <i className="fa fa-cog" aria-hidden="true"></i>
-                  &nbsp;<span>Theme Setting</span>
+                  &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
                 </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
-                  &nbsp;<span>Logout</span>
+                  &nbsp;<span className="custom-sidebar-span">Logout</span>
                 </Link>
               </>
             ) : (
@@ -113,35 +113,35 @@ const Sidebar = () => {
               <>
                 <Link to="/dashboard" className="theme-color1">
                   <i className="fa fa-tachometer" aria-hidden="true"></i>
-                  &nbsp;<span>Dashboard</span>
+                  &nbsp;<span className="custom-sidebar-span">Dashboard</span>
                 </Link>
                 <Link to="/company/all-users" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Company Users</span>
+                  &nbsp;<span className="custom-sidebar-span">Company Users</span>
                 </Link>
                 <Link to="/company/features" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Features</span>
+                  &nbsp;<span className="custom-sidebar-span">Features</span>
                 </Link>
                 <Link to="/company/approve-requests" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Approve Requests</span>
+                  &nbsp;<span className="custom-sidebar-span">Approve Requests</span>
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>View Features</span>
+                  &nbsp;<span className="custom-sidebar-span">View Features</span>
                 </Link>
                 <Link to="/company-profile/settings" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Company Profile</span>
+                  &nbsp;<span className="custom-sidebar-span">Company Profile</span>
                 </Link>
                 <Link to="/theme/setting" className="theme-color1">
                   <i className="fa fa-cog" aria-hidden="true"></i>
-                  &nbsp;<span>Theme Setting</span>
+                  &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
                 </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
-                  &nbsp;<span>Logout</span>
+                  &nbsp;<span className="custom-sidebar-span">Logout</span>
                 </Link>
               </>
             ) : (
@@ -152,23 +152,23 @@ const Sidebar = () => {
               <>
                 <Link to="/dashboard" className="theme-color1">
                   <i className="fa fa-tachometer" aria-hidden="true"></i>
-                  &nbsp;<span>Dashboard</span>
+                  &nbsp;<span className="custom-sidebar-span">Dashboard</span>
                 </Link>
                 <Link to="/features" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Features</span>
+                  &nbsp;<span className="custom-sidebar-span">Features</span>
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>View Features</span>
+                  &nbsp;<span className="custom-sidebar-span">View Features</span>
                 </Link>
                 <Link to="/theme/setting" className="theme-color1">
                   <i className="fa fa-cog" aria-hidden="true"></i>
-                  &nbsp;<span>Theme Setting</span>
+                  &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
                 </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
-                  &nbsp;<span>Logout</span>
+                  &nbsp;<span className="custom-sidebar-span">Logout</span>
                 </Link>
               </>
             ) : (
@@ -179,27 +179,27 @@ const Sidebar = () => {
               <>
                 <Link to="/products" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Products</span>
+                  &nbsp;<span className="custom-sidebar-span">Products</span>
                 </Link>
                 <Link to="/features" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Features</span>
+                  &nbsp;<span className="custom-sidebar-span">Features</span>
                 </Link>
                 <Link to="/search" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Search</span>
+                  &nbsp;<span className="custom-sidebar-span">Search</span>
                 </Link>
                 <Link onClick={handleSuggestNew} className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span>Suggest New</span>
+                  &nbsp;<span className="custom-sidebar-span">Suggest New</span>
                 </Link>
                 <Link to="/theme/setting" className="theme-color1">
                   <i className="fa fa-cog" aria-hidden="true"></i>
-                  &nbsp;<span>Theme Setting</span>
+                  &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
                 </Link>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
-                  &nbsp;<span>Logout</span>
+                  &nbsp;<span className="custom-sidebar-span">Logout</span>
                 </Link>
               </>
             ) : (

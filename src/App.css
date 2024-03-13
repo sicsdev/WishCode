@@ -1,3 +1,7 @@
+.custom-sidebar-span {
+  color: var(--text-color);
+}
+
 .custom-p {
   color: var(--text-color);
 }
