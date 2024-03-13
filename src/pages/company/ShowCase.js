@@ -90,7 +90,7 @@ const ShowCase = () => {
                                                                         className="text-secondary mr-3"
 
                                                                     >
-                                                                        <span className="font-weight-bold">
+                                                                        <span className="font-weight-bold custom-span">
                                                                             Company Name:
                                                                         </span>{" "}
                                                                         {feature?.company_name}{" "}
@@ -103,7 +103,7 @@ const ShowCase = () => {
                                                                         className="text-secondary"
 
                                                                     >
-                                                                        <span className="font-weight-bold">
+                                                                        <span className="font-weight-bold custom-span">
                                                                             Product Name:
                                                                         </span>{" "}
                                                                         {feature?.product_name}

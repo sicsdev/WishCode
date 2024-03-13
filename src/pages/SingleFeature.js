@@ -555,7 +555,7 @@ const SingleFeature = () => {
                                 className="text-secondary mr-3"
                                 to={`/dashboard/company/${featureData.company_id}`}
                               >
-                                <span className="font-weight-bold">
+                                <span className="font-weight-bold custom-span">
                                   Company Name:
                                 </span>{" "}
                                 {featureData?.company_name}{" "}
@@ -568,7 +568,7 @@ const SingleFeature = () => {
                                 className="text-secondary"
                                 to={`/dashboard/product/${featureData.product_id}`}
                               >
-                                <span className="font-weight-bold">
+                                <span className="font-weight-bold custom-span">
                                   Product Name:
                                 </span>{" "}
                                 {featureData?.product_name}
@@ -622,7 +622,7 @@ const SingleFeature = () => {
                             
                               {userRole == 3 || userRole == 4 ? (
                                 <>
-                                 <div className="d-flex font-weight-bold">
+                                 <div className="d-flex font-weight-bold custom-span">
                                 <span className="text-secondary d-block mb-2">
 
                                   <span>Total Vote : </span>

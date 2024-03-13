@@ -147,7 +147,7 @@ const ViewCompanyFeaturesCom = ({
                             className="text-secondary mr-3"
                             to={`/dashboard/company/${feature.company_id}`}
                           >
-                            <span className="font-weight-bold">
+                            <span className="font-weight-bold custom-span">
                               Company Name:
                             </span>{" "}
                             {feature?.company_name}{" "}
@@ -160,7 +160,7 @@ const ViewCompanyFeaturesCom = ({
                             className="text-secondary"
                             to={`/dashboard/product/${feature.product_id}`}
                           >
-                            <span className="font-weight-bold">
+                            <span className="font-weight-bold custom-span">
                               Product Name:
                             </span>{" "}
                             {feature?.product_name}

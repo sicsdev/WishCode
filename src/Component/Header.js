@@ -41,8 +41,8 @@ const Header = () => {
                 <li className="nav-item pl-lg-4 pr-2">
                   <div className="d-flex  align-items-center">
                     <div><i className="fa fa-user-circle" aria-hidden="true"></i></div>
-                    <p className="mb-0" style={{ paddingLeft: "4px" }}>{localStorage.getItem("userName")}</p>
-                    <p className="mb-0" style={{ fontSize: "12px", paddingLeft: "4px" }}>({userRole})</p>
+                    <p className="mb-0 custom-p" style={{ paddingLeft: "4px" }}>{localStorage.getItem("userName")}</p>
+                    <p className="mb-0 custom-p" style={{ fontSize: "12px", paddingLeft: "4px" }}>({userRole})</p>
                   </div>
                 </li>
               </ul>

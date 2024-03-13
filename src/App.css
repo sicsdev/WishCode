@@ -1,9 +1,15 @@
 
-p,h2,span,h5{
+span{
+  color: var(--text-color);
+}
+.custom-p{
   color: var(--text-color);
 }
 .context-button{
   background-color: var(--button-color);
+}
+.custom-span{
+  color :#000
 }
 .App {
   text-align: center;
