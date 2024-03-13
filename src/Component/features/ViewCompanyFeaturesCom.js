@@ -109,7 +109,7 @@ const ViewCompanyFeaturesCom = ({
           <h5 className="text-white text-uppercase">Company Feature</h5>
           <Link
             to=""
-            className="btn btn-lg-primary text-white"
+            className="btn btn-lg-primary"
             onClick={(e) => {
               addFeature();
             }}

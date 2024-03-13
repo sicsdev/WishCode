@@ -16,6 +16,7 @@ export const ColorProvider = ({ children }) => {
   useEffect(() => {
     getThemeColor();
   }, '');
+  
   //get token
   const tokens = localStorage.getItem("token");
   const config = {
@@ -36,7 +37,7 @@ export const ColorProvider = ({ children }) => {
       textColor: data?.data?.text_color || `#000000`
     });
   };
- 
+
   //for change color of theme
   const changeColor = (newColor) => {
     setColor(newColor);

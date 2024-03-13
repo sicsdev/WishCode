@@ -510,7 +510,7 @@ ol.breadcrumb li a {
 
 .dashboard .card-header {
   background: linear-gradient(90deg,
-      #6e474a 20.87%,
+  var(--background-color),
       rgba(110, 71, 74, 0) 82.85%);
 }
 
@@ -816,7 +816,7 @@ span.mt-2.company-label {
 }
 
 .add-comment .input-group-text {
-  background: #aa504f;
+  background:var(--button-color);
   color: white;
 }
 
@@ -989,7 +989,7 @@ a.text-secondary.vote {
 }
 
 button.input-group-text.vote {
-  background: #aa504f;
+  background: var(--button-color);
   color: white;
 }
 
@@ -1046,6 +1046,7 @@ dialog.dialog.img-dialog img {
 
 .company-names span {
   cursor: pointer;
+  background-color: var(--button-color)
 }
 
 .feature-desc-string {
@@ -1084,7 +1085,7 @@ p.votes-count {
 }
 
 .card-counter.primary {
-  background: #aa504f;
+  background: var(--background-color);
   border-radius: 10px;
   color: #fff;
 }

@@ -115,7 +115,7 @@ const FeatureSearch = (props) => {
               </h5>
               <button
                 type="button"
-                className="btn btn-lg-primary text-white"
+                className="btn btn-lg-primary"
                 onClick={(e) => setShowModel(true)}
               >
                 New Feature

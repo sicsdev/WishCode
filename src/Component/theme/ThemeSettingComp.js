@@ -9,9 +9,9 @@ import { useColor } from '../../commanapi/ColorProvider';
 
 
 const ThemeSettingComp = () => {
-    const [buttonColor, setButtonColor] = useState('#ffffff');
-    const [backgroundColor, setBackgroundColor] = useState('#ffffff');
-    const [textColor, setTextColor] = useState('#ffffff');
+    const [buttonColor, setButtonColor] = useState('#fff');
+    const [backgroundColor, setBackgroundColor] = useState('#aa504f');
+    const [textColor, setTextColor] = useState('#000000');
     const [load, setLoad] = useState(false);
     const { changeColor } = useColor();
     useEffect(() => {
@@ -35,7 +35,39 @@ const ThemeSettingComp = () => {
         setBackgroundColor(data?.data?.background_color);
         setTextColor(data?.data?.text_color);
     };
+    //function for handle the default theme
 
+    const defaultHandleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            setLoad(true);
+            const { data } = await axiosConfig.post(
+                `/set/theme/color`,
+                {
+                    button_color: '#fff',
+                    background_color: '#aa504f',
+                    text_color: '#000000',
+                },
+                config
+            );
+            setLoad(false);
+            changeColor({
+                backgroundColor: data?.data?.background_color,
+                buttonColor: data?.data?.button_color,
+                textColor: data?.data?.text_color
+            });
+            setLoad(false);
+            setButtonColor('#fff');
+            setBackgroundColor('#aa504f');
+            setTextColor('#000000');
+            toast.success(`Set Default Theme Successfully!`, {
+                position: "bottom-right",
+                autoClose: 2000,
+            });
+        } catch (error) {
+            console.log(' Theme Set Color error', error);
+        }
+    };
     // Function to handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -85,9 +117,12 @@ const ThemeSettingComp = () => {
                                 <input type="color" id="textInput" className="form-control" value={textColor} onChange={(e) => setTextColor(e.target.value)} aria-label="Text" />
                             </div>
                         </div>
-                        <div className="input-group-append " style={{"width": "75%",justifyContent:"center",marginTop: "23px"}}>
-                            <button type="submit" style={{ cursor: 'pointer' }} className="input-group-text context-button">
+                        <div className="input-group-append " style={{ "width": "75%", justifyContent: "center", marginTop: "23px" }}>
+                            <button type="submit" style={{ cursor: 'pointer' }} className="input-group-text context-button back-btn">
                                 Set Theme
+                            </button>
+                            <button type="button" onClick={defaultHandleSubmit} style={{ cursor: 'pointer' }} className="input-group-text context-button ml-2 back-btn">
+                                Default Theme
                             </button>
                         </div>
                     </form>

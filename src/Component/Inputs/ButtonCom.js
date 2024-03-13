@@ -4,7 +4,7 @@ const ButtonCom = (props) => {
   return (
     <>
       <div className="py-2 text-right">
-        <button type={props.type} className={props.class} disabled={props.disable}>
+        <button type={props.type} className="btn btn-lg-primary" disabled={props.disable}>
           {props.name}
         </button>
       </div>
