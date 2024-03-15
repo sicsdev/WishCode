@@ -22,7 +22,9 @@ const Users = () => {
   const [showModal, setshowModal] = useState(false);
   const [userId, setuserId] = useState();
   const [loader, setloader] = useState(false);
-
+  const [newPassword,setPassword] =useState("");
+  const [confirmPassword,setConfirmPassword] =useState("");
+  const [passwordMatch, setPasswordMatch] = useState(true);
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -96,12 +98,18 @@ const Users = () => {
 
   const updateUserhandler = async (e) => {
     e.preventDefault();
+      if (newPassword !== confirmPassword) {
+      setPasswordMatch(false);
+      setloader(false);
+      return; // Exit the function if passwords don't match
+    }
     try {
       const { data } = await axiosConfig.put(
         `/admin/user/update/${userId}`,
         {
           name: userName,
           email: userEmail,
+          password:confirmPassword,
         },
         config
       );
@@ -218,6 +226,7 @@ const Users = () => {
                                       ></i>
                                     </Link>
                                     <a
+                                    style={{ cursor: "pointer" }}
                                       onClick={(e) => {
                                         editViewUser(user);
                                       }}
@@ -231,6 +240,7 @@ const Users = () => {
                                       ></i>
                                     </a>
                                     <a
+                                    style={{ cursor: "pointer" }}
                                       onClick={(e) => {
                                         deleteCompanyUser(user.id);
                                       }}
@@ -345,6 +355,26 @@ const Users = () => {
                   onChange={(e) => setuserEmail(e.target.value)}
                 />
               </div>
+              <label>Change Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  value={newPassword}
+                  placeholder="New Password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
+                />
+                <input
+                  type="password"
+                  className="form-control"
+                  value={confirmPassword}
+                  placeholder="Confirm Password"
+                  required
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  autoComplete="new-password"
+                />
+                {!passwordMatch && <p style={{ color: 'red' }}>Passwords do not match!</p>}
             </>
           </Modal.Body>
           <Modal.Footer>
