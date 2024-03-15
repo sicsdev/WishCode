@@ -817,7 +817,7 @@ span.mt-2.company-label {
 
 .add-comment .input-group-text {
   background:var(--button-color);
-  color: white;
+  color: var(--button-text-color);
 }
 
 .reply-comment .input-group-text {
@@ -990,7 +990,7 @@ a.text-secondary.vote {
 
 button.input-group-text.vote {
   background: var(--button-color);
-  color: white;
+  color: var(--button-text-color);
 }
 
 .post-comments .user-img img {
