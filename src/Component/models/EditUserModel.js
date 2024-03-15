@@ -68,6 +68,9 @@ const EditUserModel = ({
       setshowModal(false);
       getPageData();
       setStorePermissions([]);
+      setPassword("");
+      setConfirmPassword("");
+      setPasswordMatch(true)
       toast.success(data.message, {
         position: "bottom-right",
         autoClose: 2000,
@@ -223,6 +226,9 @@ const EditUserModel = ({
               className="btn btn-lg-primary"
               onClick={(e) => {
                 setshowModal(false);
+                setConfirmPassword("");
+                setPassword("");
+                setPasswordMatch(true);
               }}
             >
               Close Modal

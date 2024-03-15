@@ -115,7 +115,9 @@ const Users = () => {
       );
       setshowModal(false);
       getAllUsers();
-
+      setConfirmPassword("");
+      setPassword("");
+      setPasswordMatch(true);
       toast.success(data.message, {
         position: "bottom-right",
         autoClose: 2000,
@@ -386,6 +388,9 @@ const Users = () => {
               className="btn btn-lg-primary"
               onClick={(e) => {
                 setshowModal(false);
+                setConfirmPassword("");
+                setPassword("");
+                setPasswordMatch(true);
               }}
             >
               Close Modal
