@@ -12,6 +12,7 @@ const ThemeSettingComp = () => {
     const [buttonColor, setButtonColor] = useState('#fff');
     const [backgroundColor, setBackgroundColor] = useState('#aa504f');
     const [textColor, setTextColor] = useState('#000000');
+    const [buttonTextColor, setButtonTextColor] = useState('#000000');
     const [load, setLoad] = useState(false);
     const { changeColor } = useColor();
     useEffect(() => {
@@ -27,6 +28,7 @@ const ThemeSettingComp = () => {
     };
     //for get the theme color 
     const getThemeColor = async () => {
+        setLoad(true);
         const { data } = await axiosConfig.get(
             "/get/theme/color",
             config
@@ -34,6 +36,8 @@ const ThemeSettingComp = () => {
         setButtonColor(data?.data?.button_color);
         setBackgroundColor(data?.data?.background_color);
         setTextColor(data?.data?.text_color);
+        setButtonTextColor(data?.data?.btn_text_color);
+        setLoad(false);
     };
     //function for handle the default theme
 
@@ -54,12 +58,14 @@ const ThemeSettingComp = () => {
             changeColor({
                 backgroundColor: data?.data?.background_color,
                 buttonColor: data?.data?.button_color,
-                textColor: data?.data?.text_color
+                textColor: data?.data?.text_color,
+                buttonTextColor: data?.data?.btn_text_color
             });
             setLoad(false);
             setButtonColor('#fff');
             setBackgroundColor('#aa504f');
             setTextColor('#000000');
+            setButtonTextColor('#000000');
             toast.success(`Set Default Theme Successfully!`, {
                 position: "bottom-right",
                 autoClose: 2000,
@@ -79,6 +85,7 @@ const ThemeSettingComp = () => {
                     button_color: buttonColor,
                     background_color: backgroundColor,
                     text_color: textColor,
+                    btn_text_color: buttonTextColor
                 },
                 config
             );
@@ -86,7 +93,8 @@ const ThemeSettingComp = () => {
             changeColor({
                 backgroundColor: data?.data?.background_color,
                 buttonColor: data?.data?.button_color,
-                textColor: data?.data?.text_color
+                textColor: data?.data?.text_color,
+                buttonTextColor: data?.data?.btn_text_color,
             });
             toast.success(`Theme Setting Successfully!`, {
                 position: "bottom-right",
@@ -145,10 +153,14 @@ const ThemeSettingComp = () => {
                                 </div>
                                 <div className="card-body">
                                     <div className="row">
-                                        <form className="post-comment-form mt-5 ml-5" onSubmit={handleSubmit} >
+                                        <form className="post-comment-form mt-5 ml-5" onSubmit={handleSubmit}>
                                             <div className="d-flex gap-4">
                                                 <label className="font-weight-bold w-25  mt-3">Button color : </label>
                                                 <input type="color" id="buttonInput" className="form-control w-25 ml-5 mt-3" value={buttonColor} onChange={(e) => setButtonColor(e.target.value)} aria-label="Button" />
+                                            </div>
+                                            <div className="d-flex gap-4">
+                                                <label className="font-weight-bold w-25 mt-3">Button Text color : </label>
+                                                <input type="color" id="textInput" className="form-control w-25 ml-5 mt-3" value={buttonTextColor} onChange={(e) => setButtonTextColor(e.target.value)} aria-label="Text" />
                                             </div>
                                             <div className="d-flex gap-4">
                                                 <label className="font-weight-bold w-25 mt-3">Background color : </label>
@@ -158,11 +170,12 @@ const ThemeSettingComp = () => {
                                                 <label className="font-weight-bold w-25 mt-3">Text color : </label>
                                                 <input type="color" id="textInput" className="form-control w-25 ml-5 mt-3" value={textColor} onChange={(e) => setTextColor(e.target.value)} aria-label="Text" />
                                             </div>
+                                           
                                             <div className="input-group-append " style={{ "width": "75%", justifyContent: "center", marginTop: "23px" }}>
-                                                <button type="submit" style={{ cursor: 'pointer' }} className="input-group-text context-button back-btn">
+                                                <button type="submit" style={{ cursor: 'pointer' }} className=" btn btn-lg-primary">
                                                     Set Theme
                                                 </button>
-                                                <button type="button" onClick={defaultHandleSubmit} style={{ cursor: 'pointer' }} className="input-group-text context-button ml-2 back-btn">
+                                                <button type="button" onClick={defaultHandleSubmit} style={{ cursor: 'pointer' }} className="btn btn-lg-primary ml-2 back-btn">
                                                     Default Theme
                                                 </button>
                                             </div>
@@ -174,7 +187,6 @@ const ThemeSettingComp = () => {
                     </section>
                 </div>
             </div>
-
             {load === true ? <Loader /> : <></>}
             <ToastContainer />
         </>

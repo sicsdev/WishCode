@@ -1,6 +1,6 @@
 .navbar .sign_in_btn {
     background: var(--button-color);
-    color: #000000;
+    color: var(--button-text-color);
     margin-right: 10px;
     padding: 8px 25px
 }

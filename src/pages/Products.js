@@ -196,7 +196,7 @@ const Products = () => {
                         {alphabets.map((ele, key) => (
                           <span
                             key={key}
-                            className="text-uppercase"
+                            className="text-uppercase custom-product-span"
                             onClick={(e) => {
                               filterCompanies(ele);
                             }}
@@ -213,7 +213,7 @@ const Products = () => {
                           key={key}
                         >
                           <div className="company-names">
-                            <span className="text-capitalize">
+                            <span className="text-capitalize custom-product-span">
                               {element.alpha} alphabets
                             </span>
                           </div>
@@ -222,7 +222,7 @@ const Products = () => {
                               <p className="search_heading">Companies</p>
                               {element.companies.map((company, index) => (
                                 <div className="col-md-3" key={index}>
-                                  <span className="d-block py-3 text-uppercase company-nameing">
+                                  <span className="d-block py-3 text-uppercase company-nameing custom-product-span">
                                     <Link
                                       className="link-secondary single-product-link"
                                       to={`/dashboard/company/${company.id}`}
@@ -239,7 +239,7 @@ const Products = () => {
                               <p className="search_heading">Products</p>
                               {element.products.map((product, index) => (
                                 <div className="col-md-3" key={index}>
-                                  <span className="d-block py-3 text-uppercase company-nameing">
+                                  <span className="d-block py-3 text-uppercase company-nameing custom-product-span">
                                     <Link
                                       className="link-secondary single-product-link"
                                       to={`/dashboard/product/${product.id}`}

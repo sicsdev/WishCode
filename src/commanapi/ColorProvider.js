@@ -10,7 +10,8 @@ export const ColorProvider = ({ children }) => {
   const [color, setColor] = useState({
     backgroundColor: '',
     buttonColor: '',
-    textColor: ''
+    textColor: '',
+    buttonTextColor:'',
   });
 
   useEffect(() => {
@@ -34,7 +35,8 @@ export const ColorProvider = ({ children }) => {
     changeColor({
       backgroundColor: data?.data?.background_color || `#aa504f`,
       buttonColor: data?.data?.button_color || `#fff`,
-      textColor: data?.data?.text_color || `#000000`
+      textColor: data?.data?.text_color || `#000000`,
+      buttonTextColor:data?.data?.btn_text_color || `#000000`
     });
   };
 
@@ -44,6 +46,7 @@ export const ColorProvider = ({ children }) => {
     document.documentElement.style.setProperty('--background-color', newColor.backgroundColor);
     document.documentElement.style.setProperty('--button-color', newColor.buttonColor);
     document.documentElement.style.setProperty('--text-color', newColor.textColor);
+    document.documentElement.style.setProperty('--button-text-color', newColor.buttonTextColor);
   };
   // console.log("first",color);
   return (

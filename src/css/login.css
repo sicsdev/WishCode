@@ -77,7 +77,7 @@ li {
 
 .btn-lg-primary {
   background:var(--button-color);
-  color: var(--text-color);
+  color: var(--button-text-color);
   font-size: 16px;
   padding: 12px 25px;
   line-height: 1.2;
@@ -1059,7 +1059,7 @@ dialog.dialog.img-dialog img {
 }
 
 .btn.back-btn {
-  color: #6e474a !important;
+  color: var(--button-text-color);
   font-weight: 600;
   background-color: var(--button-color);
 }

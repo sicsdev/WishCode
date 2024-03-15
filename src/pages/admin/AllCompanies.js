@@ -133,7 +133,7 @@ const AllCompanies = () => {
                   <h5 className="text-white text-uppercase">Company Name</h5>
                   <Link
                     to="/admin/add-company"
-                    className="btn btn-lg-primary text-white"
+                    className="btn btn-lg-primary"
                   >
                     Add Company
                   </Link>

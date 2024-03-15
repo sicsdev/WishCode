@@ -125,7 +125,7 @@ const ManageSubscriptionPlans = () => {
                   <h5 className="text-white text-uppercase">Manage Plans</h5>
                   <Link
                     to=""
-                    className="btn btn-lg-primary text-white"
+                    className="btn btn-lg-primary"
                     onClick={(e) => {
                       addPlanModal();
                     }}

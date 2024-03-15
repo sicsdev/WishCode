@@ -294,7 +294,7 @@ const ViewCompany = () => {
                           </h5>
                           <Link
                             to=""
-                            className="btn btn-lg-primary text-white"
+                            className="btn btn-lg-primary"
                             onClick={(e) => {
                               addUser();
                             }}
@@ -370,7 +370,7 @@ const ViewCompany = () => {
                                 <Link
                                   to={`/admin/company-users/${id}`}
                                   type="button"
-                                  className="btn btn-lg-primary text-white"
+                                  className="btn btn-lg-primary"
                                 >
                                   View All
                                 </Link>
@@ -498,7 +498,7 @@ const ViewCompany = () => {
                                 <Link
                                   to={`/admin/company-features/${id}`}
                                   type="button"
-                                  className="btn btn-lg-primary text-white"
+                                  className="btn btn-lg-primary"
                                 >
                                   View All
                                 </Link>

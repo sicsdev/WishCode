@@ -51,6 +51,7 @@ const Login = ({ }) => {
         backgroundColor: data?.themeColor?.background_color || `#aa504f`,
         buttonColor: data?.themeColor?.button_color || `#fff`,
         textColor: data?.themeColor?.text_color || `#000000`,
+        buttonTextColor:data?.themeColor?.btn_text_color || `#000000`,
     });
       setEmail("");
       setPassword("");

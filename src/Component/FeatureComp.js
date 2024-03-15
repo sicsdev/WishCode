@@ -133,7 +133,7 @@ const FeatureComp = ({
             {suggestFeature === true ? (
               <button
                 type="button"
-                className="btn btn-lg-primary text-white mr-2"
+                className="btn btn-lg-primary mr-2"
                 onClick={(e) => {
                   addFeature();
                 }}
@@ -148,7 +148,7 @@ const FeatureComp = ({
               companyData.requested_by !== null ? (
               <button
                 type="button"
-                className="btn btn-lg-primary text-white"
+                className="btn btn-lg-primary"
                 onClick={(e) => {
                   // claimCompnayHandler(companyData.id);
                   claimCompanyModalHandler(companyData.id);

@@ -91,7 +91,7 @@ const FeatureChartReport = () => {
                   </h5>
                   <Link
                     to={`/feature/${id}`}
-                    className="btn btn-lg-primary text-white"
+                    className="btn btn-lg-primary"
                   >
                     View Feature
                   </Link>
