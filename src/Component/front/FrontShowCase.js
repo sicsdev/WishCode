@@ -42,7 +42,7 @@ const FrontShowCase = () => {
         </div>
         <div className="dashboard card mt-5">
           <div className="card-header d-flex justify-content-between align-items-center">
-            <h5 className="text-white text-uppercase">
+            <h5 className="text-uppercase">
               Showcase of Completed Items
             </h5>
           </div>

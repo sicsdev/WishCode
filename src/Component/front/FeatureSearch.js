@@ -28,7 +28,7 @@ const FeatureSearch = (props) => {
           <div className="latest-wishes-table">
             <div className="dashboard card mt-5">
               <div className="card-header d-flex justify-content-between align-items-center">
-                <h5 className="text-white text-uppercase">
+                <h5 className="text-uppercase">
                   Search Result For Feature Wishes
                 </h5>
               </div>
@@ -110,7 +110,7 @@ const FeatureSearch = (props) => {
         <div className="latest-wishes-table">
           <div className="dashboard card mt-5">
             <div className="card-header d-flex justify-content-between align-items-center">
-              <h5 className="text-white text-uppercase">
+              <h5 className="text-uppercase">
                 latest Feature Wishes
               </h5>
               <button

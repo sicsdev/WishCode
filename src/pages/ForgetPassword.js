@@ -5,7 +5,7 @@ import ForgetPassCom from "../Component/ForgetPassCom";
 const ForgetPassword = () => {
   return (
     <>
-      <div className="auth-wrapper">
+      <div className="auth-wrapper custom-background" style={{ backgroundImage: `url('home-bg.png')` }}>
         <div className="login-form-inner">
           <div className="brand-nam">
             <h3 className="pb-3">WishTrax</h3>

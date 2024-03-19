@@ -67,7 +67,7 @@ const ShowCase = () => {
                         <div className="container">
                             <div className="dashboard card">
                                 <div className='card-header d-flex justify-content-between align-items-center'>
-                                <h5 className="text-white text-uppercase">Showcase of Completed Items</h5>
+                                <h5 className=" text-uppercase">Showcase of Completed Items</h5>
                                 </div>
                                 <div className="card-body">
                                     <div className="row">

@@ -51,8 +51,8 @@ const Login = ({ }) => {
         backgroundColor: data?.themeColor?.background_color || `#aa504f`,
         buttonColor: data?.themeColor?.button_color || `#fff`,
         textColor: data?.themeColor?.text_color || `#000000`,
-        buttonTextColor:data?.themeColor?.btn_text_color || `#000000`,
-    });
+        buttonTextColor: data?.themeColor?.btn_text_color || `#000000`,
+      });
       setEmail("");
       setPassword("");
       setIsLoader(false);
@@ -82,13 +82,13 @@ const Login = ({ }) => {
   return (
     <>
       <GoogleOAuthProvider clientId={myGoogleAppId}>
-        <div className="auth-wrapper">
+        <div className="auth-wrapper custom-background" style={{ backgroundImage: `url('home-bg.png')` }}>
           <div className="login-form-inner">
             <div className="brand-nam">
               <h3 className="pb-3">WishTrax</h3>
             </div>
             <div className="login-form">
-              <h3 className="pb-3">.Login to your account.</h3>
+              <h3 className="pb-3">Login to your account</h3>
               <form onSubmit={loginhandler}>
                 <div className="input-form">
                   <input
@@ -143,7 +143,7 @@ const Login = ({ }) => {
                 </div>
               </form>
               <GoogleLoginComp />
-              <FacebookLoginComp/>
+              {/* <FacebookLoginComp/> */}
             </div>
           </div>
           <ToastContainer />
