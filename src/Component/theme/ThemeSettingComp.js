@@ -142,8 +142,7 @@ const ThemeSettingComp = () => {
         // </>
         <>
             <div className="main-body">
-                <Sidebar />
-                <div className="body-wrapper" id="body-content">
+                <Sidebar>
                     <Header />
                     <section className="body-content-inner">
                         <div className="container">
@@ -185,7 +184,7 @@ const ThemeSettingComp = () => {
                             </div>
                         </div>
                     </section>
-                </div>
+                </Sidebar>
             </div>
             {load === true ? <Loader /> : <></>}
             <ToastContainer />

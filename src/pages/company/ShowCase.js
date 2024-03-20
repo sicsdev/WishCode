@@ -9,6 +9,7 @@ import FeatureComp from '../../Component/FeatureComp';
 const ShowCase = () => {
     const [showCase, setShowCase] = useState();
 
+    const [isToggleOpen, setIsToggleOpen] = useState(false);
     const getShowCaseCompany = async () => {
         let companySlug = "smartinfo-care-solution";
         let response = await getRequestApi(`${companySlug}/showcase`);
@@ -24,7 +25,7 @@ const ShowCase = () => {
     return (
         <>
             <div className="main-body">
-                <Sidebar />
+                <Sidebar isToggleOpen={isToggleOpen} setIsToggleOpen={setIsToggleOpen}/>
                 <div className="body-wrapper" id="body-content">
                     <Header />
                     {/* <section className="body-content-inner">

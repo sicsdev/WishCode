@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../Component/Sidebar";
 import Header from "../Component/Header";
 
 const AddFeedback = () => {
+
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
   return (
     <>
       <div className="main-body">
-        <Sidebar />
+                <Sidebar isToggleOpen={isToggleOpen} setIsToggleOpen={setIsToggleOpen}/>
         <div className="body-wrapper" id="body-content">
           <Header />
           <section className="body-content-inner">

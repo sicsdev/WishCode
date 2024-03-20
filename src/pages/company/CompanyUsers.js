@@ -138,8 +138,7 @@ const CompanyUsers = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar />
-        <div className="body-wrapper" id="body-content">
+        <Sidebar>
           <Header />
           <section className="body-content-inner">
             <div className="container">
@@ -152,7 +151,7 @@ const CompanyUsers = () => {
               />
             </div>
           </section>
-        </div>
+        </Sidebar>
       </div>
       {displayModel.addModel === true ? (
         <AddUserModel

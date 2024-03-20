@@ -50,8 +50,7 @@ const SearchArea = () => {
 
   return (
     <div className="main-body">
-      <Sidebar />
-      <div className="body-wrapper" id="body-content">
+      <Sidebar >
         <Header />
         <section className="body-content-inner">
           <div className="container">
@@ -85,9 +84,9 @@ const SearchArea = () => {
             </div>
           </div>
         </section>
-      </div>
       {loader === true ? <Loader /> : <></>}
       <ToastContainer />
+      </Sidebar>
     </div>
   );
 };

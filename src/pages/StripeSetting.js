@@ -89,8 +89,7 @@ const StripeSetting = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar />
-        <div className="body-wrapper" id="body-content">
+        <Sidebar>
           <Header />
           <section className="body-content-inner">
             <div className="container">
@@ -146,7 +145,7 @@ const StripeSetting = () => {
               </div>
             </div>
           </section>
-        </div>
+        </Sidebar>
       </div>
 
       {loader === true ? <Loader /> : <></>}

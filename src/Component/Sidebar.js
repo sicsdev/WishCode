@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import AddFeatureModel from "./models/AddFeatureModel";
 
-const Sidebar = () => {
+const Sidebar = ({children}) => {
   const navigate = useNavigate();
   const user_role = localStorage.getItem("role");
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -73,7 +73,7 @@ const Sidebar = () => {
                   &nbsp;<span className="custom-sidebar-span">Dashboard</span>
                 </Link>
                 <Link to="/admin/companies" className="theme-color1">
-                  <i className="fa fa-building-o" aria-hidden="true"></i>
+                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">All Companies</span>
                 </Link>
                 <Link to="/admin/users" className="theme-color1">
@@ -85,7 +85,7 @@ const Sidebar = () => {
                   &nbsp;<span className="custom-sidebar-span">Approve Request</span>
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                  <i className="fa fa-eye" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">View Features</span>
                 </Link>
                 <Link to="/search" className="theme-color1">
@@ -177,7 +177,7 @@ const Sidebar = () => {
 
             {user_role == 4 ? (
               <>
-                <Link to="/products" className="theme-color1 active">
+                <Link to="/products" className="theme-color1">
                   <i className="fa fa-product-hunt" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Products</span>
                 </Link>
@@ -208,6 +208,10 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
+      <div className={`${isToggleOpen === true ? "body-wrapper-1":"body-wrapper"} `} id="body-content">
+        {children}
+        </div>
+
       <AddFeatureModel
         show={show}
         handleClose={handleClose}
