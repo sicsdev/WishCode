@@ -129,8 +129,7 @@ const FeatureComp = ({
             )}
           </h5>
           <div className="header-btns">
-
-            {suggestFeature === true ? (
+            {localStorage.getItem('role') == 4 ? <>{suggestFeature === true ? (
               <button
                 type="button"
                 className="btn btn-lg-primary mr-2"
@@ -142,7 +141,8 @@ const FeatureComp = ({
               </button>
             ) : (
               ""
-            )}
+            )}</> : ""}
+
             {companyData &&
               companyData.is_claimed === "0" &&
               companyData.requested_by !== null ? (

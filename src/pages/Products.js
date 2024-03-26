@@ -76,9 +76,12 @@ const Products = () => {
             const filterData = response?.data?.data?.companies.filter(
               (x) => x.company_name.charAt(0).toLowerCase() == element
             );
+            console.log(response?.data?.data?.products)
             const productFilterData = response?.data?.data?.products.filter(
               (x) => x.product_name.charAt(0).toLowerCase() === element
+              
             );
+            console.log(productFilterData);
             if (
               (filterData && filterData.length > 0) ||
               (productFilterData && productFilterData.length > 0)
@@ -177,7 +180,7 @@ const Products = () => {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="input-form">
-                        <label>Search Companies</label>
+                        <label>Search {localStorage.getItem('role') == 3 || localStorage.getItem('role') ==2 ? "Products" : "Companies"}</label>
                         <input
                           type="search"
                           className="form-control"
@@ -216,7 +219,7 @@ const Products = () => {
                               {element.alpha} alphabets
                             </span>
                           </div>
-                          <div className="company-list">
+                          {localStorage.getItem('role') == 4 ?  <div className="company-list">
                             <div className="row">
                               <p className="search_heading">Companies</p>
                               {element.companies.map((company, index) => (
@@ -232,7 +235,8 @@ const Products = () => {
                                 </div>
                               ))}
                             </div>
-                          </div>
+                          </div>:""}
+                         
                           <div className="product-list">
                             <div className="row">
                               <p className="search_heading">Products</p>

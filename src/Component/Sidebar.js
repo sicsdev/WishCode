@@ -115,6 +115,10 @@ const Sidebar = ({children}) => {
                   <i className="fa fa-tachometer" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Dashboard</span>
                 </Link>
+                <Link to="/products" className="theme-color1">
+                  <i className="fa fa-product-hunt" aria-hidden="true"></i>
+                  &nbsp;<span className="custom-sidebar-span">Products</span>
+                </Link>
                 <Link to="/company/all-users" className="theme-color1">
                   <i className="fa fa-users" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Company Users</span>
@@ -153,6 +157,10 @@ const Sidebar = ({children}) => {
                 <Link to="/dashboard" className="theme-color1">
                   <i className="fa fa-tachometer" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Dashboard</span>
+                </Link>
+                <Link to="/products" className="theme-color1">
+                  <i className="fa fa-product-hunt" aria-hidden="true"></i>
+                  &nbsp;<span className="custom-sidebar-span">Products</span>
                 </Link>
                 <Link to="/features" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
