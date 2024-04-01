@@ -19,6 +19,9 @@ const AllCompanies = () => {
   const [loader, setloader] = useState(false);
   const [pageLoad, setPageLoad] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState("");
+  const [menus, setTotalMenu] = useState([]);
+  const [companyTypeId,setCompanyTypeId]=useState("");
+  
 
   const editViewUser = (val) => {
     setShow(true);
@@ -27,8 +30,24 @@ const AllCompanies = () => {
     setuserEmail(val.email);
     setcompanyId(val.id);
     setSubscriptionStatus(val.subscription_status);
+    getMenus();
   };
 
+  const getMenus = () => {
+    axiosConfig
+      .get("/admin/menus", config)
+      .then((response) => {
+        setloader(false);
+        setTotalMenu(response?.data?.data);
+      })
+      .catch((data) => {
+        setloader(false);
+        toast.success(data.response.data.message, {
+          position: "bottom-right",
+          autoClose: 2000,
+        });
+      });
+  }
   const [totalCompanies, settotalCompanies] = useState([]);
 
   const tokens = localStorage.getItem("token");
@@ -72,6 +91,8 @@ const AllCompanies = () => {
           company_name: company,
           name: user,
           subscription_status: subscriptionStatus,
+          company_id:companyId,
+          company_type_id:companyTypeId,
         },
         config
       );
@@ -84,11 +105,10 @@ const AllCompanies = () => {
     } catch (error) {
       setloader(false);
       return toast.error(
-        `${
-          error.response.data.message &&
+        `${error.response.data.message &&
           error.response.data.message.company_name
-            ? error.response.data.message.company_name[0]
-            : error.response.data.message
+          ? error.response.data.message.company_name[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -119,7 +139,10 @@ const AllCompanies = () => {
       });
     }
   };
-
+  //for select comapny type
+  const handleSelectChange = (event) => {
+    setCompanyTypeId(event.target.value);
+  };
   return (
     <>
       <div className="main-body">
@@ -308,6 +331,27 @@ const AllCompanies = () => {
                   >
                     Cancelled
                   </option>
+                </select>
+              </div>
+              <div className="input-form">
+                <label>Company Type</label>
+                <select
+                  className="form-control"
+                  onChange={handleSelectChange}
+                  value={companyTypeId}
+                >
+                  {menus && menus.length !== 0 ? <>
+                    {menus.map((menu, index) => (
+                    <option key={index} value={menu.id}>
+                      {menu.company_type}
+                    </option>
+                  ))}
+                  </>:<>
+                  <option value="">
+                      Not Found Type
+                    </option>
+                    </>}
+                 
                 </select>
               </div>
             </>

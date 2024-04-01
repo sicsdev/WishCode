@@ -40,6 +40,7 @@ import ShowCase from "../pages/company/ShowCase";
 import SearchCompanyFeatureComp from "./Search/SearchCompanyFeatureComp";
 import FrontShowCase from "./front/FrontShowCase";
 import ThemeSettingComp from "./theme/ThemeSettingComp";
+import MenuComp from "./menu/MenuComp";
 
 const RouteCom = () => {
   return (
@@ -83,6 +84,7 @@ const RouteCom = () => {
         />
         {/*for theme Setting */}
         <Route path="/theme/setting" element={<ThemeSettingComp />} />
+        <Route path="/admin/set/menu" element={<MenuComp/>}/>
       </Route>
       {/* END:: Super Admin Routes */}
       <Route exact path="/" element={<PrivateRoute />}>

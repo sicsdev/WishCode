@@ -79,7 +79,7 @@ const Products = () => {
             console.log(response?.data?.data?.products)
             const productFilterData = response?.data?.data?.products.filter(
               (x) => x.product_name.charAt(0).toLowerCase() === element
-              
+
             );
             console.log(productFilterData);
             if (
@@ -152,10 +152,9 @@ const Products = () => {
     } catch (error) {
       setloader(false);
       return toast.error(
-        `${
-          error.response.data.message && error.response.data.message.email
-            ? error.response.data.message.email[0]
-            : error.response.data.message
+        `${error.response.data.message && error.response.data.message.email
+          ? error.response.data.message.email[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -180,7 +179,7 @@ const Products = () => {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="input-form">
-                        <label>Search {localStorage.getItem('role') == 3 || localStorage.getItem('role') ==2 ? "Products" : "Companies"}</label>
+                        <label>Search {localStorage.getItem('role') == 3 || localStorage.getItem('role') == 2 ? "Products" : "Companies"}</label>
                         <input
                           type="search"
                           className="form-control"
@@ -214,12 +213,14 @@ const Products = () => {
                           className="col-md-12 mt-3 company-order-main"
                           key={key}
                         >
-                          <div className="company-names">
-                            <span className="text-capitalize custom-product-span">
-                              {element.alpha} alphabets
-                            </span>
-                          </div>
-                          {localStorage.getItem('role') == 4 ?  <div className="company-list">
+                          {element.products.length ? <>
+                            <div className="company-names">
+                              <span className="text-capitalize custom-product-span">
+                                {element.alpha}
+                              </span>
+                            </div></> : ""}
+
+                          {localStorage.getItem('role') == 4 ? <div className="company-list">
                             <div className="row">
                               <p className="search_heading">Companies</p>
                               {element.companies.map((company, index) => (
@@ -235,11 +236,12 @@ const Products = () => {
                                 </div>
                               ))}
                             </div>
-                          </div>:""}
-                         
+                          </div> : ""}
+
                           <div className="product-list">
                             <div className="row">
-                              <p className="search_heading">Products</p>
+                              {element.products.length ?
+                                <p className="search_heading">Products</p> : ""}
                               {element.products.map((product, index) => (
                                 <div className="col-md-3" key={index}>
                                   <span className="d-block py-3 text-uppercase company-nameing custom-product-span">
@@ -296,7 +298,7 @@ const Products = () => {
               </div>
             </div>
           </section>
-        
+
         </Sidebar>
       </div>
       {loader === true ? <Loader /> : <></>}

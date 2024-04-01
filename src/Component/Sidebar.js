@@ -96,6 +96,10 @@ const Sidebar = ({children}) => {
                   <i className="fa fa-columns" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Manage Plans</span>
                 </Link>
+                <Link to="/admin/set/menu" className="theme-color1">
+                  <i className="fa fa-minus-square" aria-hidden="true"></i>
+                  &nbsp;<span className="custom-sidebar-span">Set Menu</span>
+                </Link>
                 <Link to="/theme/setting" className="theme-color1">
                   <i className="fa fa-cog" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
