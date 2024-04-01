@@ -77,8 +77,8 @@ const MenuComp = () => {
         setModelHeader("Add");
     }
 
-    const getMenus = () => {
-        axiosConfig
+    const getMenus = async () => {
+        await axiosConfig
             .get("/admin/menus", config)
             .then((response) => {
                 setloader(false);
