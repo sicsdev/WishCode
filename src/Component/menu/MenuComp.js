@@ -33,11 +33,11 @@ const MenuComp = () => {
         getMenus();
     }, []);
     //sve the menu model
-    const handleMenuModal = (e) => {
+    const handleMenuModal = async(e) => {
         e.preventDefault();
         setloader(true);
         try {
-            const { data } = axiosConfig.post(
+            const { data } = await axiosConfig.post(
                 `/save/menus`,
                 {
                     id: menuId,
@@ -50,7 +50,7 @@ const MenuComp = () => {
                 config
             );
             setloader(false);
-            getMenus();
+            setTotalMenu(prevRows => [...prevRows, data?.data]);
             setshowModal(false);
             toast.success("Menu Added Successfully!", {
                 position: "bottom-right",
@@ -177,7 +177,7 @@ const MenuComp = () => {
                                                             menus.map((menu, index) => (
                                                                 <tr key={index}>
                                                                     <td className="text-center"><a>{menu?.company_type}</a></td>
-                                                                    <td className="text-center"><a>{menu?.product??"Normal"}</a></td>
+                                                                    <td className="text-center"><a>{menu?.product ?? "Normal"}</a></td>
                                                                     <td className="text-center"><a>{menu?.feature ?? "Normal"}</a></td>
                                                                     <td className="text-center"><a>{menu?.view_feature ?? "Normal"}</a></td>
                                                                     <td className="text-center"><a>{menu?.company_profile ?? "Normal"}</a></td>
