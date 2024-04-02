@@ -33,7 +33,7 @@ const MenuComp = () => {
         getMenus();
     }, []);
     //sve the menu model
-    const handleMenuModal = async(e) => {
+    const handleMenuModal = async (e) => {
         e.preventDefault();
         setloader(true);
         try {
@@ -50,12 +50,27 @@ const MenuComp = () => {
                 config
             );
             setloader(false);
-            setTotalMenu(prevRows => [...prevRows, data?.data]);
-            setshowModal(false);
-            toast.success("Menu Added Successfully!", {
-                position: "bottom-right",
-                autoClose: 2000,
-            });
+            // Check if the menu already exists in the listing
+            const isMenuExist = menus && menus.find(menu => menu.id == data?.data?.id);
+            if (!isMenuExist) {
+                setTotalMenu(prevRows => [...prevRows, data?.data]);
+                setshowModal(false);
+                toast.success("Menu Added Successfully!", {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                });
+            } else {
+                setTotalMenu(prevRows =>
+                    prevRows.map(menu =>
+                        menu.id === data?.data?.id ? data?.data : menu
+                    )
+                );
+                setshowModal(false);
+                toast.success("Menu updated Successfully", {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                });
+            }
         } catch (error) {
             setloader(false);
             toast.success("Something is Wrong", {
@@ -117,7 +132,7 @@ const MenuComp = () => {
                 autoClose: 2000,
             });
             setloader(false);
-            getMenus();
+            setTotalMenu(prevRows => prevRows.filter(menu => menu.id !== id));
         } catch {
             setloader(false);
             toast.error("Unable to delete the Menu!", {
