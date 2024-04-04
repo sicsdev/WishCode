@@ -60,7 +60,7 @@ export const ColorProvider = ({ children }) => {
   };
 
   return (
-    <ColorContext.Provider value={{ menus, color, changeColor }}>
+    <ColorContext.Provider value={{ menus, color, changeColor ,getMenus}}>
       {children}
     </ColorContext.Provider>
   );

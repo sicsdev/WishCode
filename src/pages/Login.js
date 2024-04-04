@@ -17,15 +17,25 @@ const Login = ({ }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isloader, setIsLoader] = useState(false);
-  const { changeColor } = useColor();
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 1000);
-    }
-  }, []);
+  const { changeColor, getMenus } = useColor();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Call getMenus function
+        await getMenus();
+        // After getMenus is completed, navigate to dashboard
+        if (localStorage.getItem("token")) {
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 1000);
+        }
+      } catch (error) {
+        console.error("Error fetching menus:", error);
+      }
+    };
+    fetchData();
+  }, [navigate, getMenus]);
   const loginhandler = async (e) => {
     e.preventDefault();
 
@@ -53,6 +63,7 @@ const Login = ({ }) => {
         textColor: data?.themeColor?.text_color || `#000000`,
         buttonTextColor: data?.themeColor?.btn_text_color || `#000000`,
       });
+
       setEmail("");
       setPassword("");
       setIsLoader(false);

@@ -20,7 +20,7 @@ const AllCompanies = () => {
   const [pageLoad, setPageLoad] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState("");
   const [menus, setTotalMenu] = useState([]);
-  const [companyTypeId,setCompanyTypeId]=useState("");
+  const [companyTypeId, setCompanyTypeId] = useState("");
 
   const editViewUser = (val) => {
     setShow(true);
@@ -91,8 +91,8 @@ const AllCompanies = () => {
           company_name: company,
           name: user,
           subscription_status: subscriptionStatus,
-          company_id:companyId,
-          company_type_id:companyTypeId,
+          company_id: companyId,
+          company_type_id: companyTypeId,
         },
         config
       );
@@ -340,18 +340,21 @@ const AllCompanies = () => {
                   onChange={handleSelectChange}
                   value={companyTypeId}
                 >
+                  <option key="" value="">
+                    Normal
+                  </option>
                   {menus && menus.length !== 0 ? <>
                     {menus.map((menu, index) => (
-                    <option key={index} value={menu.id}>
-                      {menu.company_type}
-                    </option>
-                  ))}
-                  </>:<>
-                  <option value="">
+                      <option key={index} value={menu.id}>
+                        {menu.company_type}
+                      </option>
+                    ))}
+                  </> : <>
+                    <option value="">
                       Not Found Type
                     </option>
-                    </>}
-                 
+                  </>}
+
                 </select>
               </div>
             </>
