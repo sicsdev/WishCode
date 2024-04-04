@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify'
 const MenuComp = () => {
     const [loader, setloader] = useState(false);
     const [menus, setTotalMenu] = useState([]);
+    const [updateMenu, setupdateMenu] = useState([]);
     const [menuId, setMenuId] = useState("");
     const [modelHeader, setModelHeader] = useState("Add");
     const [companyType, setCompanyType] = useState("");
@@ -49,15 +50,16 @@ const MenuComp = () => {
                 // Check if the menu already exists in the listing
                 const isMenuExist = menus && menus.find(menu => menu.id == response?.data?.data?.id);
                 if (!isMenuExist) {
-                    setTotalMenu(prevRows => [...prevRows, response?.data?.data]);
+                    setTotalMenu(prev => [...prev, response?.data?.data]);
+                    setupdateMenu(response?.data?.data);
                     setshowModal(false);
                     toast.success("Menu Added Successfully!", {
                         position: "bottom-right",
                         autoClose: 2000,
                     });
                 } else {
-                    setTotalMenu(prevRows =>
-                        prevRows.map(menu =>
+                    setTotalMenu(prev =>
+                        prev.map(menu =>
                             menu.id === response?.data?.data?.id ? response?.data?.data : menu
                         )
                     );
@@ -137,7 +139,8 @@ const MenuComp = () => {
             });
         }
     }
-
+    console.log("addmenu", menus);
+    console.log("updatemenu", updateMenu);
     return (
         <>
             <div className="main-body">
