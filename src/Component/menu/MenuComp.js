@@ -36,50 +36,45 @@ const MenuComp = () => {
     const handleMenuModal = async (e) => {
         e.preventDefault();
         setloader(true);
-        try {
-            const { data } = await axiosConfig.post(
-                `/save/menus`,
-                {
-                    id: menuId,
-                    company_type: companyType,
-                    feature: featureMenu,
-                    product: productMenu,
-                    view_feature: viewFeature,
-                    company_profile: companyProfile,
-                },
-                config
-            );
-            setloader(false);
-            // Check if the menu already exists in the listing
-            const isMenuExist = menus && menus.find(menu => menu.id == data?.data?.id);
-            if (!isMenuExist) {
-                setTotalMenu(prevRows => [...prevRows, data?.data]);
-                setshowModal(false);
-                toast.success("Menu Added Successfully!", {
+        axiosConfig.post(`/save/menus`, {
+            id: menuId,
+            company_type: companyType,
+            feature: featureMenu,
+            product: productMenu,
+            view_feature: viewFeature,
+            company_profile: companyProfile,
+        }, config)
+            .then(response => {
+                setloader(false);
+                // Check if the menu already exists in the listing
+                const isMenuExist = menus && menus.find(menu => menu.id == response?.data?.data?.id);
+                if (!isMenuExist) {
+                    setTotalMenu(prevRows => [...prevRows, response?.data?.data]);
+                    setshowModal(false);
+                    toast.success("Menu Added Successfully!", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                    });
+                } else {
+                    setTotalMenu(prevRows =>
+                        prevRows.map(menu =>
+                            menu.id === response?.data?.data?.id ? response?.data?.data : menu
+                        )
+                    );
+                    setshowModal(false);
+                    toast.success("Menu updated Successfully", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                    });
+                }
+            })
+            .catch(error => {
+                setloader(false);
+                toast.success("Something is Wrong", {
                     position: "bottom-right",
                     autoClose: 2000,
                 });
-            } else {
-                setTotalMenu(prevRows =>
-                    prevRows.map(menu =>
-                        menu.id === data?.data?.id ? data?.data : menu
-                    )
-                );
-                setshowModal(false);
-                toast.success("Menu updated Successfully", {
-                    position: "bottom-right",
-                    autoClose: 2000,
-                });
-            }
-        } catch (error) {
-            setloader(false);
-            toast.success("Something is Wrong", {
-                position: "bottom-right",
-                autoClose: 2000,
             });
-        }
-
-
     }
     //for open model 
     const handleSaveMenu = () => {
@@ -90,6 +85,7 @@ const MenuComp = () => {
         setCompanyProfile("");
         setViewFeature("");
         setModelHeader("Add");
+        setMenuId("");
     }
 
     const getMenus = async () => {
