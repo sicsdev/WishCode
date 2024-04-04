@@ -21,7 +21,6 @@ const AllCompanies = () => {
   const [subscriptionStatus, setSubscriptionStatus] = useState("");
   const [menus, setTotalMenu] = useState([]);
   const [companyTypeId,setCompanyTypeId]=useState("");
-  
 
   const editViewUser = (val) => {
     setShow(true);
@@ -29,6 +28,7 @@ const AllCompanies = () => {
     setuser(val.name);
     setuserEmail(val.email);
     setcompanyId(val.id);
+    setCompanyTypeId(val?.company_type_id);
     setSubscriptionStatus(val.subscription_status);
     getMenus();
   };

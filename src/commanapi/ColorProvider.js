@@ -11,13 +11,16 @@ export const ColorProvider = ({ children }) => {
     backgroundColor: '',
     buttonColor: '',
     textColor: '',
-    buttonTextColor:'',
+    buttonTextColor: '',
   });
-
+  const [menus, setMenus] = useState([]);
   useEffect(() => {
-    getThemeColor();
+    if (localStorage.getItem('role')) {
+      getThemeColor();
+      getMenus();
+    }
   }, '');
-  
+
   //get token
   const tokens = localStorage.getItem("token");
   const config = {
@@ -36,10 +39,17 @@ export const ColorProvider = ({ children }) => {
       backgroundColor: data?.data?.background_color || `#aa504f`,
       buttonColor: data?.data?.button_color || `#fff`,
       textColor: data?.data?.text_color || `#000000`,
-      buttonTextColor:data?.data?.btn_text_color || `#000000`
+      buttonTextColor: data?.data?.btn_text_color || `#000000`
     });
   };
-
+  //for get menu 
+  const getMenus = async () => {
+    const { data } = await axiosConfig.get(
+      "/sidebar/menus",
+      config
+    );
+    setMenus(data?.data);
+  };
   //for change color of theme
   const changeColor = (newColor) => {
     setColor(newColor);
@@ -48,9 +58,9 @@ export const ColorProvider = ({ children }) => {
     document.documentElement.style.setProperty('--text-color', newColor.textColor);
     document.documentElement.style.setProperty('--button-text-color', newColor.buttonTextColor);
   };
-  // console.log("first",color);
+
   return (
-    <ColorContext.Provider value={{ color, changeColor }}>
+    <ColorContext.Provider value={{ menus, color, changeColor }}>
       {children}
     </ColorContext.Provider>
   );

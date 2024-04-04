@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import AddFeatureModel from "./models/AddFeatureModel";
+import { useColor } from "../commanapi/ColorProvider";
 
 const Sidebar = ({children}) => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Sidebar = ({children}) => {
   const [featureDescription,setFeatureDescription] =useState("")
   const [selectedFile, setselectedFile] = useState(null);
   const [loader, setloader] = useState(false);
+  const { menus } = useColor();
   const toggleMenu = (e) => {
     setIsToggleOpen((prevState) => !prevState);
   };
@@ -121,7 +123,7 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/products" className="theme-color1">
                   <i className="fa fa-product-hunt" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">Products</span>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.product?menus?.product:"Products"}</span>
                 </Link>
                 <Link to="/company/all-users" className="theme-color1">
                   <i className="fa fa-users" aria-hidden="true"></i>
@@ -129,7 +131,7 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/company/features" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">Features</span>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.feature?menus?.feature:"Features"}</span>
                 </Link>
                 <Link to="/company/approve-requests" className="theme-color1">
                   <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
@@ -137,11 +139,11 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-eye" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">View Features</span>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.view_feature?menus?.view_feature:"View Features"}</span>
                 </Link>
                 <Link to="/company-profile/settings" className="theme-color1">
                   <i className="fa fa-building-o" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">Company Profile</span>
+                  &nbsp;<span className="custom-sidebar-span"> {menus?.company_profile?menus?.company_profile:"Company Profile"}</span>
                 </Link>
                 <Link to="/theme/setting" className="theme-color1">
                   <i className="fa fa-cog" aria-hidden="true"></i>

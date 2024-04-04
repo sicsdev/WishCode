@@ -72,7 +72,7 @@ const MenuComp = () => {
             })
             .catch(error => {
                 setloader(false);
-                toast.success("Something is Wrong", {
+                toast.error("Something is Wrong", {
                     position: "bottom-right",
                     autoClose: 2000,
                 });
@@ -139,8 +139,6 @@ const MenuComp = () => {
             });
         }
     }
-    console.log("addmenu", menus);
-    console.log("updatemenu", updateMenu);
     return (
         <>
             <div className="main-body">
