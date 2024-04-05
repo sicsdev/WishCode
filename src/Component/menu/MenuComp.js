@@ -6,6 +6,7 @@ import { Modal, Button } from 'react-bootstrap'
 import axiosConfig from '../../base_url/config'
 import Loader from 'react-spinners/SyncLoader'
 import { ToastContainer, toast } from 'react-toastify'
+import swal from 'sweetalert'
 
 const MenuComp = () => {
     const [loader, setloader] = useState(false);
@@ -120,17 +121,27 @@ const MenuComp = () => {
     //for delete menu
     const deleteMenu = (id) => {
         try {
-            setloader(true);
-            const { data } = axiosConfig.delete(
-                `/delete/menu/${id}`,
-                config
-            );
-            toast.success("Menu Deleted Successfully!", {
-                position: "bottom-right",
-                autoClose: 2000,
+            swal({
+                title: "Are you sure?",
+                text: "You want Delete this Company Type?",
+                icon: "warning",
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    setloader(true);
+                    const { data } = axiosConfig.delete(
+                        `/delete/menu/${id}`,
+                        config
+                    );
+                    toast.success("Menu Deleted Successfully!", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                    });
+                    setloader(false);
+                    setTotalMenu(prevRows => prevRows.filter(menu => menu.id !== id));
+                }
             });
-            setloader(false);
-            setTotalMenu(prevRows => prevRows.filter(menu => menu.id !== id));
+
         } catch {
             setloader(false);
             toast.error("Unable to delete the Menu!", {
