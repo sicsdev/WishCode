@@ -61,7 +61,7 @@ const FeatureDatatable = () => {
             <div className="container">
 
               <div className="dashboard card">
-                <FilterDatatableCom data={allFeatures} title={"All Features"} />
+                <FilterDatatableCom data={allFeatures} title={"Features Priority List"} />
               </div>
             </div>
           </section>

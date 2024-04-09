@@ -10,6 +10,7 @@ import Loader from "./Loader";
 const ForgetPassCom = () => {
   const [userEmail, setUserEmail] = useState("");
   const [loader, setloader] = useState(false);
+  const [delay,setDelay] =useState("");
   const forgetPasswordHandler = async (e) => {
     e.preventDefault();
     setloader(true);
@@ -21,13 +22,7 @@ const ForgetPassCom = () => {
       if (res && res.success === true) {
         setloader(false);
         setUserEmail("");
-        toast.success(
-          "We have sent you an email containing your password reset link. Follow the link to reset your password!",
-          {
-            position: "bottom-right",
-            autoClose: 4000,
-          }
-        );
+        setDelay("It may take a few minutes for password reset email to arrive in your inbox");
       } else {
         setloader(false);
         return toast.error(
@@ -63,6 +58,7 @@ const ForgetPassCom = () => {
             setValue={setUserEmail}
             required={true}
           />
+          <span style={{color:"#aa504f"}}>{delay}</span>
           <ButtonCom
             name={"Submit"}
             class={"btn btn-lg-primary w-100"}

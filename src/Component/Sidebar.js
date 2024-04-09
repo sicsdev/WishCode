@@ -88,7 +88,7 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-eye" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">View Features</span>
+                  &nbsp;<span className="custom-sidebar-span">Priority List</span>
                 </Link>
                 <Link to="/search" className="theme-color1">
                   <i className="fa fa-search" aria-hidden="true"></i>
@@ -139,7 +139,7 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-eye" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">{menus?.view_feature?menus?.view_feature:"View Features"}</span>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.view_feature?menus?.view_feature:"Priority List"}</span>
                 </Link>
                 <Link to="/company-profile/settings" className="theme-color1">
                   <i className="fa fa-building-o" aria-hidden="true"></i>
@@ -174,7 +174,7 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-eye" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">View Features</span>
+                  &nbsp;<span className="custom-sidebar-span">Priority List</span>
                 </Link>
                 <Link to="/theme/setting" className="theme-color1">
                   <i className="fa fa-cog" aria-hidden="true"></i>

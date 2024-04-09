@@ -150,7 +150,7 @@ li {
 }
 
 input:checked+.slider {
-  background-color: #aa504f;
+  background-color: var(--background-color);
 }
 
 input:focus+.slider {
@@ -355,7 +355,7 @@ input:checked+.slider:before {
 }
 
 .bg--header {
-  background-color:var(--background-color);;
+  background-color:var(--background-color);
 }
 
 .button-checkbox button.bg-danger {

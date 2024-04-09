@@ -185,7 +185,7 @@ const MenuComp = () => {
                                                                 Features
                                                             </th>
                                                             <th scope="col" className="text-center">
-                                                                View Features
+                                                                Priority List
                                                             </th>
                                                             <th scope="col" className="text-center">
                                                                 Company Profile
@@ -301,7 +301,7 @@ const MenuComp = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="View Feature Menu"
+                                        placeholder="Priority List Menu"
                                         value={viewFeature}
                                         onChange={(e) => setViewFeature(e.target.value)}
                                     />
