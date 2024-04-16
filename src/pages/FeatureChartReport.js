@@ -90,7 +90,7 @@ const FeatureChartReport = () => {
                     View Feature Report
                   </h5>
                   <Link
-                    to={`/feature/${id}`}
+                    to={`/wish/${id}`}
                     className="btn btn-lg-primary"
                   >
                     View Feature

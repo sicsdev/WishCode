@@ -417,7 +417,7 @@ const ViewCompany = () => {
                                       allFeatures.map((feature, index) => (
                                         <tr key={index}>
                                           <td>
-                                            <Link to={`/feature/${feature.id}`}>
+                                            <Link to={`/wish/${feature.id}`}>
                                               {feature.title}
                                             </Link>
                                           </td>

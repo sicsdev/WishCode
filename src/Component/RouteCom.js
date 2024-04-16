@@ -110,7 +110,7 @@ const RouteCom = () => {
         />
         <Route exact path="/feedback" element={<Feedbacks />} />
         <Route exact path="/feedback/add" element={<AddFeedback />} />
-        <Route exact path="/feature/:id" element={<SingleFeature />} />
+        <Route exact path="/wish/:id" element={<SingleFeature />} />
         <Route exact path="/features" element={<AllFeatures />} />
         <Route exact path="/feature/all" element={<FeatureDatatable />} />
         <Route

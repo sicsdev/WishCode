@@ -33,7 +33,7 @@ const SearchCompanyFeatureComp = () => {
 
   const navigate = useNavigate();
   const onClickItem = (itemId) => {
-    navigate(`/feature/${itemId}`);
+    navigate(`/wish/${itemId}`);
   }
 
   return (

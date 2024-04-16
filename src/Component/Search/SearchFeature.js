@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const SearchFeature = (props) => {
   const navigate = useNavigate();
   const onClickItem = (itemId) => {
-    navigate(`/feature/${itemId}`);
+    navigate(`/wish/${itemId}`);
   }
   return (
     <>

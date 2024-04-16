@@ -167,7 +167,7 @@ const FeatureComp = ({
               {searchFeature !== undefined ? (
                 searchFeature?.map((feature, key) => (
                   <div className="company-post-wrapper" key={key}>
-                    <Link to={`/feature/${feature.id}`}>
+                    <Link to={`/wish/${feature.id}`}>
                       <div className="comp-post">
                         <span className="text-lg-primary">
                           {moment(feature.created_at).format("DD MMM YYYY")}
@@ -214,7 +214,7 @@ const FeatureComp = ({
                             ""
                           )}
                           <Link
-                            to={`/feature/${feature.id}`}
+                            to={`/wish/${feature.id}`}
                             className="text-secondary"
                           >
                             <i
@@ -224,7 +224,7 @@ const FeatureComp = ({
                             {feature.comments_count}
                           </Link>
                           <Link
-                            to={`/feature/${feature.id}`}
+                            to={`/wish/${feature.id}`}
                             className="text-secondary"
                             data-toggle="modal"
                             data-target="#view-vote-post"
