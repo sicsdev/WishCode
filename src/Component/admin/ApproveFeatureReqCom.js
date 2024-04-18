@@ -31,7 +31,7 @@ const ApproveFeatureReqCom = ({
   const updateFeatureStatusHandler = async (id, status) => {
     swal({
       title: "Are you sure?",
-      text: `You want to ${status} this Company ?`,
+      text: `You want to ${status=="publish"?"Approve":status} this Feature ?`,
       icon: "warning",
       dangerMode: true,
     }).then(async (willApprove) => {
