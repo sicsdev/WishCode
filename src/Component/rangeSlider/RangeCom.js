@@ -17,9 +17,9 @@ const RangeCom = ({ rangevalue, setRangevalue }) => {
               ...props.style,
               height: "1px",
               width: "100%",
-              backgroundColor: "#aa504f",
+              // backgroundColor: "#aa504f",
             }}
-            className="p-1"
+            className="p-1 rangeSlide"
           >
             {children}
           </div>
@@ -31,8 +31,9 @@ const RangeCom = ({ rangevalue, setRangevalue }) => {
               ...props.style,
               height: "30px",
               width: "15px",
-              backgroundColor: "#aa504f",
+              // backgroundColor: "#aa504f",
             }}
+            className="p-1 rangeSlide"
           />
         )}
       />
