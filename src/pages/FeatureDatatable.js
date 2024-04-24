@@ -7,12 +7,13 @@ import Loader from "../Component/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FilterDatatableCom from "../Component/filterDatatableCom";
+import { useColor } from "../commanapi/ColorProvider";
 
 const FeatureDatatable = () => {
   const [allFeatures, setAllFeatures] = useState([]);
   const [loader, setloader] = useState(false);
   const [completeFeature, setCompleteFeature] = useState("all");
-
+  const { isToggleOpen, toggleMenu } = useColor();
   useEffect(() => {
     getAllfeatureData(completeFeature);
   }, []);
@@ -39,8 +40,8 @@ const FeatureDatatable = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <div className="row text-right align-items-center">

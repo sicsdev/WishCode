@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../Component/Loader";
+import { useColor } from "../../commanapi/ColorProvider";
 
 const AllCompanies = () => {
   const [company, setcompany] = useState("");
@@ -21,7 +22,7 @@ const AllCompanies = () => {
   const [subscriptionStatus, setSubscriptionStatus] = useState("");
   const [menus, setTotalMenu] = useState([]);
   const [companyTypeId, setCompanyTypeId] = useState("");
-
+ const {isToggleOpen,toggleMenu} =useColor();
   const editViewUser = (val) => {
     setShow(true);
     setcompany(val.company_name);
@@ -146,8 +147,8 @@ const AllCompanies = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-const Header = () => {
+const Header = ({ toggleMenu }) => {
+
   const navigate = useNavigate();
   // const headerValue = useContext(HeaderContextApi);
   const [userRole, setUserRole] = useState("");
@@ -26,13 +27,21 @@ const Header = () => {
         break;
     }
   }, []);
+
   return (
     <>
       <nav className="bg--header">
         <div className="container">
           <div className="d-flex justify-content-between py-3 align-items-center">
-            <div className="title-bar">
-              <button onClick={() => navigate(-1)} className="btn back-btn context-button">
+            <div className="title-bar d-flex align-items-center">
+              <div className="hide-desktop w-full" onClick={toggleMenu} style={{ width: "20px" }}>
+                <img
+                  src={window.location.origin + "/img/toggle.png"}
+                  className="img-fluid"
+                  width="20px"
+                />
+              </div>
+              <button onClick={() => navigate(-1)} className="ml-4 btn back-btn context-button">
                 <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
               </button>
             </div>

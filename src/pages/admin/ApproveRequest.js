@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getRequestApi } from "../../helper/Helper";
 import ApproveFeatureReqCom from "../../Component/admin/ApproveFeatureReqCom";
+import { useColor } from "../../commanapi/ColorProvider";
 
 const ApproveRequest = () => {
   const [loader, setloader] = useState(false);
@@ -17,6 +18,7 @@ const ApproveRequest = () => {
   const [frontPendingCompanyList, setFrontPendingCompanyList] = useState([]);
   const [pendingFeatureRequests, setPendingFeatureRequests] = useState([]);
   const [claimRequests, setClaimRequest] = useState([]);
+  const { isToggleOpen, toggleMenu } = useColor();
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -61,8 +63,8 @@ const ApproveRequest = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+      <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
           <section className="body-content-inner">
             <div className="container">
               <ApproveRequestCom

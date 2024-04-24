@@ -7,20 +7,20 @@ import { useState } from "react";
 import AddFeatureModel from "./models/AddFeatureModel";
 import { useColor } from "../commanapi/ColorProvider";
 
-const Sidebar = ({children}) => {
+const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
   const navigate = useNavigate();
   const user_role = localStorage.getItem("role");
-  const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const [show,setShow] =useState(false);
+  // const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const [featureTitle,setFeatureTitle]= useState("");
-  const [featureDescription,setFeatureDescription] =useState("")
+  const [featureTitle, setFeatureTitle] = useState("");
+  const [featureDescription, setFeatureDescription] = useState("")
   const [selectedFile, setselectedFile] = useState(null);
   const [loader, setloader] = useState(false);
   const { menus } = useColor();
-  const toggleMenu = (e) => {
-    setIsToggleOpen((prevState) => !prevState);
-  };
+  // const toggleMenu = (e) => {
+  //   setIsToggleOpen((prevState) => !prevState);
+  // };
 
   const logOut = async (e) => {
     e.preventDefault();
@@ -34,27 +34,45 @@ const Sidebar = ({children}) => {
       navigate("/login");
     }, 1000);
   };
- const handleSuggestNew=()=>{
-  setShow(true);
-  setFeatureTitle("");
-  setFeatureDescription("")
- }
- useEffect(()=>{
-  getProductData();
- })
- const getProductData=()=>{
-     return null;
- }
+  const handleSuggestNew = () => {
+    setShow(true);
+    setFeatureTitle("");
+    setFeatureDescription("")
+  }
+  useEffect(() => {
+    getProductData();
+  })
+  const getProductData = () => {
+    return null;
+  }
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+    };
+
+    handleResize(); // Call initially to set the initial state
+    window.addEventListener('resize', handleResize); // Add event listener for window resize
+
+    return () => {
+      window.removeEventListener('resize', handleResize); // Clean up on component unmount
+    };
+  }, []);
+
+
   return (
     <>
       <div
         id="sidebar-menu"
-        className={
-          isToggleOpen === true
-            ? "sidebar-menu hide-mobile remove-sidebar-text"
-            : "sidebar-menu hide-mobile"
+        className={`${isToggleOpen === true ? "sidebar-menu remove-sidebar-text" : "sidebar-menu"}`}
+        style={
+          isToggleOpen && isMobile === true
+            ? { width: "0px" }
+            : isToggleOpen && !isMobile === true
+              ? { width: "80px" }
+              : { width: "300px" }
         }
-        style={isToggleOpen === true ? { width: "80px" } : { width: "300px" }}
       >
         <div className="brand-name">
           <h3>WishTrax</h3>
@@ -123,7 +141,7 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/products" className="theme-color1">
                   <i className="fa fa-product-hunt" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">{menus?.product?menus?.product:"Products"}</span>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.product ? menus?.product : "Products"}</span>
                 </Link>
                 <Link to="/company/all-users" className="theme-color1">
                   <i className="fa fa-users" aria-hidden="true"></i>
@@ -131,7 +149,7 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/company/features" className="theme-color1">
                   <i className="fa fa-address-book-o" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">{menus?.feature?menus?.feature:"Features"}</span>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.feature ? menus?.feature : "Features"}</span>
                 </Link>
                 <Link to="/company/approve-requests" className="theme-color1">
                   <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
@@ -139,11 +157,11 @@ const Sidebar = ({children}) => {
                 </Link>
                 <Link to="/feature/all" className="theme-color1">
                   <i className="fa fa-eye" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span">{menus?.view_feature?menus?.view_feature:"Priority List"}</span>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.view_feature ? menus?.view_feature : "Priority List"}</span>
                 </Link>
                 <Link to="/company-profile/settings" className="theme-color1">
                   <i className="fa fa-building-o" aria-hidden="true"></i>
-                  &nbsp;<span className="custom-sidebar-span"> {menus?.company_profile?menus?.company_profile:"Company Profile"}</span>
+                  &nbsp;<span className="custom-sidebar-span"> {menus?.company_profile ? menus?.company_profile : "Company Profile"}</span>
                 </Link>
                 <Link to="/theme/setting" className="theme-color1">
                   <i className="fa fa-cog" aria-hidden="true"></i>
@@ -222,9 +240,10 @@ const Sidebar = ({children}) => {
           </div>
         </div>
       </div>
-      <div className={`${isToggleOpen === true ? "body-wrapper-1":"body-wrapper"} `} id="body-content">
+
+      <div className={`${isToggleOpen === true ? "body-wrapper-1" : "body-wrapper"} `} id="body-content">
         {children}
-        </div>
+      </div>
 
       <AddFeatureModel
         show={show}

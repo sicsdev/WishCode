@@ -8,12 +8,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ViewCompanyFeaturesCom from "../../Component/features/ViewCompanyFeaturesCom";
 import Loader from "../../Component/Loader";
+import { useColor } from "../../commanapi/ColorProvider";
 
 const Features = () => {
   const [totalCompanyFeatures, settotalCompanyFeatures] = useState([]);
   const [loader, setloader] = useState(false);
   const [completeFeature, setCompleteFeature] = useState("all");
   const tokens = localStorage.getItem("token");
+  const {isToggleOpen,toggleMenu}=useColor();
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -49,8 +51,8 @@ const Features = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
           <div className="container">
               <div className="row text-right align-items-center">

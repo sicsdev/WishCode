@@ -18,6 +18,7 @@ import CountVoteModel from "../Component/models/CountVoteModel";
 import Loader from "../Component/Loader";
 import ExtraFeatureButtonCom from "../Component/features/ExtraFeatureButtonCom";
 import axios from "axios";
+import { useColor } from "../commanapi/ColorProvider";
 
 const SingleFeature = () => {
   const { id } = useParams();
@@ -56,7 +57,7 @@ const SingleFeature = () => {
   const [ipAddress, setIpAddress] = useState("");
   const [totalVote, setTotalVote] = useState("");
   const [userVote, setUserVote] = useState("");
-
+  const { isToggleOpen, toggleMenu } = useColor();
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -90,7 +91,7 @@ const SingleFeature = () => {
         setloader(false);
         setFeatureData(response?.data?.data);
         setCurrent_userId(response?.data?.current_id);
-        setTotalVote(response?.data?.data?.post_votes.filter(item => item.type === 'yes' ||  item.type === 'optional').length)
+        setTotalVote(response?.data?.data?.post_votes.filter(item => item.type === 'yes' || item.type === 'optional').length)
       })
       .catch((data) => {
         setloader(false);
@@ -324,7 +325,7 @@ const SingleFeature = () => {
       setShow(false);
       setUserVote(type);
       getFeatureData();
-      setTotalVote(featureData?.post_votes?.filter(item => item.type === 'yes' ||  item.type === 'optional').length)
+      setTotalVote(featureData?.post_votes?.filter(item => item.type === 'yes' || item.type === 'optional').length)
       toast.success(data.message, {
         position: "bottom-right",
         autoClose: 2000,
@@ -537,9 +538,9 @@ const SingleFeature = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
         <div className="body-wrapper" id="body-content">
-          <Header />
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <div className="posts-wrapper">
@@ -605,31 +606,31 @@ const SingleFeature = () => {
                           </div>
                           <div className="col-md-3">
                             <div className="no-of-vote custom-grid">
-                              {userRole == 2 || userRole == 1 ?(
+                              {userRole == 2 || userRole == 1 ? (
                                 <>
                                   <a className="text-secondary d-block mb-2">
-                                <img
-                                  src={window.location.origin + "/img/up.png"}
-                                  width="20"
-                                  className="img-fluid"
-                                />
-                                {featureData && featureData.post_votes
-                                  ? featureData.post_votes.length
-                                  : ""}
-                              </a>
-                                 </>
-                              ):""}
-                            
+                                    <img
+                                      src={window.location.origin + "/img/up.png"}
+                                      width="20"
+                                      className="img-fluid"
+                                    />
+                                    {featureData && featureData.post_votes
+                                      ? featureData.post_votes.length
+                                      : ""}
+                                  </a>
+                                </>
+                              ) : ""}
+
                               {userRole == 3 || userRole == 4 ? (
                                 <>
-                                 <div className="d-flex font-weight-bold custom-span">
-                                <span className="text-secondary d-block mb-2">
+                                  <div className="d-flex font-weight-bold custom-span">
+                                    <span className="text-secondary d-block mb-2">
 
-                                  <span>Total Vote : </span>
+                                      <span>Total Vote : </span>
 
-                                  {totalVote}
-                                </span>
-                              </div>
+                                      {totalVote}
+                                    </span>
+                                  </div>
                                   {/* <button
                                     className="input-group-text vote"
                                     onClick={(e) => {
@@ -721,9 +722,9 @@ const SingleFeature = () => {
                               ) : (
                                 ""
                               )}
-                              { (featureData.user_id == current_user_id && userRole == 2 ) || 
-                               (featureData.user_id == current_user_id && userRole == 3 )||
-                                current_user_id == 1 || userRole == 2?(
+                              {(featureData.user_id == current_user_id && userRole == 2) ||
+                                (featureData.user_id == current_user_id && userRole == 3) ||
+                                current_user_id == 1 || userRole == 2 ? (
                                 <>
                                   <button
                                     className="btn input-group-text vote"

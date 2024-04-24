@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import swal from "sweetalert";
 import Loader from "../../Component/Loader";
+import { useColor } from "../../commanapi/ColorProvider";
 
 const Users = () => {
   const [userName, setuserName] = useState("");
@@ -25,6 +26,7 @@ const Users = () => {
   const [newPassword,setPassword] =useState("");
   const [confirmPassword,setConfirmPassword] =useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const {isToggleOpen,toggleMenu} =useColor();
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -163,8 +165,8 @@ const Users = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">

@@ -58,9 +58,14 @@ export const ColorProvider = ({ children }) => {
     document.documentElement.style.setProperty('--text-color', newColor.textColor);
     document.documentElement.style.setProperty('--button-text-color', newColor.buttonTextColor);
   };
+// for menu of sidebar control
+const [isToggleOpen, setIsToggleOpen] = useState(false);
 
+const toggleMenu = (e) => {
+  setIsToggleOpen((prevState) => !prevState);
+};
   return (
-    <ColorContext.Provider value={{ menus, color, changeColor, getMenus }}>
+    <ColorContext.Provider value={{ menus, color, isToggleOpen,changeColor, getMenus ,toggleMenu}}>
       {children}
     </ColorContext.Provider>
   );

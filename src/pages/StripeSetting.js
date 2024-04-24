@@ -11,6 +11,7 @@ import { getRequestApi } from "../helper/Helper";
 import axiosConfig from "../base_url/config";
 import { imageBaseUrl } from "../base_url/config";
 import SubscriptionCom from "../Component/SubscriptionCom";
+import { useColor } from "../commanapi/ColorProvider";
 
 const StripeSetting = () => {
   const [loader, setloader] = useState(false);
@@ -18,6 +19,7 @@ const StripeSetting = () => {
   const [cardDetails, setCardDetails] = useState([]);
   const [companyName, setCompanyName] = useState("");
   const [companyProfileImage, setCompanyProfileImage] = useState("");
+  const { isToggleOpen, toggleMenu } = useColor();
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -89,8 +91,8 @@ const StripeSetting = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">

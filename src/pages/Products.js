@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CryptoJS from "crypto-js";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Component/Loader";
+import { useColor } from "../commanapi/ColorProvider";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Products = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [companySiteUrl, setCompanySiteUrl] = useState("");
+  const { isToggleOpen, toggleMenu } = useColor();
   const alphabets = [
     "a",
     "b",
@@ -167,8 +169,8 @@ const Products = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">

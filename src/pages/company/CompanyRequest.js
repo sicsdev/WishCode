@@ -6,11 +6,13 @@ import ApproveFeatureReqCom from "../../Component/admin/ApproveFeatureReqCom";
 import { useState, useEffect } from "react";
 import { getRequestApi } from "../../helper/Helper";
 import Loader from "../../Component/Loader";
+import { useColor } from "../../commanapi/ColorProvider";
 
 const CompanyRequest = () => {
   const [loader, setloader] = useState(false);
   const [pendingFeatureRequests, setPendingFeatureRequests] = useState([]);
   const tokens = localStorage.getItem("token");
+  const { isToggleOpen, toggleMenu } = useColor();
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -32,8 +34,8 @@ const CompanyRequest = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <ApproveFeatureReqCom

@@ -9,6 +9,7 @@ import Loader from "../Component/Loader";
 import { getRequestApi } from "../helper/Helper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useColor } from "../commanapi/ColorProvider";
 
 const SearchArea = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -16,6 +17,7 @@ const SearchArea = () => {
   const [companyList, setCompanyList] = useState([]);
   const [featureList, setFeatureList] = useState([]);
   const [loadPageData, setLoadPageData] = useState(false);
+  const { isToggleOpen, toggleMenu } = useColor();
   useEffect(() => {
     getSearchResults("all");
   }, []);
@@ -50,8 +52,8 @@ const SearchArea = () => {
 
   return (
     <div className="main-body">
-      <Sidebar >
-        <Header />
+       <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
         <section className="body-content-inner">
           <div className="container">
             <div className="dashboard card">

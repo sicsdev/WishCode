@@ -8,6 +8,7 @@ import Loader from "../Component/Loader";
 import PieChartCom from "../Component/charts/PieChartCom";
 import { useParams } from "react-router";
 import { getRequestApi } from "../helper/Helper";
+import { useColor } from "../commanapi/ColorProvider";
 
 const FeatureChartReport = () => {
   const { id } = useParams();
@@ -25,6 +26,7 @@ const FeatureChartReport = () => {
   const [ProductName, setProductName] = useState('');
   const [description, setDescription] = useState('');
   const [developmentUrl, setDevelopmentUrl] = useState('');
+  const {isToggleOpen,toggleMenu} =useColor();
   useEffect(() => {
     getFeatureReportData();
   }, []);
@@ -79,9 +81,9 @@ const FeatureChartReport = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
         <div className="body-wrapper" id="body-content">
-          <Header />
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">

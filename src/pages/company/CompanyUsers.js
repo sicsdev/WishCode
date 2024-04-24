@@ -12,6 +12,7 @@ import { getRequestApi } from "../../helper/Helper";
 import Loader from "../../Component/Loader";
 import EditUserModel from "../../Component/models/EditUserModel";
 import ViewCompanyUserCom from "../../Component/users/ViewCompanyUserCom";
+import { useColor } from "../../commanapi/ColorProvider";
 
 const CompanyUsers = () => {
   const [show, setShow] = useState(false);
@@ -30,6 +31,7 @@ const CompanyUsers = () => {
     addModel: false,
     editModel: false,
   });
+  const { isToggleOpen, toggleMenu } = useColor();
 
   const addUser = async (val) => {
     setloader(true);
@@ -138,8 +140,8 @@ const CompanyUsers = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <ViewCompanyUserCom

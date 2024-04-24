@@ -10,12 +10,13 @@ import { useState, useEffect } from "react";
 import { getRequestApi } from "../helper/Helper";
 import CountDashboardCom from "../Component/admin/CountDashboardCom";
 import moment from "moment";
+import { useColor } from "../commanapi/ColorProvider";
 
 const Dashboard = () => {
   const [loader, setloader] = useState(false);
   const [dashBoardData, setDashboardData] = useState([]);
   const [dashChartData, setDashChartData] = useState([]);
-
+  const { isToggleOpen, toggleMenu } = useColor();
   useEffect(() => {
     getDashboardData();
   }, []);
@@ -46,12 +47,11 @@ const Dashboard = () => {
     });
     setDashChartData(chartData);
   };
-
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">
@@ -60,7 +60,6 @@ const Dashboard = () => {
                 </div>
                 <div className="card-body">
                   <CountDashboardCom dashBoardData={dashBoardData} />
-
                   <div className="row mt-5">
                     <div className="col-lg-6">
                       {dashChartData.length !== 0 ? (

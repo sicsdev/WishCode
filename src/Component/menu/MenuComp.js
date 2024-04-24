@@ -7,6 +7,7 @@ import axiosConfig from '../../base_url/config'
 import Loader from 'react-spinners/SyncLoader'
 import { ToastContainer, toast } from 'react-toastify'
 import swal from 'sweetalert'
+import { useColor } from '../../commanapi/ColorProvider'
 
 const MenuComp = () => {
     const [loader, setloader] = useState(false);
@@ -21,7 +22,7 @@ const MenuComp = () => {
     const handleCloseModal = () => setshowModal(false);
     const [viewFeature, setViewFeature] = useState("");
     const [companyProfile, setCompanyProfile] = useState("");
-
+    const { isToggleOpen, toggleMenu } = useColor();
     const tokens = localStorage.getItem("token");
     const config = {
         headers: {
@@ -153,8 +154,8 @@ const MenuComp = () => {
     return (
         <>
             <div className="main-body">
-                <Sidebar>
-                    <Header />
+                <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+                    <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
                     <section className="body-content-inner">
                         <div className="container">
                             <div className="dashboard card">

@@ -14,7 +14,8 @@ const ThemeSettingComp = () => {
     const [textColor, setTextColor] = useState('#000000');
     const [buttonTextColor, setButtonTextColor] = useState('#000000');
     const [load, setLoad] = useState(false);
-    const { changeColor } = useColor();
+    const { changeColor, isToggleOpen, toggleMenu } = useColor();
+    
     useEffect(() => {
         getThemeColor();
     }, '');
@@ -142,8 +143,8 @@ const ThemeSettingComp = () => {
         // </>
         <>
             <div className="main-body">
-                <Sidebar>
-                    <Header />
+                <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+                    <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
                     <section className="body-content-inner">
                         <div className="container">
                             <div className="dashboard card">
@@ -169,7 +170,7 @@ const ThemeSettingComp = () => {
                                                 <label className="font-weight-bold w-25 mt-3">Text color : </label>
                                                 <input type="color" id="textInput" className="form-control w-25 ml-5 mt-3" value={textColor} onChange={(e) => setTextColor(e.target.value)} aria-label="Text" />
                                             </div>
-                                           
+
                                             <div className="input-group-append " style={{ "width": "75%", justifyContent: "center", marginTop: "23px" }}>
                                                 <button type="submit" style={{ cursor: 'pointer' }} className=" btn btn-lg-primary">
                                                     Set Theme
