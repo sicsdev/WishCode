@@ -4,12 +4,14 @@ import Sidebar from "../Component/Sidebar";
 import { useEffect, useState } from "react";
 import FeatureComp from "../Component/FeatureComp";
 import axiosConfig from "../base_url/config";
+import { useColor } from "../commanapi/ColorProvider";
 
 const AllFeatures = () => {
   const [allFeatures, setAllFeatures] = useState([]);
   const [errorMessage, seterrorMessage] = useState("");
   const [completeFeature, setCompleteFeature] = useState("all");
   const [loader, setloader] = useState(false);
+  const { isToggleOpen, toggleMenu } = useColor();
   const tokens = localStorage.getItem("token");
   useEffect(() => {
     getAllCompanyFeatures(completeFeature);
@@ -37,8 +39,8 @@ const AllFeatures = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar>
-          <Header />
+      <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
           <section className="body-content-inner">
             <div className="container">
               <div className="row text-right align-items-center">

@@ -93,7 +93,6 @@ const UserRegister = () => {
 
   const createCompanySlug = (val) => {
     // let Text = company_name;
-    console.log("asasas", val);
     let slug = val
       .toLowerCase()
       .replace(/ /g, "-")

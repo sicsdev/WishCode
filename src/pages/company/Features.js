@@ -45,7 +45,6 @@ const Features = () => {
       });
   };
   const handeCompleteToggle = (featureType) => {
-    console.log(featureType);
     getAllCompanyFeatures(featureType);
   }
   return (

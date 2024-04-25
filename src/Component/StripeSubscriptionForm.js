@@ -114,7 +114,6 @@ const StripeSubscriptionForm = (props) => {
         "company-admin/subscription/get_plans",
         config
       );
-      console.log("data", subscriptionpaln)
 
       setSubscriptionplan(data.data);
 

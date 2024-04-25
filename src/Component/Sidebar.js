@@ -18,6 +18,7 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
   const [selectedFile, setselectedFile] = useState(null);
   const [loader, setloader] = useState(false);
   const { menus } = useColor();
+
   // const toggleMenu = (e) => {
   //   setIsToggleOpen((prevState) => !prevState);
   // };
@@ -49,17 +50,20 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint as needed
+      setIsMobile(window.innerWidth <= 768); 
     };
-
-    handleResize(); // Call initially to set the initial state
-    window.addEventListener('resize', handleResize); // Add event listener for window resize
+    handleResize();
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize); // Clean up on component unmount
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
+  const handleSidebar = (slug) => {
+    toggleMenu();
+    navigate(slug);
+  }
 
   return (
     <>
@@ -84,46 +88,46 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
             />
           </a>
         </div>
-        <div className="sidebar-menu-inner">
+        <div className={`sidebar-menu-inner ${isToggleOpen === true ? "sidebarTitle" : ""}`}>
           <div className="menu-items">
             {user_role == 1 ? (
               <>
-                <Link to="/dashboard" className="theme-color1">
-                  <i className="fa fa-tachometer" aria-hidden="true"></i>
+                <div to="/dashboard" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/dashboard")}>
+                  <i className="fa fa-tachometer" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Dashboard</span>
-                </Link>
-                <Link to="/admin/companies" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                </div>
+                <div to="/admin/companies" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/admin/companies")}>
+                  <i className="fa fa-address-book-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">All Companies</span>
-                </Link>
-                <Link to="/admin/users" className="theme-color1">
-                  <i className="fa fa-users" aria-hidden="true"></i>
+                </div>
+                <div to="/admin/users" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/admin/users")}>
+                  <i className="fa fa-users" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">End Users</span>
-                </Link>
-                <Link to="/admin/approve-request" className="theme-color1">
-                  <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </div>
+                <div to="/admin/approve-request" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/admin/approve-request")}>
+                  <i className="fa fa-thumbs-o-up" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Approve Request</span>
-                </Link>
-                <Link to="/feature/all" className="theme-color1">
-                  <i className="fa fa-eye" aria-hidden="true"></i>
+                </div>
+                <div to="/feature/all" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/feature/all")}>
+                  <i className="fa fa-eye" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Priority List</span>
-                </Link>
-                <Link to="/search" className="theme-color1">
-                  <i className="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <div to="/search" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/search")}>
+                  <i className="fa fa-search" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Search</span>
-                </Link>
-                <Link to="/admin/subscription/manage" className="theme-color1">
-                  <i className="fa fa-columns" aria-hidden="true"></i>
+                </div>
+                <div to="/admin/subscription/manage" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/admin/subscription/manage")}>
+                  <i className="fa fa-columns" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Manage Plans</span>
-                </Link>
-                <Link to="/admin/set/menu" className="theme-color1">
-                  <i className="fa fa-minus-square" aria-hidden="true"></i>
+                </div>
+                <div to="" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/admin/set/menu")}>
+                  <i className="fa fa-minus-square" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Set Menu</span>
-                </Link>
-                <Link to="/theme/setting" className="theme-color1">
-                  <i className="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div to="" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/theme/setting")}>
+                  <i className="fa fa-cog" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
-                </Link>
+                </div>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Logout</span>
@@ -135,40 +139,40 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
 
             {user_role == 2 ? (
               <>
-                <Link to="/dashboard" className="theme-color1">
-                  <i className="fa fa-tachometer" aria-hidden="true"></i>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/dashboard")}>
+                  <i className="fa fa-tachometer" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Dashboard</span>
-                </Link>
-                <Link to="/products" className="theme-color1">
-                  <i className="fa fa-product-hunt" aria-hidden="true"></i>
+                </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/products")}>
+                  <i className="fa fa-product-hunt" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">{menus?.product ? menus?.product : "Products"}</span>
-                </Link>
-                <Link to="/company/all-users" className="theme-color1">
-                  <i className="fa fa-users" aria-hidden="true"></i>
+                </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/company/all-users")}>
+                  <i className="fa fa-users" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Company Users</span>
-                </Link>
-                <Link to="/company/features" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                </div>
+                <div to="" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/company/features")}>
+                  <i className="fa fa-address-book-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">{menus?.feature ? menus?.feature : "Features"}</span>
-                </Link>
-                <Link to="/company/approve-requests" className="theme-color1">
-                  <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </div>
+                <div to="" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/company/approve-requests")}>
+                  <i className="fa fa-thumbs-o-up" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Approve Requests</span>
-                </Link>
-                <Link to="/feature/all" className="theme-color1">
-                  <i className="fa fa-eye" aria-hidden="true"></i>
+                </div>
+                <div to="" className="theme-color1 sidebar_links " onClick={() => handleSidebar("/feature/all")}>
+                  <i className="fa fa-eye" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">{menus?.view_feature ? menus?.view_feature : "Priority List"}</span>
-                </Link>
-                <Link to="/company-profile/settings" className="theme-color1">
-                  <i className="fa fa-building-o" aria-hidden="true"></i>
+                </div>
+                <div to="" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/company-profile/settings")}>
+                  <i className="fa fa-building-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span"> {menus?.company_profile ? menus?.company_profile : "Company Profile"}</span>
-                </Link>
-                <Link to="/theme/setting" className="theme-color1">
-                  <i className="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div to="/theme/setting" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/theme/setting")}>
+                  <i className="fa fa-cog" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
-                </Link>
-                <Link to="" className="theme-color1" onClick={logOut}>
-                  <i className="fa fa-sign-out" aria-hidden="true"></i>
+                </div>
+                <Link to="" className="theme-color1 sidebar_links" onClick={logOut}>
+                  <i className="fa fa-sign-out" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Logout</span>
                 </Link>
               </>
@@ -178,26 +182,26 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
 
             {user_role == 3 ? (
               <>
-                <Link to="/dashboard" className="theme-color1">
-                  <i className="fa fa-tachometer" aria-hidden="true"></i>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/dashboard")}>
+                  <i className="fa fa-tachometer" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Dashboard</span>
-                </Link>
-                <Link to="/products" className="theme-color1">
-                  <i className="fa fa-product-hunt" aria-hidden="true"></i>
+                </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/products")}>
+                  <i className="fa fa-product-hunt" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Products</span>
-                </Link>
-                <Link to="/features" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/features")}>
+                  <i className="fa fa-address-book-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Features</span>
-                </Link>
-                <Link to="/feature/all" className="theme-color1">
-                  <i className="fa fa-eye" aria-hidden="true"></i>
+                </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/feature/all")}>
+                  <i className="fa fa-eye" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Priority List</span>
-                </Link>
-                <Link to="/theme/setting" className="theme-color1">
-                  <i className="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div to="" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/theme/setting")}>
+                  <i className="fa fa-cog" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
-                </Link>
+                </div>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Logout</span>
@@ -209,26 +213,26 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
 
             {user_role == 4 ? (
               <>
-                <Link to="/products" className="theme-color1">
-                  <i className="fa fa-product-hunt" aria-hidden="true"></i>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/products")}>
+                  <i className="fa fa-product-hunt" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Products</span>
-                </Link>
-                <Link to="/features" className="theme-color1">
-                  <i className="fa fa-address-book-o" aria-hidden="true"></i>
+                </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/features")}>
+                  <i className="fa fa-address-book-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Features</span>
-                </Link>
-                <Link to="/search" className="theme-color1">
-                  <i className="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/search")}>
+                  <i className="fa fa-search" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Search</span>
-                </Link>
-                <Link onClick={handleSuggestNew} className="theme-color1">
-                  <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                </div>
+                <div onClick={() => { handleSuggestNew(); handleSidebar("/theme/setting"); }} className="theme-color1 sidebar_links">
+                  <i className="fa fa-plus-square-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Suggest New</span>
-                </Link>
-                <Link to="/theme/setting" className="theme-color1">
-                  <i className="fa fa-cog" aria-hidden="true"></i>
+                </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/theme/setting")}>
+                  <i className="fa fa-cog" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Theme Setting</span>
-                </Link>
+                </div>
                 <Link to="" className="theme-color1" onClick={logOut}>
                   <i className="fa fa-sign-out" aria-hidden="true"></i>
                   &nbsp;<span className="custom-sidebar-span">Logout</span>

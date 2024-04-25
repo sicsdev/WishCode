@@ -115,8 +115,6 @@ const CompanyUsers = () => {
       );
       setshowModal(false);
       getAllCompanyUsers();
-
-      // console.log('data', data.message);
       toast.success(data.message, {
         position: "bottom-right",
         autoClose: 2000,

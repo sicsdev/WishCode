@@ -78,12 +78,10 @@ const Products = () => {
             const filterData = response?.data?.data?.companies.filter(
               (x) => x.company_name.charAt(0).toLowerCase() == element
             );
-            console.log(response?.data?.data?.products)
             const productFilterData = response?.data?.data?.products.filter(
               (x) => x.product_name.charAt(0).toLowerCase() === element
 
             );
-            console.log(productFilterData);
             if (
               (filterData && filterData.length > 0) ||
               (productFilterData && productFilterData.length > 0)

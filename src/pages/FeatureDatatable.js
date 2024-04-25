@@ -19,7 +19,6 @@ const FeatureDatatable = () => {
   }, []);
   const getAllfeatureData = async (featureType) => {
     setloader(true);
-    console.log(featureType);
     let response = await getRequestApi(`/feature/filter/all?feature_type=${featureType}`);
     if (response && response.data && response.data.data) {
       setAllFeatures(response.data.data);

@@ -429,6 +429,10 @@ ol.breadcrumb li a {
   justify-content: center;
 }
 
+.sidebarTitle .menu-items .custom-sidebar-span{
+  display: none;
+}
+
 .mobile-menu-icon,
 .close-mobile-menu {
   display: none;
@@ -1359,4 +1363,14 @@ input.form-check-input:checked:after {
   height: 100vh;
   background-size: cover;
   background-position: center;
+}
+
+.sidebar_links {
+	font-size: 18px;
+	display: flex;
+	transition: 0.3s;
+	padding: 7px 0;
+	border-bottom: 1px solid #d3d3d33d;
+	margin-bottom: 10px;
+  cursor: pointer; /* Add cursor pointer */
 }

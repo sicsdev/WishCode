@@ -10,12 +10,13 @@ import Loader from 'react-spinners/SyncLoader';
 import { ToastContainer } from 'react-toastify';
 import moment from "moment";
 import { useNavigate } from 'react-router-dom';
+import { useColor } from '../../commanapi/ColorProvider';
 const SearchCompanyFeatureComp = () => {
   const { id } = useParams();
   const [totalCompanyFeatures, settotalCompanyFeatures] = useState([]);
   const [loader, setloader] = useState(false);
   const [loadPageData, setLoadPageData] = useState(false);
-
+  const { isToggleOpen, toggleMenu } = useColor();
 
   useEffect(() => {
     getAllCompanyFeatures();
@@ -26,7 +27,6 @@ const SearchCompanyFeatureComp = () => {
     let response = await getRequestApi(`/dashboard/feature/company/${id}`);
     if (response) {
       settotalCompanyFeatures(response.data.data);
-      console.log(response.data.data);
     }
     setloader(false);
   };
@@ -39,9 +39,10 @@ const SearchCompanyFeatureComp = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
+
         <div className="body-wrapper" id="body-content">
-          <Header />
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">
