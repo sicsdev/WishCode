@@ -1267,6 +1267,12 @@ input.form-check-input:checked:after {
 /* END:: Card Counter */
 
 @media screen and (max-width: 768px) {
+  .login-form {
+  padding: 70px 20px;
+}
+  .brand-nam h3 {
+    font-size: 24px;
+  }
   .hide-desktop {
     display: block;
   }

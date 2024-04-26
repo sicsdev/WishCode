@@ -177,3 +177,14 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
     
+@media screen and (max-width: 768px) {
+.header_navbar {
+    padding: 20px 15px;
+}
+.navbar .register_btn {
+    padding: 8px 16px;
+}
+.navbar .sign_in_btn {
+    padding: 8px 12px
+}
+}

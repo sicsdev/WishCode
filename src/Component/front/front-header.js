@@ -27,7 +27,7 @@ const FrontHeader = () => {
               <h3 className="">WishTrax</h3>
             </Link>
           </div>
-          <ul className="nav navbar-nav navbar-right">
+          <ul className="nav navbar-right">
             {tokens === null ? (
               <li>
                 <Link to="/login" className="btn btn-small sign_in_btn">
