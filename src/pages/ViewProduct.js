@@ -9,6 +9,7 @@ import Loader from "../Component/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getRequestApi } from "../helper/Helper";
+import { useColor } from "../commanapi/ColorProvider";
 
 const ViewProduct = () => {
   const { id } = useParams();
@@ -26,7 +27,7 @@ const ViewProduct = () => {
       Authorization: `Bearer ${tokens}`,
     },
   };
-
+  const {isToggleOpen,toggleMenu}=useColor();
   useEffect(() => {
     getProductData();
     getCompanyData();
@@ -72,9 +73,9 @@ const ViewProduct = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
         <div className="body-wrapper" id="body-content">
-          <Header />
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
                 {

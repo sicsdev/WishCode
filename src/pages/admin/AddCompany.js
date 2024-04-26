@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosConfig from "../../base_url/config";
 import Loader from "../../Component/Loader";
+import { useColor } from "../../commanapi/ColorProvider";
 
 const AddCompany = () => {
   const [company_name, setCompanyName] = useState("");
@@ -14,7 +15,7 @@ const AddCompany = () => {
   const [user_email, setUserEmail] = useState("");
   const [trial_period, setTrialPeriod] = useState("off");
   const [loader, setloader] = useState(false);
-
+  const {isToggleOpen,toggleMenu} = useColor();
   const addcompanyhandler = async (e) => {
     e.preventDefault();
     setloader(true);
@@ -77,10 +78,9 @@ const AddCompany = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar />
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
         <div className="body-wrapper" id="body-content">
-          <Header />
-
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">
