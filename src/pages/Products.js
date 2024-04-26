@@ -298,7 +298,6 @@ const Products = () => {
               </div>
             </div>
           </section>
-
         </Sidebar>
       </div>
       {loader === true ? <Loader /> : <></>}

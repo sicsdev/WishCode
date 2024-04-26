@@ -39,12 +39,12 @@ const FrontHeader = () => {
               </li>
             ) : (
               <>
-                <li>
+                <li className="mb-3">
                   <Link to="" onClick={logOut} className="btn btn-small sign_in_btn">
                     Logout
                   </Link>
                 </li>
-                <li>
+                <li className="mb-3">
                   {localStorage.getItem('role') == 4 ? <Link to="/products" className="btn btn-small sign_in_btn">
                     Dashboard
                   </Link>:<Link to="/dashboard" className="btn btn-small sign_in_btn">

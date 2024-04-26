@@ -50,18 +50,19 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); 
+      setIsMobile(window.innerWidth <= 768);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   const handleSidebar = (slug) => {
-    toggleMenu();
+    if (isMobile) {
+      toggleMenu();
+    }
     navigate(slug);
   }
 
@@ -88,7 +89,7 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
             />
           </a>
         </div>
-        <div className={`sidebar-menu-inner ${isToggleOpen === true ? "sidebarTitle" : ""}`}>
+        <div className={`sidebar-menu-inner ${isToggleOpen && !isMobile === true ? "sidebarTitle" : ""}`}>
           <div className="menu-items">
             {user_role == 1 ? (
               <>
@@ -136,11 +137,14 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
             ) : (
               ""
             )}
-
             {user_role == 2 ? (
               <>
-                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/dashboard")}>
-                  <i className="fa fa-tachometer" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/dashboard")}
+                // style={{
+                //   backgroundColor: active? "red":"",
+                // }}
+                >
+                  <i className="fa fa-tachometer" aria-hidden="true" style={{ color: "#fff", fontSize: "30px", }}></i>
                   &nbsp;<span className="custom-sidebar-span">Dashboard</span>
                 </div>
                 <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/products")}>
