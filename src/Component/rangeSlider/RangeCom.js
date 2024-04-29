@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Range } from "react-range";
 
-const RangeCom = ({ rangevalue, setRangevalue }) => {
+const RangeCom = ({ rangevalue, setRangevalue ,maxRangeLimit=10}) => {
   return (
     <>
       <Range
         step={1}
         min={1}
-        max={10}
+        max={maxRangeLimit}
         values={rangevalue.values}
         onChange={(values) => setRangevalue({ values })}
         renderTrack={({ props, children }) => (
@@ -41,7 +41,7 @@ const RangeCom = ({ rangevalue, setRangevalue }) => {
         style={{ marginTop: "30px", display: "block", textAlign: "center" }}
         id="output"
       >
-        {rangevalue.values[0].toFixed()}
+        {rangevalue?.values[0]}
       </output>
     </>
   );

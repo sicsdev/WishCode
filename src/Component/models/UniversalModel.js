@@ -22,8 +22,9 @@ const UniversalModel = (props) => {
               <div className="input-form">
                 <label className="mb-3">{props.RangeSliderLabel}</label>
                 <RangeCom
-                  rangevalue={props.RangeSliderValue}
-                  setRangevalue={props.setRangeSliderValue}
+                  rangevalue={props?.RangeSliderValue}
+                  setRangevalue={props?.setRangeSliderValue}
+                  maxRangeLimit={props?.maxRangeLimit}
                 />
               </div>
             )}

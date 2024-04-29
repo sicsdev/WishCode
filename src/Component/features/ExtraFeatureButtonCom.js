@@ -12,9 +12,12 @@ const ExtraFeatureButtonCom = ({
   getFeatureData,
 }) => {
   const [showPriorityModel, setShowPriorityModel] = useState(false);
+  // const [showEstimateModel, setShowEstimateModel] = useState(false);
   const [rangeSliderValue, setRangeSliderValue] = useState({ values: [0] });
+  const [rangeEstimateSliderValue, setRangeEstimateSliderValue] = useState({ values: [0] });
   const [modelType, setModelType] = useState("");
   const [developmentUrl, setDevelopmentUrl] = useState("");
+  const userRole = localStorage.getItem("role");
 
   const tokens = localStorage.getItem("token");
   const config = {
@@ -23,6 +26,7 @@ const ExtraFeatureButtonCom = ({
       Authorization: `Bearer ${tokens}`,
     },
   };
+
 
   useEffect(() => {
     if (
@@ -33,15 +37,30 @@ const ExtraFeatureButtonCom = ({
     } else {
       setRangeSliderValue({ values: [0] });
     }
+    if (
+      featureData?.estimate_level !== null &&
+      featureData?.estimate_level !== undefined
+    ) {
+
+      setRangeEstimateSliderValue({ values: [featureData?.estimate_level] });
+    } else {
+      setRangeEstimateSliderValue({ values: [0] });
+    }
     setDevelopmentUrl(featureData.development_url);
   }, [featureData]);
 
-  const handlePriorityClose = () => setShowPriorityModel(false);
+  const handlePriorityClose = () => {
+    setShowPriorityModel(false)
+  };
   const openPriorityModel = (e) => {
     setModelType("Priority");
     setShowPriorityModel(true);
   };
-
+  //for estimate model
+  const openEstimateModel = (e) => {
+    setModelType("Estimate");
+    setShowPriorityModel(true);
+  };
   const SubmitPriorityModelHandler = async (e) => {
     e.preventDefault();
     setloader(true);
@@ -64,11 +83,10 @@ const ExtraFeatureButtonCom = ({
     } catch (error) {
       setloader(false);
       return toast.error(
-        `${
-          error.response.data.message &&
+        `${error.response.data.message &&
           error.response.data.message.internal_priority
-            ? error.response.data.message.internal_priority[0]
-            : error.response.data.message
+          ? error.response.data.message.internal_priority[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -105,11 +123,10 @@ const ExtraFeatureButtonCom = ({
     } catch (error) {
       setloader(false);
       return toast.error(
-        `${
-          error.response.data.message &&
+        `${error.response.data.message &&
           error.response.data.message.development_url
-            ? error.response.data.message.development_url[0]
-            : error.response.data.message
+          ? error.response.data.message.development_url[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -118,7 +135,44 @@ const ExtraFeatureButtonCom = ({
       );
     }
   };
+  const SubmitEstimateModelHandler = async (e) => {
+    e.preventDefault();
+    setloader(true);
+    try {
+      const { data } = await axiosConfig.post(
+        "/feature/update/estimate_level",
+        {
+          id: featureData.id,
+          estimate_level: rangeEstimateSliderValue.values[0],
+        },
+        config
+      );
+      setShowPriorityModel(false);
+      setloader(false);
 
+      getFeatureData();
+      toast.success(data.message, {
+        position: "bottom-right",
+        autoClose: 2000,
+      });
+    } catch (error) {
+      setloader(false);
+      return toast.error(
+        `${error.response.data.message &&
+          error.response.data.message.estimate_level
+          ? error.response.data.message.estimate_level[0]
+          : error.response.data.message
+        }`,
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+        }
+      );
+    }
+  }
+  const handleEstimateClose = () => {
+    setShowPriorityModel(false)
+  }
   return (
     <>
       <p>
@@ -143,12 +197,20 @@ const ExtraFeatureButtonCom = ({
         >
           Internal Priority
         </button>
+        {userRole == 3 ? <button
+          className="btn input-group-text vote ml-2"
+          onClick={(e) => {
+            openEstimateModel(e);
+          }}
+        >
+          Set Estimate
+        </button> : ""}
       </div>
       {modelType === "Priority" ? (
         <UniversalModel
           showPriorityModel={showPriorityModel}
           setShowPriorityModel={setShowPriorityModel}
-          handlePriorityClose={handlePriorityClose}
+          handlePriorityClose={handleEstimateClose}
           modalHeading={"Update Internal Priority"}
           RangeSlider={true}
           RangeSliderLabel={"Internal Priority"}
@@ -156,6 +218,19 @@ const ExtraFeatureButtonCom = ({
           setRangeSliderValue={setRangeSliderValue}
           formSubmit={SubmitPriorityModelHandler}
         />
+      ) : modelType === "Estimate" ? (
+        <><UniversalModel
+          showPriorityModel={showPriorityModel}
+          setShowPriorityModel={setShowPriorityModel}
+          modalHeading={"Update Estimate Level"}
+          handlePriorityClose={handleEstimateClose}
+          RangeSliderLabel={"Estimate Level"}
+          RangeSlider={true}
+          RangeSliderValue={rangeEstimateSliderValue}
+          setRangeSliderValue={setRangeEstimateSliderValue}
+          formSubmit={SubmitEstimateModelHandler}
+          maxRangeLimit={5}
+        /></>
       ) : (
         <UniversalModel
           showPriorityModel={showPriorityModel}
