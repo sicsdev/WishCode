@@ -36,26 +36,29 @@ const FeatureDatatable = () => {
     console.log(featureType);
     getAllfeatureData(featureType);
   }
+  const userRole = localStorage.getItem('role')
   return (
     <>
       <div className="main-body">
         <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}>
-          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
           <section className="body-content-inner">
             <div className="container">
               <div className="row text-right align-items-center">
-                <div className="switch-btn-wrapper mt-3 w-100 justify-content-end d-flex pr-3">
-                  <b>Show/Hide Completed:</b>
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      name="completeFeature"
-                      checked={completeFeature == "completed"}
-                      onChange={(e) => handeCompleteToggle(completeFeature == "all" ? "completed" : "all")}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                </div>
+                {userRole == 3 ? "" : <>
+                  <div className="switch-btn-wrapper mt-3 w-100 justify-content-end d-flex pr-3">
+                    <b>Show/Hide Completed:</b>
+                    <label className="switch">
+                      <input
+                        type="checkbox"
+                        name="completeFeature"
+                        checked={completeFeature == "completed"}
+                        onChange={(e) => handeCompleteToggle(completeFeature == "all" ? "completed" : "all")}
+                      />
+                      <span className="slider round"></span>
+                    </label>
+                  </div></>}
+
               </div>
             </div>
             <div className="container">

@@ -229,7 +229,7 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
                   <i className="fa fa-search" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Search</span>
                 </div>
-                <div onClick={() => { handleSuggestNew(); handleSidebar("/theme/setting"); }} className="theme-color1 sidebar_links">
+                <div onClick={() => { handleSuggestNew(); }} className="theme-color1 sidebar_links">
                   <i className="fa fa-plus-square-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Suggest New</span>
                 </div>

@@ -25,6 +25,7 @@ const FilterDatatableCom = (props) => {
     return results;
   }
   const tokens = localStorage.getItem("token");
+  const userRole = localStorage.getItem("role");
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -33,10 +34,18 @@ const FilterDatatableCom = (props) => {
   };
   function handleFeatureStatus(FeatureId, FeatureStatus) {
     let apVal = "";
-    if (FeatureStatus == "completed") {
-      apVal = "publish";
+    if (userRole == 3) {
+      if (FeatureStatus == "review") {
+        apVal = "pending";
+      } else {
+        apVal = "review";
+      }
     } else {
-      apVal = "completed";
+      if (FeatureStatus == "completed") {
+        apVal = "review";
+      } else {
+        apVal = "completed";
+      }
     }
     swal({
       title: "Are you sure?",
@@ -54,13 +63,20 @@ const FilterDatatableCom = (props) => {
             },
             config
           );
-          SetIsFeatureChecked((prevCheckboxes) =>
-            prevCheckboxes.map((checkbox) =>
-              checkbox.id === FeatureId ? { ...checkbox, status: checkbox.status == "completed" ? "publish" : "completed" } : checkbox
-            )
-          );
+          if (userRole == 3) {
+            SetIsFeatureChecked((prevCheckboxes) =>
+              prevCheckboxes.map((checkbox) =>
+                checkbox.id === FeatureId ? { ...checkbox, status: checkbox.status == "review" ? "pending" : "review" } : checkbox
+              )
+            );
+          } else {
+            SetIsFeatureChecked((prevCheckboxes) =>
+              prevCheckboxes.map((checkbox) =>
+                checkbox.id === FeatureId ? { ...checkbox, status: checkbox.status == "completed" ? "publish" : "completed" } : checkbox
+              )
+            );
+          }
           swal("Updated!", "You Completed a Feature successfully!", "success");
-
         } catch (error) {
           swal(
             "Error!",
@@ -165,25 +181,48 @@ const FilterDatatableCom = (props) => {
       name: "Status",
       selector: (row) => (
         <div className="switch-btn-wrapper mt-3">
-          <label className="switch type_switch">
-            <input
-              type="checkbox"
-              name="completeFeature"
-              checked={
-                row.status == "completed"
-              }
-              onChange={(e) => {
-                handleFeatureStatus(
-                  row.id,
-                  row.status
-                );
-              }}
-            />
-             <div className="slider round">
-            <span className="on"> Complete</span>
-            <span className="off">In Progress</span>
-          </div>
-          </label>
+          {userRole == 3 ? <>
+            <label className="switch type_switch">
+              <input
+                type="checkbox"
+                name="completeFeature"
+                checked={
+                  row.status == "review"
+                }
+                onChange={(e) => {
+                  handleFeatureStatus(
+                    row.id,
+                    row.status
+                  );
+                }}
+              />
+              <div className="slider round">
+                <span className="on"> Review</span>
+                <span className="off">In Process</span>
+              </div>
+            </label>
+          </> : <>
+            <label className="switch type_switch">
+              <input
+                type="checkbox"
+                name="completeFeature"
+                checked={
+                  row.status == "completed"
+                }
+                onChange={(e) => {
+                  handleFeatureStatus(
+                    row.id,
+                    row.status
+                  );
+                }}
+              />
+              <div className="slider round">
+                <span className="on"> Complete</span>
+                <span className="off">In Review</span>
+              </div>
+            </label>
+          </>}
+
         </div>
       ),
       center: true,
