@@ -218,7 +218,7 @@ const FilterDatatableCom = (props) => {
               />
               <div className="slider round">
                 <span className="on"> Complete</span>
-                <span className="off">In Review</span>
+                <span className="off">{row?.status == "review"?"In Review":"In Process"}</span>
               </div>
             </label>
           </>}

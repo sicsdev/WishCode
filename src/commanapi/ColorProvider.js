@@ -50,7 +50,7 @@ export const ColorProvider = ({ children }) => {
     );
     setMenus(data?.data);
   };
-  //for change color of theme
+  //for change color of theme 
   const changeColor = (newColor) => {
     setColor(newColor);
     document.documentElement.style.setProperty('--background-color', newColor.backgroundColor);
