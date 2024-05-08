@@ -5,6 +5,7 @@ import { getRequestApi } from "../../helper/Helper";
 import { useEffect } from 'react';
 import { useState } from 'react';
 import FeatureComp from '../../Component/FeatureComp';
+import { stripHtml } from '../../helper/Helper';
 
 const ShowCase = () => {
     const [showCase, setShowCase] = useState();
@@ -83,7 +84,7 @@ const ShowCase = () => {
                                                             <div className="options">
                                                                 <h2>{feature.title}</h2>
                                                             </div>
-                                                            <p>{feature.content}</p>
+                                                            <p>{stripHtml(feature.content)}</p>
 
                                                             <div className="actions-links position-relative py-2 pt-4 d-flex">
                                                                 {feature?.company_id && feature?.company_name ? (

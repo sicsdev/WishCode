@@ -19,6 +19,7 @@ import Loader from "../Component/Loader";
 import ExtraFeatureButtonCom from "../Component/features/ExtraFeatureButtonCom";
 import axios from "axios";
 import { useColor } from "../commanapi/ColorProvider";
+import { stripHtml } from "../helper/Helper";
 
 const SingleFeature = () => {
   const { id } = useParams();
@@ -578,7 +579,7 @@ const SingleFeature = () => {
                               ""
                             )}
                             <h4>{featureData.title}</h4>
-                            <p>{featureData.content}</p>
+                            <p>{stripHtml(featureData.content)}</p>
                             <a href={`${imageBaseUrl}/${featureData?.image}`} target="_blank">
                               <div className="user-img">
                                 {featureData.image ? (
@@ -657,7 +658,7 @@ const SingleFeature = () => {
                                         <div className="voting-option mb-2">
                                           <label className="custom-radio">
                                             <i className="fa fa-thumbs-up"
-                                              style={{ color: userVote == "yes" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                                              style={{ color: userVote == "yes" ? 'var(--background-color)' : 'rgb(155, 155, 155)', fontSize: "36px" }}
                                               aria-hidden="true"></i>
                                             <input
                                               type="radio"
@@ -671,7 +672,7 @@ const SingleFeature = () => {
                                               }}
                                             />
                                             {/* <span className="checkmark bg-white">
-                      </span> */}
+                                             </span> */}
                                           </label>
                                         </div>
                                       </div>
@@ -679,7 +680,7 @@ const SingleFeature = () => {
                                         <div className="voting-option mb-2">
                                           <label className="custom-radio">
                                             <i className="fa fa-thumbs-down"
-                                              style={{ color: userVote == "no" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                                              style={{ color: userVote == "no" ? 'var(--background-color)' : 'rgb(155, 155, 155)', fontSize: "36px" }}
                                               aria-hidden="true"></i>
                                             <input
                                               type="radio"
@@ -699,7 +700,7 @@ const SingleFeature = () => {
                                         <div className="voting-option mb-2">
                                           <label className="custom-radio">
                                             <i className="fa fa-question"
-                                              style={{ color: userVote == "optional" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                                              style={{ color: userVote == "optional" ? 'var(--background-color)' : 'rgb(155, 155, 155)', fontSize: "36px" }}
                                               aria-hidden="true"></i>
                                             <input
                                               type="radio"
@@ -1295,7 +1296,7 @@ const SingleFeature = () => {
                 <div className="col-md-4">
                   <div className="voting-option mb-2">
                     <label className="custom-radio">
-                      <i className="fa fa-thumbs-up"
+                      <i className="fa fa-thumbs-up vote-background"
                         style={{ color: toggleVal == "yes" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
                         aria-hidden="true"></i>
                       <input

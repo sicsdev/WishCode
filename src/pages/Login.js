@@ -25,11 +25,16 @@ const Login = ({ }) => {
         // Call getMenus function
         await getMenus();
         // After getMenus is completed, navigate to dashboard
-        if (localStorage.getItem("token")) {
           setTimeout(() => {
-            navigate("/dashboard");
+            if (localStorage.getItem("role") == 2) {
+              navigate("/company/features");
+            } else if (localStorage.getItem("role") == 4) {
+              navigate("/products");
+            } else {
+              navigate("/dashboard");
+            }
           }, 1000);
-        }
+        
       } catch (error) {
         console.error("Error fetching menus:", error);
       }
@@ -63,7 +68,6 @@ const Login = ({ }) => {
         textColor: data?.themeColor?.text_color || `#000000`,
         buttonTextColor: data?.themeColor?.btn_text_color || `#000000`,
       });
-
       setEmail("");
       setPassword("");
       setIsLoader(false);

@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import RangeCom from "../rangeSlider/RangeCom";
 import { getRequestApi } from "../../helper/Helper";
 import { useParams } from "react-router-dom";
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
 const AddFeatureModel = ({
   show,
   handleClose,
@@ -33,9 +35,8 @@ const AddFeatureModel = ({
   const [suggestCompany, setSuggestCompany] = useState('');
   const [suggestCompanyProduct, setSuggestCompanyProducts] = useState("");
   const [productId, setProductId] = useState("");
-  const [userComID,setUserComID] =useState(companyId);
-  const [userProID,setUserProID] =useState(id);
-
+  const [userComID, setUserComID] = useState(companyId);
+  const [userProID, setUserProID] = useState(id);
   const tokens = localStorage.getItem("token");
   const config = {
     headers: {
@@ -60,13 +61,13 @@ const AddFeatureModel = ({
     setloader(true);
     const formData = new FormData();
     formData.append("title", featureTitle);
-    formData.append("content", featureDescription);
+    formData.append("content",featureDescription);
     formData.append("internal_priority", rangevalue.values);
     formData.append("development_url", developmentURL);
     formData.append("image", selectedFile);
     formData.append("companyID", userComID);
     formData.append("product_name", productName);
-    formData.append("product_id", userProID)
+    formData.append("product_id", userProID);
 
     try {
       const { data } = await axiosConfig.post(
@@ -220,18 +221,16 @@ const AddFeatureModel = ({
                 </div> : ""}
               <div className="input-form">
                 <label>Description</label>
-                <textarea
-                  className="form-control"
+                <ReactQuill
+                  theme='snow'
                   placeholder="Enter Description"
-                  rows="5"
-                  cols="20"
-                  required
                   value={featureDescription}
-                  onChange={(e) => setfeatureDescription(e.target.value)}
-                ></textarea>
+                  onChange={setfeatureDescription}
+                  style={{minHeight: '200px', height:"200px"}}
+                />
               </div>
 
-              {localStorage.getItem('role') == 4 ? "" : <div className="input-form">
+              {localStorage.getItem('role') == 4 ? "" : <div className="input-form" style={{marginTop:"60px"}}>
                 <label className="mb-3">Priority</label>
                 <RangeCom
                   rangevalue={rangevalue}
@@ -249,7 +248,7 @@ const AddFeatureModel = ({
                 />
               </div>}
               { }
-              <div className="input-form">
+              <div className="input-form" style={{marginTop:"60px"}}>
                 <label> {localStorage.getItem('role') == 4 ? "Select Product" : "Product Name"}</label>
                 {localStorage.getItem('role') == 4 ?
                   <select

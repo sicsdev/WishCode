@@ -1,5 +1,6 @@
 import React from "react";
 import { imageBaseUrl } from "../../base_url/config";
+import { stripHtml } from "../../helper/Helper";
 
 const HomeFeatures = (props) => {
   return (
@@ -25,7 +26,7 @@ const HomeFeatures = (props) => {
                   />
                   <div className="card-body-content">
                     <h5>{feature.title}</h5>
-                    <p>{feature.content}</p>
+                    <p>{stripHtml(feature.content)}</p>
                   </div>
                 </div>
               </div>

@@ -9,6 +9,7 @@ import PieChartCom from "../Component/charts/PieChartCom";
 import { useParams } from "react-router";
 import { getRequestApi } from "../helper/Helper";
 import { useColor } from "../commanapi/ColorProvider";
+import { stripHtml } from "../helper/Helper";
 
 const FeatureChartReport = () => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ const FeatureChartReport = () => {
       setloader(false);
       setTotalComments(response?.data?.data?.commentCount);
       setProductName(response?.data?.data?.ProductName);
-      setDescription(response?.data?.data?.content?.content);
+      setDescription(stripHtml(response?.data?.data?.content?.content));
       setDevelopmentUrl(response?.data?.data?.content?.development_url)
       if (response.data.data && response.data.data.publicVotes) {
         setTotalPublicVotes(response.data.data.publicVotes.length);

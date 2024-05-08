@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import swal from "sweetalert";
 import { useState } from "react";
 import EditFeatureModel from "../models/EditFeatureModel";
+import { stripHtml } from "../../helper/Helper";
 
 const ApproveFeatureReqCom = ({
   pendingFeatureList,
@@ -105,7 +106,7 @@ const ApproveFeatureReqCom = ({
                         </td>
                         <td>
                           <p className="feature-desc-string">
-                            {feature.content}
+                            {stripHtml(feature.content)}
                           </p>
                         </td>
                         <td>{feature.product_name}</td>

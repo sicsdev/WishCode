@@ -5,7 +5,8 @@ import axiosConfig from "../../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getRequestApi } from "../../helper/Helper";
-
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
 const EditFeatureModel = ({
   showModal,
   handleCloseModal,
@@ -33,7 +34,6 @@ const EditFeatureModel = ({
       Authorization: `Bearer ${tokens}`,
     },
   };
-
   const updateCompanyFeaturehandler = async (e) => {
     e.preventDefault();
     setloader(true);
@@ -62,10 +62,9 @@ const EditFeatureModel = ({
     } catch (error) {
       setloader(false);
       return toast.error(
-        `${
-          error.response.data.message && error.response.data.message.title
-            ? error.response.data.message.title[0]
-            : error.response.data.message
+        `${error.response.data.message && error.response.data.message.title
+          ? error.response.data.message.title[0]
+          : error.response.data.message
         }`,
         {
           position: "bottom-right",
@@ -131,17 +130,16 @@ const EditFeatureModel = ({
               </div>
               <div className="input-form">
                 <label>Description</label>
-                <textarea
-                  className="form-control"
+                <ReactQuill
+                  theme='snow'
+                  // className="form-control"
                   placeholder="Enter Description"
-                  rows="5"
-                  cols="20"
-                  required
                   value={featureDescription}
-                  onChange={(e) => setfeatureDescription(e.target.value)}
-                ></textarea>
+                  onChange={setfeatureDescription}
+                  style={{minHeight: '200px', height:"200px"}}
+                />
               </div>
-              <div className="input-form">
+              <div className="input-form" style={{marginTop:"60px"}}>
                 <label> Product Name</label>
                 <input
                   type="text"

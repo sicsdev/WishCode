@@ -11,7 +11,7 @@ import Loader from "../Loader";
 import AddFeatureModel from "../models/AddFeatureModel";
 import EditFeatureModel from "../models/EditFeatureModel";
 import swal from "sweetalert";
-
+import { stripHtml } from "../../helper/Helper";
 const ViewCompanyFeaturesCom = ({
   totalCompanyFeatures,
   getPageData,
@@ -130,7 +130,7 @@ const ViewCompanyFeaturesCom = ({
                       <div className="options">
                         <h2>{feature.title}</h2>
                       </div>
-                      <p>{feature.content}</p>
+                      <p>{stripHtml(feature.content)}</p>
                       <div className="user-img">
                         {feature.image ? (
                           <img

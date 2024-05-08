@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import axiosConfig from "../base_url/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { stripHtml } from "../helper/Helper";
 
 const SingleFeatureComp = ({ featureData }) => {
   const { id } = useParams();
@@ -59,7 +60,7 @@ const SingleFeatureComp = ({ featureData }) => {
             <div className="post-main">
               <div className="post-content pt-3">
                 <h4>{featureData.title}</h4>
-                <p>{featureData.content}</p>
+                <p>{stripHtml(featureData.content)}</p>
               </div>
               {featureData.comments !== undefined ? (
                 <div>

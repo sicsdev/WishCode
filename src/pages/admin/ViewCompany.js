@@ -16,6 +16,7 @@ import EditUserModel from "../../Component/models/EditUserModel";
 import CountVoteModel from "../../Component/models/CountVoteModel";
 import AddFeatureModel from "../../Component/models/AddFeatureModel";
 import EditFeatureModel from "../../Component/models/EditFeatureModel";
+import { stripHtml } from "../../helper/Helper";
 
 const ViewCompany = () => {
   const [companyData, setcompanyData] = useState([]);
@@ -184,7 +185,7 @@ const ViewCompany = () => {
   const editViewFeature = (val) => {
     setShowEditFeatureModel(true);
     setfeatureTitle(val.title);
-    setfeatureDescription(val.content);
+    setfeatureDescription(stripHtml(val.content));
     setfeatureId(val.id);
     setProductName(val.product_name);
   };

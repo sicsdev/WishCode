@@ -9,7 +9,7 @@ import Loader from "./Loader";
 import { useState, useEffect } from "react";
 import axiosConfig from "../base_url/config";
 import { Modal, Button } from "react-bootstrap";
-
+import { stripHtml } from "../helper/Helper";
 const FeatureComp = ({
   features,
   companyID,
@@ -175,7 +175,7 @@ const FeatureComp = ({
                         <div className="options">
                           <h2>{feature.title}</h2>
                         </div>
-                        <p>{feature.content}</p>
+                        <p>{stripHtml(feature.content)}</p>
                         <div className="user-img">
                           {feature.image ? (
                             <img

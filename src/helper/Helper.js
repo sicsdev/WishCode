@@ -47,3 +47,9 @@ export const isUserPermission = (permissions, check_slug) => {
     return false;
   }
 };
+
+  // Function to strip HTML tags
+export const stripHtml = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+  };
