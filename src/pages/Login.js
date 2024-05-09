@@ -158,7 +158,7 @@ const Login = ({ }) => {
                 </div>
               </form>
               <GoogleLoginComp />
-              <FacebookLoginComp/>
+              {/* <FacebookLoginComp/> */}
             </div>
           </div>
           <ToastContainer />

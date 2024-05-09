@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 const FacebookLoginComp = () => {
     const navigate = useNavigate();
+    const myFacebookAppId = process.env.REACT_APP_GOOGLE_APP_ID;
     const facebookAuthBackend = async (response) => {
         console.log(response);
         let facebookData = {
@@ -38,7 +39,7 @@ const FacebookLoginComp = () => {
                             <FacebookLogin
                                 cssClass="bg-primary text-white px-2 py-3 border-0"
                                 icon="fa-facebook"
-                                appId="3816927948587067"
+                                appId={myFacebookAppId}
                                 autoLoad={false}
                                 fields="name,email,picture"
                                 callback={facebookAuthBackend}
