@@ -4,10 +4,12 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import axiosConfig from '../../base_url/config';
+import { useColor } from '../../commanapi/ColorProvider';
 
 
 const GoogleLoginComp = () => {
   const navigate = useNavigate();
+  const { changeColor } = useColor();
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const userInfo = await axios.get(
@@ -30,6 +32,12 @@ const GoogleLoginComp = () => {
     localStorage.setItem("role", data?.data?.data?.role_id);
     localStorage.setItem("userName", data?.data?.data?.name);
     localStorage.setItem("token", data?.data?.token);
+    changeColor({
+      backgroundColor: "#aa504f",
+      buttonColor: "#fff",
+      textColor: "#000000",
+      buttonTextColor: "#000000",
+    });
     toast.success("login successfully", {
       position: "bottom-right",
       autoClose: 2000,
@@ -45,7 +53,7 @@ const GoogleLoginComp = () => {
   return (
     <>
       {/* <button type="button" className="fa fa-google"onClick={googleLogin}>Sign in with Google 🚀</button> */}
-      <div className='d-flex justify-content-center py-3'>
+      <div className='d-flex justify-content-center py-3' style={{ cursor: 'pointer' }}>
         <button className="d-flex bg-primary text-white justify-content-between align-items-center p-0 m-0 border-0 cursor-pointer" style={{ cursor: "pointer" }} onClick={googleLogin}>
           <div className="google-icon-wrapper bg-white p-2">
             <svg

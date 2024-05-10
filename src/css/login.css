@@ -1380,3 +1380,20 @@ input.form-check-input:checked:after {
 	margin-bottom: 10px;
   cursor: pointer; /* Add cursor pointer */
 }
+.facebook-setting{
+  padding-left: 0 9px;
+}
+.icon-setting{
+  padding: 9px;
+}
+.package-setting{
+  height: 27px;
+  margin-bottom: 16px;
+}
+.pointer-cursor {
+  cursor: pointer;
+  height: 10px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
