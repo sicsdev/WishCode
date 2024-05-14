@@ -133,6 +133,51 @@ const FilterDatatableCom = (props) => {
   const renderTooltip = (title) => (
     <Tooltip id="tooltip">{title}</Tooltip>
   );
+  const handleRecurring = (postId, recurring) => {
+    let type;
+    if (recurring == 0) {
+      type = 1;
+    } else {
+      type = 0;
+    }
+    swal({
+      title: "Are you sure?",
+      text: `You want to Change Feature Recurring to ${type == 1 ? "Yes" : "No"
+        }?`,
+      icon: "warning",
+      dangerMode: true,
+    }).then(async (willApprove) => {
+      if (willApprove) {
+        try {
+          const responseData = await axiosConfig.post(
+            `/admin/post/change-recurring`,
+            {
+
+              post_id: postId,
+              recurring: type,
+            },
+            config
+          );
+          if (responseData.status === 200) {
+            SetIsFeatureChecked((prevPosts) =>
+              prevPosts.map((post) =>
+                post.id === postId ? { ...post, recurring: type } : post
+              )
+            );
+            // Show success message
+            swal("Updated!", "Feature Recurring status updated!", "success");
+          }
+        } catch (error) {
+          // Show error message
+          swal(
+            "Error!",
+            "Unable to update the Recurring status!",
+            "error"
+          );
+        }
+      }
+    });
+  };
   const columns = [
     {
 
@@ -218,10 +263,39 @@ const FilterDatatableCom = (props) => {
               />
               <div className="slider round">
                 <span className="on"> Complete</span>
-                <span className="off">{row?.status == "review"?"In Review":"In Process"}</span>
+                <span className="off">{row?.status == "review" ? "In Review" : "In Process"}</span>
               </div>
             </label>
           </>}
+
+        </div>
+      ),
+      center: true,
+
+    },
+    {
+      name: 'Recurring',
+      selector: (row) => (
+        <div className="switch-btn-wrapper mt-3">
+          {userRole == 2 ? <>
+            <label className="switch type_switch">
+              <input type="checkbox" name="changeUserType"
+                checked={
+                  row.recurring == 1
+                }
+                onChange={(e) => {
+                  handleRecurring(
+                    row.id,
+                    row.recurring,
+                  );
+                }}
+              />
+              <div className="slider round">
+                <span className="on">Yes</span>
+                <span className="off">No</span>
+              </div>
+            </label>
+          </> : null}
 
         </div>
       ),
@@ -266,11 +340,10 @@ const FilterDatatableCom = (props) => {
           <div className="col-md-12 all_features">
             <DataTable
               title={""}
-              columns={columns}
+              columns={userRole == 2 ? columns : columns.filter(column => column.name !== "Recurring")}
               data={isFeatureChecked}
               defaultSortFieldID={1}
               pagination
-            // paginationComponent={BootyPagination}
             />
           </div>
         </div>
