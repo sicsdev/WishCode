@@ -539,9 +539,9 @@ const SingleFeature = () => {
   return (
     <>
       <div className="main-body">
-        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
         <div className="body-wrapper" id="body-content">
-          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
           <section className="body-content-inner">
             <div className="container">
               <div className="posts-wrapper">
@@ -1249,6 +1249,7 @@ const SingleFeature = () => {
                                 <button
                                   type="submit"
                                   className="input-group-text"
+                                  style={{ cursor: 'pointer' }}
                                 >
                                   Add Feedback
                                 </button>

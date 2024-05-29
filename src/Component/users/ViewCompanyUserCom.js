@@ -93,7 +93,6 @@ const ViewCompanyUserCom = ({
             );
           }
           swal("Updated!", "You User Type Role is updated!", "success");
-
         } catch (error) {
           swal(
             "Error!",

@@ -163,7 +163,6 @@ const Products = () => {
       );
     }
   };
-
   return (
     <>
       <div className="main-body">
@@ -210,7 +209,7 @@ const Products = () => {
                     {alphaData.length !== 0 ? (
                       alphaData.map((element, key) => (
                         <div
-                          className="col-md-12 mt-3 company-order-main"
+                          className={element ?"col-md-12 mt-3 " :"col-md-12 mt-3"}
                           key={key}
                         >
                           {element.products.length ? <>
