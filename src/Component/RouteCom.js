@@ -41,6 +41,7 @@ import SearchCompanyFeatureComp from "./Search/SearchCompanyFeatureComp";
 import FrontShowCase from "./front/FrontShowCase";
 import ThemeSettingComp from "./theme/ThemeSettingComp";
 import MenuComp from "./menu/MenuComp";
+import TeamComp from "./team/TeamComp";
 
 const RouteCom = () => {
   return (
@@ -72,6 +73,8 @@ const RouteCom = () => {
           path="/admin/company-users/:id"
           element={<ViewCompanyUsers />}
         />
+         {/* for team */}
+         <Route path="/teams" element={<TeamComp />} />
         <Route
           exact
           path="/admin/company-features/:id"

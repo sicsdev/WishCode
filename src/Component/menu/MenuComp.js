@@ -130,7 +130,7 @@ const MenuComp = () => {
             }).then((willDelete) => {
                 if (willDelete) {
                     setloader(true);
-                    const { data } = axiosConfig.delete(
+                    const { data } = axiosConfig.post(
                         `/delete/menu/${id}`,
                         config
                     );

@@ -155,6 +155,10 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
                   <i className="fa fa-users" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Company Users</span>
                 </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/teams")}>
+                  <i className="fa fa-object-group" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.team ? menus?.team : "Teams"}</span>
+                </div>
                 <div to="" className="theme-color1 sidebar_links" onClick={() => handleSidebar("/company/features")}>
                   <i className="fa fa-address-book-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">{menus?.feature ? menus?.feature : "Features"}</span>
