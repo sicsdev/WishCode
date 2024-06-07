@@ -129,7 +129,7 @@ const FeatureSearch = (props) => {
                     <th scope="col">Company</th>
                     <th scope="col">Product</th>
                     <th scope="col">Submitted By</th>
-
+                    <th scope="col"> Vote</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -143,6 +143,7 @@ const FeatureSearch = (props) => {
                       </td>
                       <td>{feature.product_name}</td>
                       <td>{feature.user_name}</td>
+                      <td className="fa fa-thumbs-o-up"  style={{ padding: "30px" }}></td>
                     </tr>
                   ))}
                 </tbody>

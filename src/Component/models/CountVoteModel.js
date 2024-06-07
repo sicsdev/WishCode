@@ -30,11 +30,16 @@ const CountVoteModel = ({
         <Modal.Header className="d-block">
           <Modal.Title className="vote-modal-title">
             <div className="row">
-              <div className="col-md-4">
-                <h5 className="modal-title mr-3">Feature Vote Count</h5>
+              <div className="col-md-3 "
+              style={{width:"15%", maxWidth:"18%"}}
+              >
+                <h5 className="modal-title "> Vote Count</h5>
               </div>
 
-              <div className="col-md-2">
+              <div className="col-md-1"
+              style={{width:"15%", maxWidth:"10%"}}
+              
+              >
                 <div className="voting-option mb-2">
                   <label className="custom-radio">
                     All
@@ -50,7 +55,10 @@ const CountVoteModel = ({
                   </label>
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3"
+             
+              
+              >
                 <div className="voting-option mb-2">
                   <label className="custom-radio">
                     Company User
@@ -82,6 +90,20 @@ const CountVoteModel = ({
                   </label>
                 </div>
               </div>
+              <div className="col-md-2">
+                <div className="voting-option mb-2">
+                  <label className="custom-radio">
+                  Anonymous
+                    <input
+                      type="radio"
+                      name="vote_count_type"
+                      checked={''}
+                      onChange={''}
+                    />
+                    <span className="checkmark"></span>
+                  </label>
+                </div>
+              </div>
             </div>
           </Modal.Title>
         </Modal.Header>
@@ -89,26 +111,56 @@ const CountVoteModel = ({
           <>
             <div className="voting row">
               <div className="col-md-6">
-                <span className="d-block py-3 no-of-vote-card ">
+                <span className="d-block py-3 no-of-vote-card "
+                  style={{ height: "144px" }}
+                >
                   <h4 className="mb-0">{yesVoteCount}</h4>
-                  <span className="no-of-vote-text text-white">
+                  <span className="no-of-vote-text text-white"
+                    style={{ position: "absolute", bottom: "17px" }}
+
+                  >
                     Total Number of Vote For Yes
                   </span>
                 </span>
               </div>
               <div className="col-md-6">
-                <span className="d-block py-3 no-of-vote-card ">
+                <span className="d-block py-3 no-of-vote-card "
+                  style={{ height: "144px" }}
+
+                >
                   <h4 className="mb-0">{noVoteCount}</h4>
-                  <span className="no-of-vote-text text-white">
+                  <span className="no-of-vote-text text-white"
+                    style={{ position: "absolute", bottom: "17px" }}
+
+                  >
                     Total Number of Vote For No
                   </span>
                 </span>
               </div>
               <div className="col-md-6">
-                <span className="d-block py-3 no-of-vote-card ">
+                <span className="d-block py-3 no-of-vote-card "
+                  style={{ height: "144px" }}
+
+                >
                   <h4 className="mb-0">{optionalVoteCount}</h4>
-                  <span className="no-of-vote-text text-white">
+                  <span className="no-of-vote-text text-white"
+                    style={{ position: "absolute", bottom: "17px" }}
+
+                  >
                     Total Number of Vote For Optional
+                  </span>
+                </span>
+              </div>
+              <div className="col-md-6">
+                <span className="d-block py-3 no-of-vote-card "
+                  style={{ height: "144px" }}
+
+                >
+                  <h4 className="mb-0">0</h4>
+                  <span className="no-of-vote-text text-white"
+                    style={{ position: "absolute", bottom: "17px" }}
+                  >
+                    Total Number of Vote For Anonymous
                   </span>
                 </span>
               </div>

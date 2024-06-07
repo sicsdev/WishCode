@@ -56,7 +56,7 @@ const TeamComp = () => {
                 });
             });
     };
-
+console.log("total", totalCompanyUsers)
     const handleTeamNameChange = (e) => {
         setTeamName(e.target.value);
     };
@@ -139,6 +139,7 @@ const TeamComp = () => {
     const editTeam = (id) => {
         setShowModal(true);
         setLoader(true);
+        setModelHeader("Edit");
         axiosConfig
             .get(`/get/single/team/${id}`, config)
             .then((response) => {
