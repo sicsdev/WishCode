@@ -21,6 +21,7 @@ const TeamComp = () => {
     const [selectedMembers, setSelectedMembers] = useState([]);
     const [teamMember, setTeamMembers] = useState();
     const [selectedTeam, setSelectedTeam] = useState(null);
+    const [teamId, setTeamId] = useState("");
     const tokens = localStorage.getItem("token");
     const config = {
         headers: {
@@ -56,9 +57,12 @@ const TeamComp = () => {
                 });
             });
     };
-console.log("total", totalCompanyUsers)
     const handleTeamNameChange = (e) => {
-        setTeamName(e.target.value);
+        if (modelHeader == "Add") {
+            setTeamName(e.target.value);
+        } else {
+            setSelectedTeam(e.target.value)
+        }
     };
 
     const handleMembersChange = (selectedOptions) => {
@@ -68,24 +72,45 @@ console.log("total", totalCompanyUsers)
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoader(true);
-        axiosConfig.post(`/create/team`, {
-            name: teamName,
-            user_id: selectedMembers,
-        }, config)
-            .then(response => {
-                setShowModal(false);
-                setTeamMembers(prev => [...prev, response?.data?.data]);
-                toast.success("Team Added Successfully", {
-                    position: "bottom-right",
-                    autoClose: 2000,
+        if (modelHeader == "Add") {
+            axiosConfig.post(`/create/team`, {
+                name: teamName,
+                user_id: selectedMembers,
+                type: "add",
+            }, config)
+                .then(response => {
+                    setShowModal(false);
+                    setTeamMembers(prev => [...prev, response?.data?.data]);
+                    toast.success("Team Added Successfully", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                    });
                 });
-
-            });
+        } else {
+            axiosConfig.post(`/create/team`, {
+                name: selectedTeam,
+                user_id: selectedMembers,
+                type: "update",
+                team_id: teamId,
+            }, config)
+                .then(response => {
+                    setShowModal(false);
+                    setTeamMembers(prev =>
+                        prev.map(team =>
+                            team.id === response?.data?.data?.id ? response?.data?.data : team
+                        ));
+                    toast.success("Team Updated Successfully", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                    });
+                });
+                setModelHeader("Add");
+        }
         setLoader(false);
         handleCloseModal();
-        // getAllTeams();
         setSelectedMembers("");
         setTeamName("");
+        setSelectedTeam("");
     };
     const getAllTeams = () => {
         setLoader(true);
@@ -138,13 +163,20 @@ console.log("total", totalCompanyUsers)
     }
     const editTeam = (id) => {
         setShowModal(true);
-        setLoader(true);
         setModelHeader("Edit");
+        getAllCompanyUsers();
+        setTeamId(id);
         axiosConfig
             .get(`/get/single/team/${id}`, config)
             .then((response) => {
                 setLoader(false);
-                setSelectedTeam(response?.data?.data);
+                setSelectedTeam(response?.data?.data?.name);
+                const users = response?.data?.data?.users?.map(user => ({
+                    value: user.id,
+                    label: user.name,
+                }));
+                setSelectedMembers(users);
+
             })
             .catch((error) => {
                 setLoader(false);
@@ -154,7 +186,6 @@ console.log("total", totalCompanyUsers)
                 });
             });
     }
-
     return (
         <div>
             <div className="main-body">
@@ -268,7 +299,7 @@ console.log("total", totalCompanyUsers)
                                     type="text"
                                     className="form-control"
                                     placeholder="Team Name"
-                                    value={selectedTeam ? selectedTeam.name : teamName}
+                                    value={selectedTeam ? selectedTeam : teamName}
                                     required
                                     onChange={handleTeamNameChange}
                                 />
@@ -279,7 +310,7 @@ console.log("total", totalCompanyUsers)
                                     isMulti
                                     required
                                     options={totalCompanyUsers}
-                                    value={selectedTeam ? selectedTeam.users : selectedMembers}
+                                    value={selectedMembers}
                                     onChange={handleMembersChange}
                                     className="basic-multi-select"
                                     classNamePrefix="select"
