@@ -249,7 +249,7 @@ const AddFeatureModel = ({
               </div>}
               { }
               <div className="input-form" style={{marginTop:"60px"}}>
-                <label> {localStorage.getItem('role') == 4 ? "Select Product" : "Product Name"}</label>
+                <label> {localStorage.getItem('role') == 4 ? "Select Category" : "Category Name"}</label>
                 {localStorage.getItem('role') == 4 ?
                   <select
                     className="form-control"
@@ -257,7 +257,7 @@ const AddFeatureModel = ({
                     value={userProID || ``}
                     required
                   >
-                    <option value="">Select a Product</option>
+                    <option value="">Select a Category</option>
                     {suggestCompanyProduct ? suggestCompanyProduct?.map(product => (
                       <option key={product.id} value={product.id}>
                         {product.product_name}

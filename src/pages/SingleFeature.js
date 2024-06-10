@@ -571,7 +571,7 @@ const SingleFeature = () => {
                                 to={`/dashboard/product/${featureData.product_id}`}
                               >
                                 <span className="font-weight-bold custom-span">
-                                  Product Name:
+                               Category Name:
                                 </span>{" "}
                                 {featureData?.product_name}
                               </Link>

@@ -140,7 +140,7 @@ const EditFeatureModel = ({
                 />
               </div>
               <div className="input-form" style={{marginTop:"60px"}}>
-                <label> Product Name</label>
+                <label> Category Name</label>
                 <input
                   type="text"
                   className="form-control"

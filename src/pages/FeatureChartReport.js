@@ -149,7 +149,7 @@ const FeatureChartReport = () => {
                         <span className="count-numbers">
                           {ProductName ?? 0}
                         </span>
-                        <span className="count-name">Product Name</span>
+                        <span className="count-name">Category Name</span>
                       </div>
                     </div>
                     <div className="col-md-6 mt-5">

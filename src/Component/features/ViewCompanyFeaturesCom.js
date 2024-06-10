@@ -161,7 +161,7 @@ const ViewCompanyFeaturesCom = ({
                             to={`/dashboard/product/${feature.product_id}`}
                           >
                             <span className="font-weight-bold custom-span">
-                              Product Name:
+                              Category Name:
                             </span>{" "}
                             {feature?.product_name}
                           </Link>

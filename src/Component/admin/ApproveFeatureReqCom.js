@@ -93,7 +93,7 @@ const ApproveFeatureReqCom = ({
                     <tr>
                       <th scope="col">Feature Title</th>
                       <th scope="col">Feature Description</th>
-                      <th scope="col">Product Name</th>
+                      <th scope="col">Category Name</th>
                       <th scope="col">Created On</th>
                       <th scope="col">Action</th>
                     </tr>

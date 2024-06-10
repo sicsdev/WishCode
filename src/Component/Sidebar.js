@@ -149,7 +149,7 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
                 </div>
                 <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/products")}>
                   <i className="fa fa-product-hunt" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
-                  &nbsp;<span className="custom-sidebar-span">{menus?.product ? menus?.product : "Products"}</span>
+                  &nbsp;<span className="custom-sidebar-span">{menus?.product ? menus?.product : "Category"}</span>
                 </div>
                 <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/company/all-users")}>
                   <i className="fa fa-users" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
@@ -196,7 +196,7 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
                 </div>
                 <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/products")}>
                   <i className="fa fa-product-hunt" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
-                  &nbsp;<span className="custom-sidebar-span">Products</span>
+                  &nbsp;<span className="custom-sidebar-span">Category</span>
                 </div>
                 <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/features")}>
                   <i className="fa fa-address-book-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
@@ -223,7 +223,7 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
               <>
                 <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/products")}>
                   <i className="fa fa-product-hunt" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
-                  &nbsp;<span className="custom-sidebar-span">Products</span>
+                  &nbsp;<span className="custom-sidebar-span">Category</span>
                 </div>
                 <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/features")}>
                   <i className="fa fa-address-book-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>

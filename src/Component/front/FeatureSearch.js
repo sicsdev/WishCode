@@ -38,7 +38,7 @@ const FeatureSearch = (props) => {
                     <tr>
                       <th scope="col">Feature Wishes</th>
                       <th scope="col">Company</th>
-                      <th scope="col">Product</th>
+                      <th scope="col">Category</th>
                       <th scope="col">Submitted By</th>
                     </tr>
                   </thead>
@@ -127,7 +127,7 @@ const FeatureSearch = (props) => {
                   <tr>
                     <th scope="col">Feature Wishes</th>
                     <th scope="col">Company</th>
-                    <th scope="col">Product</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Submitted By</th>
                     <th scope="col"> Vote</th>
                   </tr>

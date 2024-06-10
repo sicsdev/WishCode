@@ -172,13 +172,13 @@ const Products = () => {
             <div className="container">
               <div className="dashboard card">
                 <div className="card-header">
-                  <h5 className="text-white text-uppercase">Products</h5>
+                  <h5 className="text-white text-uppercase">Category</h5>
                 </div>
                 <div className="card-body">
                   <div className="row">
                     <div className="col-md-12">
                       <div className="input-form">
-                        <label>Search {localStorage.getItem('role') == 3 || localStorage.getItem('role') == 2 ? "Products" : "Companies"}</label>
+                        <label>Search {localStorage.getItem('role') == 3 || localStorage.getItem('role') == 2 ? "Category" : "Companies"}</label>
                         <input
                           type="search"
                           className="form-control"
@@ -240,7 +240,7 @@ const Products = () => {
                           <div className="product-list">
                             <div className="row">
                               {element.products.length ?
-                                <p className="search_heading">Products</p> : ""}
+                                <p className="search_heading">Category</p> : ""}
                               {element.products.map((product, index) => (
                                 <div className="col-md-3" key={index}>
                                   <span className="d-block py-3 text-uppercase company-nameing custom-product-span">

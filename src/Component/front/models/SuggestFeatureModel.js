@@ -203,7 +203,7 @@ const SuggestFeatureModel = (props) => {
                     ></textarea>
                   </div>
                   <div className="input-form">
-                    <label> Product Name</label>
+                    <label> Category Name</label>
                     <input
                       type="text"
                       className="form-control"

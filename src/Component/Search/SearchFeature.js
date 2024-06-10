@@ -22,7 +22,7 @@ const SearchFeature = (props) => {
                     <tr>
                       <th>Title</th>
                       <th>Feedbacks</th>
-                      <th>Product Name</th>
+                      <th>Category Name</th>
                       <th>Votes</th>
                       <th>Created On</th>
                     </tr>

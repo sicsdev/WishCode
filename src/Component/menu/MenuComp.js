@@ -180,7 +180,7 @@ const MenuComp = () => {
                                                                 Company Type
                                                             </th>
                                                             <th scope="col" className="text-center">
-                                                                Products
+                                                                Category Name
                                                             </th>
                                                             <th scope="col" className="text-center">
                                                                 Features
@@ -281,7 +281,7 @@ const MenuComp = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="Products Menu"
+                                        placeholder="Category Menu"
                                         value={productMenu}
                                         onChange={(e) => setProductMenu(e.target.value)}
                                     />
