@@ -1,14 +1,76 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SuggestFeatureModel from "./models/SuggestFeatureModel";
 import Loader from "../Loader";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import axiosConfig from "../../base_url/config";
 
 const FeatureSearch = (props) => {
   const [showModel, setShowModel] = useState(false);
   const handleClose = () => setShowModel(false);
   const [loader, setLoader] = useState(false);
+  const [ipAddress, setIpAddress] = useState("");
+  const [featureWishes, setFeatureWishes] = useState([]);
+  const userRole = localStorage.getItem("role");
+  const tokens = localStorage.getItem("token");
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${tokens}`,
+    },
+  };
+  useEffect(() => {
+    getIpAddrees();
+    setFeatureWishes(props.featureWishes); // Initialize featureWishes state
+  }, [props.featureWishes]);
 
+  const getIpAddrees = async () => {
+    const res = await axios.get("https://geolocation-db.com/json/");
+    setIpAddress(res.data.IPv4);
+  };
+
+  const handleAnonymousVote = async (e, type, featureId) => {
+    e.preventDefault();
+    if (type == "anonymous") {
+      type = "anonymous";
+    } else {
+      type = "";
+    }
+    try {
+      const { data } = await axiosConfig.post(
+        "/anonymous/vote/store",
+        {
+          voteable_id: featureId,
+          type: type,
+          ipAddress: ipAddress,
+        },
+        config
+      );
+      toast.success(data.message, {
+        position: "bottom-right",
+        autoClose: 2000,
+      });
+      // Update featureWishes state with the new vote type
+      setFeatureWishes(prevState =>
+        prevState.map(feature =>
+          feature.id === featureId ? { ...feature, type: type } : feature
+        )
+      );
+
+    } catch (error) {
+      return toast.error(
+        `${error.response.data.message && error.response.data.message.type
+          ? error.response.data.message.type[0]
+          : error.response.data.message
+        }`,
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+        }
+      );
+    }
+  };
   return (
     <div className="featured-search section-gap">
       <div className="container">
@@ -16,7 +78,7 @@ const FeatureSearch = (props) => {
           <input
             type="search"
             className="form-control py-3"
-            placeholder="Seach.."
+            placeholder="Search.."
             value={props.searchValue}
             onChange={(e) => {
               props.setSearchValue(e.target.value);
@@ -40,6 +102,9 @@ const FeatureSearch = (props) => {
                       <th scope="col">Company</th>
                       <th scope="col">Category</th>
                       <th scope="col">Submitted By</th>
+                      {userRole ? "" :
+                        <> <th scope="col">Vote</th></>
+                      }
                     </tr>
                   </thead>
                   <tbody>
@@ -54,6 +119,25 @@ const FeatureSearch = (props) => {
                           </td>
                           <td>{feature.product_name}</td>
                           <td>{feature.user_name}</td>
+                          {userRole ? "" :
+                            <>
+                              <td>
+                                <label className="custom-radio">
+                                  <i className="fa fa-thumbs-up"
+                                    style={{ color: feature.type == "anonymous" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                                    aria-hidden="true">
+                                  </i>
+                                  <input
+                                    type="radio"
+                                    name={`vote_type_${feature?.id}`}
+                                    checked={feature?.type === "anonymous"}
+                                    value="anonymous"
+                                    onChange={(e) => handleAnonymousVote(e, "anonymous", feature?.id)}
+                                  />
+                                </label>
+                              </td>
+                            </>
+                          }
                         </tr>
                       ))
                     ) : (
@@ -99,7 +183,7 @@ const FeatureSearch = (props) => {
                       ))
                     ) : (
                       <tr>
-                       No Result Found... 
+                        No Result Found...
                       </tr>
                     )}
                   </tbody>
@@ -129,11 +213,13 @@ const FeatureSearch = (props) => {
                     <th scope="col">Company</th>
                     <th scope="col">Category</th>
                     <th scope="col">Submitted By</th>
-                    <th scope="col"> Vote</th>
+                    {userRole ? "" :
+                      <> <th scope="col">Vote</th></>
+                    }
                   </tr>
                 </thead>
                 <tbody>
-                  {props.featureWishes?.map((feature, key) => (
+                  {featureWishes?.map((feature, key) => (
                     <tr key={key}>
                       <td>{feature.title}</td>
                       <td>
@@ -143,7 +229,25 @@ const FeatureSearch = (props) => {
                       </td>
                       <td>{feature.product_name}</td>
                       <td>{feature.user_name}</td>
-                      <td className="fa fa-thumbs-o-up"  style={{ padding: "30px" }}></td>
+                      {userRole ? "" :
+                        <>
+                          <td>
+                            <label className="custom-radio">
+                              <i className="fa fa-thumbs-up"
+                                style={{ color: feature.type == "anonymous" ? '#aa504f' : 'rgb(155, 155, 155)', fontSize: "36px" }}
+                                aria-hidden="true">
+                              </i>
+                              <input
+                                type="radio"
+                                name={`vote_type_${feature?.id}`}
+                                checked={feature?.type === "anonymous"}
+                                value="anonymous"
+                                onClick={(e) => handleAnonymousVote(e, feature?.type === "anonymous" ? "" : "anonymous", feature?.id)}
+                              />
+                            </label>
+                          </td>
+                        </>
+                      }
                     </tr>
                   ))}
                 </tbody>

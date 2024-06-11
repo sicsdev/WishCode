@@ -12,6 +12,7 @@ const CountVoteModel = ({
   voteFilterVal,
   yesVoteCount,
   noVoteCount,
+  anonymousVoteCount,
   optionalVoteCount,
   setVoteFilterVal,
 }) => {
@@ -94,11 +95,13 @@ const CountVoteModel = ({
                 <div className="voting-option mb-2">
                   <label className="custom-radio">
                   Anonymous
-                    <input
+                  <input
                       type="radio"
                       name="vote_count_type"
-                      checked={''}
-                      onChange={''}
+                      checked={voteFilterVal == "anonymous_user"}
+                      onChange={(e) => {
+                        setVotCountFilter("anonymous_user");
+                      }}
                     />
                     <span className="checkmark"></span>
                   </label>
@@ -156,7 +159,7 @@ const CountVoteModel = ({
                   style={{ height: "144px" }}
 
                 >
-                  <h4 className="mb-0">0</h4>
+                  <h4 className="mb-0">{anonymousVoteCount}</h4>
                   <span className="no-of-vote-text text-white"
                     style={{ position: "absolute", bottom: "17px" }}
                   >

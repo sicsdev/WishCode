@@ -52,6 +52,7 @@ const SingleFeature = () => {
   const closeReleaseCountModal = () => setShowReleaseCountModal(false);
   const [yesReleaseVoteCount, setYesReleaseVoteCount] = useState("");
   const [noReleaseVoteCount, setNoReleaseVoteCount] = useState("");
+  const [anonymousVoteCount, setAnonymousVoteCount] = useState("");
   const [partialReleaseVoteCount, setPartialReleaseVoteCount] = useState("");
   const [releaseVoteFilterVal, setReleaseVoteFilterVal] = useState("all");
   const [userPermissions, setUserPermissions] = useState([]);
@@ -197,16 +198,19 @@ const SingleFeature = () => {
   };
 
   const viewVoteCount = async (comment_id, vote_type, filter_type) => {
+    const res = await axios.get("https://geolocation-db.com/json/");
+    const ipAddress=res.data.IPv4;
     setModalVotableId(comment_id);
     setModelVoteType(vote_type);
     let response = await getRequestApi(
-      `/company/vote/vote-type-count/${vote_type}/${comment_id}/${filter_type}`
+      `/company/vote/vote-type-count/${vote_type}/${comment_id}/${filter_type}/${ipAddress}`
     );
     if (response) {
       setshowModal(true);
-      setYesVoteCount(response.data.data.yes);
-      setNoVoteCount(response.data.data.no);
-      setOptionalVoteCount(response.data.data.optional);
+      setYesVoteCount(response?.data.data.yes);
+      setNoVoteCount(response?.data.data.no);
+      setOptionalVoteCount(response?.data?.data?.optional);
+      setAnonymousVoteCount(response?.data?.data?.anonymous);
       setVoteFilterVal(filter_type);
     }
   };
@@ -1382,8 +1386,10 @@ const SingleFeature = () => {
         voteFilterVal={voteFilterVal}
         yesVoteCount={yesVoteCount}
         noVoteCount={noVoteCount}
+        anonymousVoteCount={anonymousVoteCount}
         optionalVoteCount={optionalVoteCount}
         setVoteFilterVal={setVoteFilterVal}
+        
       />
 
       <Modal show={showReleaseModal} onHide={closeReleaseModal}>
@@ -1527,6 +1533,22 @@ const SingleFeature = () => {
                       checked={releaseVoteFilterVal == "end_user"}
                       onChange={(e) => {
                         setReleaseVoteCountFilter("end_user");
+                      }}
+                    />
+                    <span className="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="voting-option mb-2">
+                  <label className="custom-radio">
+                    End User
+                    <input
+                      type="radio"
+                      name="vote_count_type"
+                      checked={releaseVoteFilterVal == "anonymous_user"}
+                      onChange={(e) => {
+                        setReleaseVoteCountFilter("anonymous_user");
                       }}
                     />
                     <span className="checkmark"></span>

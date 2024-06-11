@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../Component/Loader";
 import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
   const [loader, setloader] = useState(false);
@@ -21,8 +22,8 @@ const Home = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [isCompanyFilter, setIsCompanyFilter] = useState(false);
-  const [showcaseSection,setShowCaseSection]=useState(false)
-
+  const [showcaseSection, setShowCaseSection] = useState(false)
+  const [ipAddress, setIpAddress] = useState("");
   const [searchParams] = useSearchParams();
   let companyName = searchParams.get("company");
   let postStatus = searchParams.get("status");
@@ -40,7 +41,8 @@ const Home = () => {
       webApiUrl = `/front/dashboard?company_name=${companyName}&status=${postStatus}`;
     } else {
       setIsCompanyFilter(false);
-      webApiUrl = `/front/dashboard`;
+      const res = await axios.get("https://geolocation-db.com/json/");
+      webApiUrl = `/front/dashboard?ipAddress=${res?.data?.IPv4}`;
     }
     let response = await getRequestApi(webApiUrl);
     if (response) {
@@ -66,8 +68,9 @@ const Home = () => {
   };
 
   const getFeaturesWishes = async (keyword) => {
+    const res = await axios.get("https://geolocation-db.com/json/");
     let response = await getRequestApi(
-      `/front/feature_wishes?keyword=${keyword}&company_slug=${companyName}`
+      `/front/feature_wishes?keyword=${keyword}&company_slug=${companyName}&ipAddress=${res?.data?.IPv4}`
     );
 
     if (response) {

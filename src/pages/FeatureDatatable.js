@@ -33,7 +33,6 @@ const FeatureDatatable = () => {
     }
   };
   const handeCompleteToggle = (featureType) => {
-    console.log(featureType);
     getAllfeatureData(featureType);
   }
   const userRole = localStorage.getItem('role')
