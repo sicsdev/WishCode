@@ -10,6 +10,8 @@ import { useParams } from "react-router";
 import { getRequestApi } from "../helper/Helper";
 import { useColor } from "../commanapi/ColorProvider";
 import { stripHtml } from "../helper/Helper";
+import DefaultPieChartImage from "../Component/default/DefaultPieChartImage";
+import DefaultPrivatePieChartImage from "../Component/default/DefaultPrivatePieChartImage";
 
 const FeatureChartReport = () => {
   const { id } = useParams();
@@ -27,7 +29,7 @@ const FeatureChartReport = () => {
   const [ProductName, setProductName] = useState('');
   const [description, setDescription] = useState('');
   const [developmentUrl, setDevelopmentUrl] = useState('');
-  const {isToggleOpen,toggleMenu} =useColor();
+  const { isToggleOpen, toggleMenu } = useColor();
   useEffect(() => {
     getFeatureReportData();
   }, []);
@@ -78,13 +80,13 @@ const FeatureChartReport = () => {
       ]);
     }
   };
-
+  console.log("publicVotes", publicVotes)
   return (
     <>
       <div className="main-body">
-        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
+        <Sidebar isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
         <div className="body-wrapper" id="body-content">
-          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu}/>
+          <Header isToggleOpen={isToggleOpen} toggleMenu={toggleMenu} />
           <section className="body-content-inner">
             <div className="container">
               <div className="dashboard card">
@@ -101,26 +103,27 @@ const FeatureChartReport = () => {
                 </div>
                 <div className="card-body">
                   <div className="row">
-                    <div className="col-md-6">
-                      {publicVotes.length !== 0 ? (
+                    <div className="col-md-6" >
+                      {publicVotes.every(vote => vote === 0) ? (
+                        <DefaultPieChartImage />
+                      ) : (
                         <PieChartCom
                           votesData={publicVotes}
                           label={publicVoteLables}
                           title="Public Vote Chart"
+                          style={{padding: "67px"}}
                         />
-                      ) : (
-                        ""
                       )}
                     </div>
-                    <div className="col-md-6">
-                      {privateVotes.length !== 0 ? (
+                    <div className="col-md-6" >
+                      {privateVotes.every(vote => vote === 0) ? (
+                        <DefaultPrivatePieChartImage />
+                      ) : (
                         <PieChartCom
                           votesData={privateVotes}
                           label={publicVoteLables}
                           title="Private Vote Chart"
                         />
-                      ) : (
-                        ""
                       )}
                     </div>
                     <div className="col-md-12 mt-5">

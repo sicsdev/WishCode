@@ -43,7 +43,7 @@ const PieChartCom = (props) => {
     <>
       <ReactApexChart
         options={options}
-        series={props.votesData}
+        series={props?.votesData}
         type="pie"
         width="380"
       />

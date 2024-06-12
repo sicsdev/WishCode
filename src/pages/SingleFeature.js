@@ -199,19 +199,25 @@ const SingleFeature = () => {
 
   const viewVoteCount = async (comment_id, vote_type, filter_type) => {
     const res = await axios.get("https://geolocation-db.com/json/");
-    const ipAddress=res.data.IPv4;
+    const ipAddress = res.data.IPv4;
     setModalVotableId(comment_id);
     setModelVoteType(vote_type);
+    setloader(true)
     let response = await getRequestApi(
       `/company/vote/vote-type-count/${vote_type}/${comment_id}/${filter_type}/${ipAddress}`
     );
+
     if (response) {
-      setshowModal(true);
-      setYesVoteCount(response?.data.data.yes);
-      setNoVoteCount(response?.data.data.no);
-      setOptionalVoteCount(response?.data?.data?.optional);
-      setAnonymousVoteCount(response?.data?.data?.anonymous);
-      setVoteFilterVal(filter_type);
+      setTimeout(() => {
+        setshowModal(true);
+        setYesVoteCount(response?.data.data.yes);
+        setNoVoteCount(response?.data.data.no);
+        setOptionalVoteCount(response?.data?.data?.optional);
+        setAnonymousVoteCount(response?.data?.data?.anonymous);
+        setVoteFilterVal(filter_type);
+        setloader(false)
+      }, 500)
+
     }
   };
 
@@ -223,9 +229,9 @@ const SingleFeature = () => {
     );
     if (response) {
       setShowReleaseCountModal(true);
-      setYesReleaseVoteCount(response.data.data.yes);
-      setNoReleaseVoteCount(response.data.data.no);
-      setPartialReleaseVoteCount(response.data.data.partial);
+      setYesReleaseVoteCount(response?.data?.data?.yes);
+      setNoReleaseVoteCount(response?.data?.data?.no);
+      setPartialReleaseVoteCount(response?.data?.data?.partial);
       setReleaseVoteFilterVal(filter_type);
     }
   };
@@ -575,7 +581,7 @@ const SingleFeature = () => {
                                 to={`/dashboard/product/${featureData.product_id}`}
                               >
                                 <span className="font-weight-bold custom-span">
-                               Category Name:
+                                  Category Name:
                                 </span>{" "}
                                 {featureData?.product_name}
                               </Link>
@@ -1389,7 +1395,7 @@ const SingleFeature = () => {
         anonymousVoteCount={anonymousVoteCount}
         optionalVoteCount={optionalVoteCount}
         setVoteFilterVal={setVoteFilterVal}
-        
+
       />
 
       <Modal show={showReleaseModal} onHide={closeReleaseModal}>
