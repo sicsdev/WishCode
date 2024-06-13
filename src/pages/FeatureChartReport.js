@@ -103,7 +103,7 @@ const FeatureChartReport = () => {
                 </div>
                 <div className="card-body">
                   <div className="row">
-                    <div className="col-md-6" >
+                    <div className="col-md-6" style={{ display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }}>
                       {publicVotes.every(vote => vote === 0) ? (
                         <DefaultPieChartImage />
                       ) : (
@@ -111,11 +111,11 @@ const FeatureChartReport = () => {
                           votesData={publicVotes}
                           label={publicVoteLables}
                           title="Public Vote Chart"
-                          style={{padding: "67px"}}
+                          
                         />
                       )}
                     </div>
-                    <div className="col-md-6" >
+                    <div className="col-md-6" style={{ display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center" }}>
                       {privateVotes.every(vote => vote === 0) ? (
                         <DefaultPrivatePieChartImage />
                       ) : (
