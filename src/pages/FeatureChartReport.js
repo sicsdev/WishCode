@@ -111,7 +111,7 @@ const FeatureChartReport = () => {
                           votesData={publicVotes}
                           label={publicVoteLables}
                           title="Public Vote Chart"
-                          
+
                         />
                       )}
                     </div>

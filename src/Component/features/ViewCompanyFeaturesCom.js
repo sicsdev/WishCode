@@ -12,6 +12,7 @@ import AddFeatureModel from "../models/AddFeatureModel";
 import EditFeatureModel from "../models/EditFeatureModel";
 import swal from "sweetalert";
 import { stripHtml } from "../../helper/Helper";
+import AssignFeatureModel from "../models/AssignFeatureModel";
 const ViewCompanyFeaturesCom = ({
   totalCompanyFeatures,
   getPageData,
@@ -20,14 +21,15 @@ const ViewCompanyFeaturesCom = ({
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleCloseModal = () => setshowModal(false);
+  const handleCloseAssigned = () => setshowAssignedModal(false);
   const [showModal, setshowModal] = useState(false);
+  const [showAssigned, setshowAssignedModal] = useState(false);
   const [featureId, setfeatureId] = useState();
   const [selectedFile, setselectedFile] = useState(null);
   const [featureTitle, setfeatureTitle] = useState("");
   const [featureDescription, setfeatureDescription] = useState("");
   const [loader, setloader] = useState(false);
   const [productName, setProductName] = useState("");
-
   const [searchFeature, setSearchFeature] = useState([]);
 
   useEffect(() => {
@@ -96,6 +98,12 @@ const ViewCompanyFeaturesCom = ({
     }
   }
 
+
+  //for feature assigned 
+  const assignedFeatureToUser = (featureId) => {
+    setshowAssignedModal(true);
+    setfeatureId(featureId)
+  }
   return (
     <>
       <div class="row justify-content-end">
@@ -168,6 +176,7 @@ const ViewCompanyFeaturesCom = ({
                         ) : (
                           ""
                         )}
+                        
                         <Link
                           to={`/wish/${feature.id}`}
                           className="text-secondary"
@@ -189,6 +198,7 @@ const ViewCompanyFeaturesCom = ({
                         </Link>
                       </div>
                     </div>
+                    
                   </Link>
 
                   <div className="select">
@@ -218,6 +228,20 @@ const ViewCompanyFeaturesCom = ({
                         data-toggle="tooltip"
                         data-placement="top"
                         title="Delete"
+                      ></i>
+                    </a>
+                    <a
+                      href="javascript:void(0)"
+                      onClick={(e) => {
+                        assignedFeatureToUser(feature?.id)
+                      }}
+                    >
+                      <i
+                        className="fa fa-exchange"
+                        aria-hidden="true"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Edit"
                       ></i>
                     </a>
                   </div>
@@ -261,6 +285,12 @@ const ViewCompanyFeaturesCom = ({
         setfeatureId={setfeatureId}
         setProductName={setProductName}
         productName={productName}
+      />
+      <AssignFeatureModel
+        showAssigned={showAssigned}
+        handleCloseAssigned={handleCloseAssigned}
+        setshowAssignedModal={setshowAssignedModal}
+        featureId={featureId}
       />
       {loader === true ? <Loader /> : <></>}
       <ToastContainer />
