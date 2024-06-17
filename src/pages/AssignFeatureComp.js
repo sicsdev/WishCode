@@ -1,8 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../Component/Sidebar'
 import Header from '../Component/Header'
+import axiosConfig from '../base_url/config';
 
 const AssignFeatureComp = () => {
+    const [assignFeature, setAssignFeature] = useState("");
+    const tokens = localStorage.getItem("token");
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${tokens}`,
+        },
+    };
+    useEffect(() => {
+        getAllAssignFeature();
+    }, "")
+    const getAllAssignFeature = async () => {
+        axiosConfig.get("/get/assign/company_user/features", config)
+            .then((response) => {
+                // console.log(response?.data?.data, "response");
+                setAssignFeature(response?.data?.data);
+            })
+    }
+    const stripHtmlTags = (html) => {
+        if (!html) return "";
+        return html.replace(/<\/?[^>]+(>|$)/g, "");
+    };
     return (
         <div>
             <div className="main-body">
@@ -18,11 +41,33 @@ const AssignFeatureComp = () => {
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="table-responsive custom-table">
-                                                <table className="table table-hover">
-                                                    <tbody>
-                                                        <div className='text-center'>No Assigned Feature found</div>
-                                                    </tbody>
-                                                </table>
+                                                {assignFeature && assignFeature.length > 0 ? (
+                                                    <table className="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col" className="text-center">
+                                                                    Feature Title
+                                                                </th>
+                                                                <th scope="col" className="text-center">
+                                                                    Description
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {assignFeature.map((feature) => (
+
+                                                                <tr key={feature?.id}>
+                                                                    <td className="text-center">{feature?.title}</td>
+                                                                    <td className="text-center">{stripHtmlTags(feature?.content)}</td>
+                                                                </tr>
+
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                                ) : (
+                                                    <div className='text-center'>No Assigned Feature found</div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

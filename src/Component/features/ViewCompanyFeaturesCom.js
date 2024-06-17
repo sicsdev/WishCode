@@ -176,10 +176,12 @@ const ViewCompanyFeaturesCom = ({
                         ) : (
                           ""
                         )}
-                        
+                        <span className="font-weight-bold custom-span p-1">
+                          Assigned User :
+                        </span><span className="text-secondary">N/A</span>
                         <Link
                           to={`/wish/${feature.id}`}
-                          className="text-secondary"
+                          className="text-secondary p-2"
                         >
                           <i
                             className="fa fa-comments-o"
@@ -195,10 +197,12 @@ const ViewCompanyFeaturesCom = ({
                         >
                           <i className="fa fa-arrow-up" aria-hidden="true"></i>{" "}
                           {feature.post_votes_count}
+
                         </Link>
+
                       </div>
                     </div>
-                    
+
                   </Link>
 
                   <div className="select">
