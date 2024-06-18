@@ -31,7 +31,7 @@ const ViewCompanyFeaturesCom = ({
   const [loader, setloader] = useState(false);
   const [productName, setProductName] = useState("");
   const [searchFeature, setSearchFeature] = useState([]);
-
+  const [assignUserId,setAssignUserId]=useState(""); 
   useEffect(() => {
     setSearchFeature(totalCompanyFeatures);
   }, [totalCompanyFeatures])
@@ -100,9 +100,10 @@ const ViewCompanyFeaturesCom = ({
 
 
   //for feature assigned 
-  const assignedFeatureToUser = (featureId) => {
+  const assignedFeatureToUser = (featureId,userId) => {
     setshowAssignedModal(true);
     setfeatureId(featureId)
+    setAssignUserId(userId)
   }
   return (
     <>
@@ -178,6 +179,9 @@ const ViewCompanyFeaturesCom = ({
                         )}
                         <span className="font-weight-bold custom-span p-1">
                           Assigned User :
+                        </span><span className="text-secondary">Unassigned</span>
+                        <span className="font-weight-bold custom-span p-2">
+                          Team User :
                         </span><span className="text-secondary">N/A</span>
                         <Link
                           to={`/wish/${feature.id}`}
@@ -237,7 +241,7 @@ const ViewCompanyFeaturesCom = ({
                     <a
                       href="javascript:void(0)"
                       onClick={(e) => {
-                        assignedFeatureToUser(feature?.id)
+                        assignedFeatureToUser(feature?.id,feature?.user_assign_id)
                       }}
                     >
                       <i
@@ -295,6 +299,7 @@ const ViewCompanyFeaturesCom = ({
         handleCloseAssigned={handleCloseAssigned}
         setshowAssignedModal={setshowAssignedModal}
         featureId={featureId}
+        assignUserId={assignUserId}
       />
       {loader === true ? <Loader /> : <></>}
       <ToastContainer />
