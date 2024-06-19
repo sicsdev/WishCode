@@ -15,9 +15,8 @@ const AssignFeatureModel = ({
     const [assignedUser, setAssignedUser] = useState([]);
     const [selectedAssigenedUserId, setSelectedAssigenedUserId] = useState('');
     const [loader, setloader] = useState(false);
-    const [selectAssignTo, setSelectAssignTo] = useState("");
     const [assignType, setAssignType] = useState("");
-    const [teamData, setTeamData] = useState("");
+    const [teamData, setTeamData] = useState([]); // Initialize as an empty array
     const tokens = localStorage.getItem("token");
     const config = {
         headers: {
@@ -25,6 +24,7 @@ const AssignFeatureModel = ({
             Authorization: `Bearer ${tokens}`,
         },
     };
+
     useEffect(() => {
         getAllCompanyUserList();
         getAllTeams();
@@ -45,7 +45,9 @@ const AssignFeatureModel = ({
     }
 
     const handleAssignedFeature = (AssignedId) => {
-        setSelectedAssigenedUserId(AssignedId);
+        const [type, id] = AssignedId.split(":");
+        setAssignType(type);
+        setSelectedAssigenedUserId(id);
     }
 
     const handleSubmit = async (e) => {
@@ -54,9 +56,9 @@ const AssignFeatureModel = ({
         const formData = new FormData();
         formData.append("select_feature_id", featureId);
         formData.append('assign_type', assignType);
-        if (assignType == "user") {
+        if (assignType === "user") {
             formData.append("select_user_id", selectedAssigenedUserId);
-        } else if (assignType == "team") {
+        } else if (assignType === "team") {
             formData.append("select_team_id", selectedAssigenedUserId);
         }
         try {
@@ -67,7 +69,6 @@ const AssignFeatureModel = ({
             );
             setloader(false);
             setshowAssignedModal(false);
-            setSelectAssignTo("0");
             toast.success(`Assigned ${assignType} Successfully!`, {
                 position: "bottom-right",
                 autoClose: 2000,
@@ -78,13 +79,19 @@ const AssignFeatureModel = ({
         }
 
     }
+
     const getAllTeams = () => {
         setloader(true);
         axiosConfig
             .get("/get/team", config)
             .then((response) => {
                 setloader(false);
-                setTeamData(response?.data?.data);
+                const data = response?.data?.data;
+                if (Array.isArray(data)) {
+                    setTeamData(data);
+                } else {
+                    setTeamData([]);
+                }
             })
             .catch((error) => {
                 setloader(false);
@@ -94,17 +101,11 @@ const AssignFeatureModel = ({
                 });
             });
     }
-    //for set the select the assign is user or team dropdown
-    const handleSelectAssignTo = (selectType) => {
-        setSelectAssignTo(selectType)
-        console.log(selectType)
-        setAssignType(selectType);
-    }
 
     const closeModalHandler = () => {
         setshowAssignedModal(false);
-        setSelectAssignTo("0");
     };
+
     return (
         <div>
             <Modal show={showAssigned} onHide={handleCloseAssigned} size="">
@@ -116,55 +117,26 @@ const AssignFeatureModel = ({
                 <form onSubmit={handleSubmit}>
                     <Modal.Body>
                         <div className="input-form">
-                            <label>Select User / Team </label>
+                            <label>Select User / Team</label>
                             <select
                                 className="form-control"
-                                onChange={(e) => handleSelectAssignTo(e.target.value)}
-                                value={selectAssignTo}
+                                onChange={(e) => handleAssignedFeature(e.target.value)}
+                                value={`${assignType}:${selectedAssigenedUserId}`}
                                 required
                             >
-                                <option value="0">Please Select</option>
-                                <option value="user">Company User</option>
-                                <option value="team">Company Team</option>
+                                <option value="">Select options</option>
+                                {assignedUser.map(user => (
+                                    <option key={user.id} value={`user:${user.id}`}>
+                                        {user.name}
+                                    </option>
+                                ))}
+                                {Array.isArray(teamData) && teamData.map(team => (
+                                    <option key={team.id} value={`team:${team.id}`}>
+                                        {team.name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
-                        {selectAssignTo === "user" ? (
-                            <div className="input-form">
-                                <label>Select User </label>
-                                <select
-                                    className="form-control"
-                                    onChange={(e) => handleAssignedFeature(e.target.value)}
-                                    value={selectedAssigenedUserId}
-                                    required
-                                >
-                                    <option value="">Select Company User</option>
-                                    {assignedUser.map(user => (
-                                        <option key={user.id} value={user.id}>
-                                            {user.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        ) : selectAssignTo === "team" ? (
-                            <div className="input-form">
-                                <label>Select Team </label>
-                                <select
-                                    className="form-control"
-                                    onChange={(e) => handleAssignedFeature(e.target.value)}
-                                    value={selectedAssigenedUserId}
-                                    required
-                                >
-                                    <option value="">Select Team User</option>
-                                    {teamData.map(team => (
-                                        <option key={team.id} value={team.id}>
-                                            {team.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        ) : null}
-
-
                     </Modal.Body>
                     <Modal.Footer>
                         <button type="submit" className="btn btn-lg-primary">

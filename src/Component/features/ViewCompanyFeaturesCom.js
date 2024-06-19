@@ -31,7 +31,7 @@ const ViewCompanyFeaturesCom = ({
   const [loader, setloader] = useState(false);
   const [productName, setProductName] = useState("");
   const [searchFeature, setSearchFeature] = useState([]);
-  const [assignUserId,setAssignUserId]=useState(""); 
+  const [assignUserId, setAssignUserId] = useState("");
   useEffect(() => {
     setSearchFeature(totalCompanyFeatures);
   }, [totalCompanyFeatures])
@@ -100,11 +100,12 @@ const ViewCompanyFeaturesCom = ({
 
 
   //for feature assigned 
-  const assignedFeatureToUser = (featureId,userId) => {
+  const assignedFeatureToUser = (featureId, userId) => {
     setshowAssignedModal(true);
     setfeatureId(featureId)
     setAssignUserId(userId)
   }
+  
   return (
     <>
       <div class="row justify-content-end">
@@ -178,11 +179,10 @@ const ViewCompanyFeaturesCom = ({
                           ""
                         )}
                         <span className="font-weight-bold custom-span p-1">
-                          Assigned User :
-                        </span><span className="text-secondary">Unassigned</span>
-                        <span className="font-weight-bold custom-span p-2">
-                          Team User :
-                        </span><span className="text-secondary">N/A</span>
+                          Assigned to :
+                          
+                        </span><span className="text-secondary">{feature?.assign_feature?.team?.name ?  feature?.assign_feature?.team?.name : feature?.assign_feature?.user?.name ? feature?.assign_feature?.user?.name :"Unassigned"}</span>
+
                         <Link
                           to={`/wish/${feature.id}`}
                           className="text-secondary p-2"
@@ -241,7 +241,7 @@ const ViewCompanyFeaturesCom = ({
                     <a
                       href="javascript:void(0)"
                       onClick={(e) => {
-                        assignedFeatureToUser(feature?.id,feature?.user_assign_id)
+                        assignedFeatureToUser(feature?.id, feature?.user_assign_id)
                       }}
                     >
                       <i
