@@ -47,7 +47,6 @@ const Features = () => {
   const handeCompleteToggle = (featureType) => {
     getAllCompanyFeatures(featureType);
   }
-  console.log(totalCompanyFeatures,"toalfature")
   return (
     <>
       <div className="main-body">

@@ -56,12 +56,10 @@ const AssignFeatureComp = () => {
                                                         </thead>
                                                         <tbody>
                                                             {assignFeature.map((feature) => (
-
                                                                 <tr key={feature?.id}>
-                                                                    <td className="text-center">{feature?.title}</td>
-                                                                    <td className="text-center">{stripHtmlTags(feature?.content)}</td>
+                                                                    <td className="text-center">{feature?.post?.title}</td>
+                                                                    <td className="text-center">{stripHtmlTags(feature?.post?.content)}</td>
                                                                 </tr>
-
                                                             ))}
                                                         </tbody>
                                                     </table>

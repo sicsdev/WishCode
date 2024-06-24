@@ -249,7 +249,7 @@ const ViewCompanyFeaturesCom = ({
                         aria-hidden="true"
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="Edit"
+                        title="Assigned Feature"
                       ></i>
                     </a>
                   </div>
