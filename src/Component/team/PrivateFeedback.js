@@ -4,10 +4,12 @@ import Sidebar from '../Sidebar';
 import Header from '../Header';
 import { Link } from 'react-router-dom';
 import axiosConfig from '../../base_url/config';
+import Loader from 'react-spinners/SyncLoader';
 
 const PrivateFeedback = () => {
     const { isToggleOpen, toggleMenu } = useColor();
     const [teams, setTeams] = useState([]);
+    const [loader,setloader]=useState(false);
     const currentId = localStorage.getItem('currentId');
     const tokens = localStorage.getItem("token");
     const config = {
@@ -23,8 +25,10 @@ const PrivateFeedback = () => {
 
     const getTeams = async (currentId) => {
         try {
+            setloader(true);
             const { data } = await axiosConfig.get(`/get/leader/teams?current_id=${currentId}`, config);
             setTeams(data?.data || []);
+            setloader(false);
         } catch (error) {
             console.log(error);
         }
@@ -109,9 +113,13 @@ const PrivateFeedback = () => {
                                 </div>
                             </div>
                         </div>
+                        {loader === true ? <Loader /> : <></>}
                     </section>
+                    
                 </Sidebar>
+                
             </div>
+            
         </div>
     );
 };

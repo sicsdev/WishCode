@@ -4,6 +4,7 @@ import axiosConfig from '../../base_url/config';
 import Sidebar from '../Sidebar';
 import Header from '../Header';
 import { useColor } from '../../commanapi/ColorProvider';
+import Loader from 'react-spinners/SyncLoader';
 
 const SendFeedback = () => {
     const { id } = useParams();
@@ -11,6 +12,7 @@ const SendFeedback = () => {
     const [feedback, setFeedback] = useState('');
     const { isToggleOpen, toggleMenu } = useColor();
     const token = localStorage.getItem('token');
+    const [loader,setLoader]=useState(false);
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -24,8 +26,10 @@ const SendFeedback = () => {
 
     const getTeamMembers = async (id) => {
         try {
+            setLoader(true);
             const { data } = await axiosConfig.get(`/get/single/team/${id}`, config);
             setTeamMembers(data?.data?.users || []);
+            setLoader(false);
         } catch (error) {
             console.log(error);
         }
@@ -84,6 +88,7 @@ const SendFeedback = () => {
                                         </div>
                                     </div>
                                 </div>
+                                {loader == true?<Loader/>:""}
                             </div>
                         </div>
                     </section>
