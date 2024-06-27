@@ -19,6 +19,7 @@ const TeamComp = () => {
     const [totalCompanyUsers, setTotalCompanyUsers] = useState([]);
     const [teamName, setTeamName] = useState('');
     const [selectedMembers, setSelectedMembers] = useState([]);
+    const [selectLeader, setSelectedLeader] = useState("");
     const [teamMember, setTeamMembers] = useState();
     const [selectedTeam, setSelectedTeam] = useState(null);
     const [teamId, setTeamId] = useState("");
@@ -69,6 +70,9 @@ const TeamComp = () => {
         setSelectedMembers(selectedOptions);
     };
 
+    const handleLeaderChange = (selectedOptions) => {
+        setSelectedLeader(selectedOptions);
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoader(true);
@@ -77,6 +81,7 @@ const TeamComp = () => {
                 name: teamName,
                 user_id: selectedMembers,
                 type: "add",
+                leader_id: selectLeader?.value,
             }, config)
                 .then(response => {
                     setShowModal(false);
@@ -92,6 +97,7 @@ const TeamComp = () => {
                 user_id: selectedMembers,
                 type: "update",
                 team_id: teamId,
+                leader_id: selectLeader?.value,
             }, config)
                 .then(response => {
                     setShowModal(false);
@@ -104,13 +110,14 @@ const TeamComp = () => {
                         autoClose: 2000,
                     });
                 });
-                setModelHeader("Add");
+            setModelHeader("Add");
         }
         setLoader(false);
         handleCloseModal();
         setSelectedMembers("");
         setTeamName("");
         setSelectedTeam("");
+        setSelectedLeader("");
     };
     const getAllTeams = () => {
         setLoader(true);
@@ -175,8 +182,12 @@ const TeamComp = () => {
                     value: user.id,
                     label: user.name,
                 }));
+                const leader = {
+                    value: response?.data?.data?.leader?.id,
+                    label: response?.data?.data?.leader?.name,
+                }
                 setSelectedMembers(users);
-
+                setSelectedLeader(leader);
             })
             .catch((error) => {
                 setLoader(false);
@@ -216,6 +227,9 @@ const TeamComp = () => {
                                                                     Team Name
                                                                 </th>
                                                                 <th scope="col" className="text-center">
+                                                                    Leader Name
+                                                                </th>
+                                                                <th scope="col" className="text-center">
                                                                     Members
                                                                 </th>
                                                                 <th scope="col" className="text-center">
@@ -227,6 +241,7 @@ const TeamComp = () => {
                                                             {teamMember.length > 0 && teamMember.map(member => (
                                                                 <tr key={member.id}>
                                                                     <td className="text-center">{member?.name}</td>
+                                                                    <td className="text-center">{member?.leader?.name}</td>
                                                                     <td className="text-center">
                                                                         {member?.users?.map((user, index) => (
                                                                             <span key={user?.id}>
@@ -305,6 +320,17 @@ const TeamComp = () => {
                                 />
                             </div>
                             <div className="input-form">
+                                <label>Select Team Leader</label>
+                                <Select
+                                    required
+                                    options={totalCompanyUsers}
+                                    value={selectLeader}
+                                    onChange={handleLeaderChange}
+                                    className="basic-select"
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            <div className="input-form pt-2">
                                 <label>Select Team Members</label>
                                 <Select
                                     isMulti
@@ -329,7 +355,8 @@ const TeamComp = () => {
                                 setShowModal(false);
                                 setTeamName('');
                                 setSelectedMembers([]);
-                                setSelectedTeam("")
+                                setSelectedTeam("");
+                                setSelectedLeader("");
                             }}
                         >
                             Close Modal

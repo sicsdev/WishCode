@@ -43,6 +43,8 @@ import ThemeSettingComp from "./theme/ThemeSettingComp";
 import MenuComp from "./menu/MenuComp";
 import TeamComp from "./team/TeamComp";
 import AssignFeatureComp from "../pages/AssignFeatureComp";
+import PrivateFeedback from "./team/PrivateFeedback";
+import SendFeedback from "./team/SendFeedback";
 
 const RouteCom = () => {
   return (
@@ -90,6 +92,8 @@ const RouteCom = () => {
         <Route path="/theme/setting" element={<ThemeSettingComp />} />
         <Route path="/admin/set/menu" element={<MenuComp/>}/>
         <Route path="/assign/features" element={<AssignFeatureComp/>}/>
+        <Route path="/private/feedback" element={<PrivateFeedback/>}/>
+        <Route path="/get/members/:id" element={<SendFeedback/>}/>
       </Route>
       {/* END:: Super Admin Routes */}
       <Route exact path="/" element={<PrivateRoute />}>

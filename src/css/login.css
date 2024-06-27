@@ -998,7 +998,10 @@ button.input-group-text.vote {
   background: var(--button-color);
   color: var(--button-text-color);
 }
-
+button.input-group-text.private_feedback {
+  background: var(--button-color);
+  color: var(--button-text-color);
+}
 .post-comments .user-img img {
   border-radius: 0;
   cursor: pointer;

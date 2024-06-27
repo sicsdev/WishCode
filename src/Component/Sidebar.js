@@ -206,6 +206,10 @@ const Sidebar = ({ children, isToggleOpen, toggleMenu }) => {
                   <i className="fa fa-exchange" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span"> Assigned Features</span>
                 </div>
+                <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/private/feedback")}>
+                  <i className="fa fa-commenting-o" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
+                  &nbsp;<span className="custom-sidebar-span"> Private Feedback</span>
+                </div>
                 <div className="theme-color1 sidebar_links" onClick={() => handleSidebar("/feature/all")}>
                   <i className="fa fa-eye" aria-hidden="true" style={{ color: "#fff", fontSize: "30px" }}></i>
                   &nbsp;<span className="custom-sidebar-span">Priority List</span>

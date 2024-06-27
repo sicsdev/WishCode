@@ -62,6 +62,7 @@ const Login = ({ }) => {
       localStorage.setItem("role", data?.data?.role_id);
       localStorage.setItem("userName", data?.data?.name);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("currentId", data?.data?.id);
       changeColor({
         backgroundColor: data?.themeColor?.background_color || `#aa504f`,
         buttonColor: data?.themeColor?.button_color || `#fff`,
