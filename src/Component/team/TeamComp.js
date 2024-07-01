@@ -36,6 +36,8 @@ const TeamComp = () => {
     const handleTeam = () => {
         setShowModal(true);
         getAllCompanyUsers();
+        setModelHeader("Add");
+        setTeamName("");
     };
 
     const getAllCompanyUsers = () => {

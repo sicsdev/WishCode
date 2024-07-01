@@ -10,9 +10,10 @@ const SendFeedback = () => {
     const { id } = useParams();
     const [teamMembers, setTeamMembers] = useState([]);
     const [feedback, setFeedback] = useState('');
-    const { isToggleOpen, toggleMenu } = useColor();
+    const { isToggleOpen, toggleMenu, checkLeader, setCheckLeader, checkCurrentFeedback } = useColor();
+    const [sendFeedback, setSendFeedback] = useState('');
     const token = localStorage.getItem('token');
-    const [loader,setLoader]=useState(false);
+    const [loader, setLoader] = useState(false);
     const config = {
         headers: {
             "Content-Type": "application/json",
@@ -22,6 +23,7 @@ const SendFeedback = () => {
 
     useEffect(() => {
         getTeamMembers(id);
+        checkCurrentFeedback();
     }, [id]);
 
     const getTeamMembers = async (id) => {
@@ -39,10 +41,25 @@ const SendFeedback = () => {
         setFeedback(e.target.value);
     };
 
-    const handleSendFeedback = () => {
-        console.log(`Sending feedback: ${feedback}`);
+    const handleSendFeedback = async () => {
         setFeedback('');
+        setSendFeedback(feedback);
+        try {
+            const feedbackData = {
+                team_id: id, // Ensure you have the team ID here
+                message: feedback
+            };
+            const { data } = await axiosConfig.post("/create/feedback", feedbackData, config);
+            console.log("Response:", data);
+        } catch (error) {
+            console.log(error)
+        }
     };
+    const handleEditFeedback = async (value) => {
+        setSendFeedback("");
+        setFeedback(value)
+        setCheckLeader("");
+    }
     return (
         <div>
             <div className="main-body">
@@ -65,30 +82,41 @@ const SendFeedback = () => {
                                     <div className="col-1">
                                         <div className="border-right" style={{ height: '100%', borderRight: '5px solid #ddd' }}></div>
                                     </div>
-                                    <div className='col-8 d-flex flex-column'>
-                                        <div className="mt-5 d-flex">
-                                            <textarea
-                                                className="form-control mr-2"
-                                                placeholder="Type your feedback here..."
-                                                value={feedback}
-                                                onChange={handleFeedbackChange}
-                                                style={{ flex: 1 }}
-                                            />
-                                            <div className="input-group-append">
-                                                <button
-                                                    className="input-group-text private_feedback mt-1"
-                                                    onClick={handleSendFeedback}
-                                                    type="submit"
-                                                    style={{ height: "50px", cursor: 'pointer' }}
-                                                >
-                                                    Send Feedback
-                                                </button>
-                                            </div>
 
-                                        </div>
+                                    <div className='col-8 d-flex flex-column'>
+                                        {sendFeedback && (
+                                            <>
+                                                <p className='feedback-reply'>{sendFeedback}<i className="fa fa-edit" title="Edit Feedback " onClick={() => handleEditFeedback(sendFeedback)}></i></p>
+                                            </>
+                                        )} {checkLeader && (
+                                            <>
+                                                <p className='feedback-reply'>{checkLeader?.message}<i className="fa fa-edit" title="Edit Feedback " onClick={() => handleEditFeedback(checkLeader?.message)}></i></p>
+                                            </>
+                                        )}
+                                        {!sendFeedback && (
+                                            <div className="mt-5 d-flex">
+                                                <textarea
+                                                    className="form-control mr-2"
+                                                    placeholder="Type your feedback here..."
+                                                    value={feedback}
+                                                    onChange={handleFeedbackChange}
+                                                    style={{ flex: 1 }}
+                                                />
+                                                <div className="input-group-append">
+                                                    <button
+                                                        className="input-group-text private_feedback mt-1"
+                                                        onClick={handleSendFeedback}
+                                                        type="submit"
+                                                        style={{ height: "50px", cursor: 'pointer' }}
+                                                    >
+                                                        Send Feedback
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-                                {loader == true?<Loader/>:""}
+                                {loader == true ? <Loader /> : ""}
                             </div>
                         </div>
                     </section>

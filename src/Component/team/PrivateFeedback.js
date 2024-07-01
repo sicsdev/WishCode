@@ -10,6 +10,7 @@ const PrivateFeedback = () => {
     const { isToggleOpen, toggleMenu } = useColor();
     const [teams, setTeams] = useState([]);
     const [loader,setloader]=useState(false);
+    const [leader,setLeader]=useState("");
     const currentId = localStorage.getItem('currentId');
     const tokens = localStorage.getItem("token");
     const config = {
@@ -28,6 +29,7 @@ const PrivateFeedback = () => {
             setloader(true);
             const { data } = await axiosConfig.get(`/get/leader/teams?current_id=${currentId}`, config);
             setTeams(data?.data || []);
+            setLeader(data?.data?.leader);
             setloader(false);
         } catch (error) {
             console.log(error);
