@@ -5,11 +5,15 @@ import Sidebar from '../Sidebar';
 import Header from '../Header';
 import { useColor } from '../../commanapi/ColorProvider';
 import Loader from 'react-spinners/SyncLoader';
+import { toast } from 'react-toastify';
+import moment from 'moment';
 
 const SendFeedback = () => {
     const { id } = useParams();
     const [teamMembers, setTeamMembers] = useState([]);
     const [feedback, setFeedback] = useState('');
+    const [selectedMembers, setSelectedMembers] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
     const { isToggleOpen, toggleMenu, checkLeader, setCheckLeader, checkCurrentFeedback } = useColor();
     const [sendFeedback, setSendFeedback] = useState('');
     const token = localStorage.getItem('token');
@@ -43,23 +47,62 @@ const SendFeedback = () => {
 
     const handleSendFeedback = async () => {
         setFeedback('');
-        setSendFeedback(feedback);
         try {
             const feedbackData = {
-                team_id: id, // Ensure you have the team ID here
-                message: feedback
+                team_id: id,
+                message: feedback,
+                receiver_id: selectedMembers,
             };
-            const { data } = await axiosConfig.post("/create/feedback", feedbackData, config);
-            console.log("Response:", data);
+            axiosConfig.post(`/create/feedback`, feedbackData, config)
+                .then(response => {
+                    toast.success("Private Feedback Sent Successfully", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                    });
+                    setSelectedMembers([]);
+                    checkCurrentFeedback();
+                    // setSendFeedback(checkLeader);
+                })
+                .catch(error => {
+                    console.error("Error sending feedback:", error);
+                    toast.error("Failed to send feedback", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                    });
+                });
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
-    const handleEditFeedback = async (value) => {
+    const handleEditFeedback = async (value, receiver_id) => {
         setSendFeedback("");
-        setFeedback(value)
+        setFeedback(value);
         setCheckLeader("");
-    }
+        setSelectedMembers([receiver_id]);
+    };
+
+    const handleSelectAll = (e) => {
+        const { checked } = e.target;
+        setSelectAll(checked);
+        if (checked) {
+            const allMemberIds = teamMembers.map(member => member.id);
+            setSelectedMembers(allMemberIds);
+        } else {
+            setSelectedMembers([]);
+        }
+    };
+
+    const handleCheckboxChange = (e, memberId) => {
+        const { checked } = e.target;
+        setSelectedMembers(prevState => {
+            if (checked) {
+                return [...prevState, memberId];
+            } else {
+                return prevState.filter(id => id !== memberId);
+            }
+        });
+    };
+
     return (
         <div>
             <div className="main-body">
@@ -74,24 +117,68 @@ const SendFeedback = () => {
                             </div>
                             <div className='card-body'>
                                 <div className='row'>
-                                    <div className='col-3'>
-                                        {teamMembers.length > 0 && teamMembers.map(member => (
-                                            <p key={member.id} className='mt-2'>{member?.name}</p>
-                                        ))}
+                                    <div className='col-2'>
+                                        <ul className="pl-0 text-left">
+                                            <li className="form-check">
+                                                {checkLeader ? <><input
+                                                    type="checkbox"
+                                                    className="form-check-input"
+                                                    id="selectAll"
+                                                    checked={selectAll}
+                                                    onChange={handleSelectAll}
+                                                />
+                                                    <label className="form-check-label pl-2" htmlFor="selectAll"><b>All Members</b></label></> : ""}
+                                            </li>
+                                            {teamMembers.length > 0 && teamMembers.map(member => (
+                                                <li key={member.id} className="form-check mt-2">
+                                                    {checkLeader ? <><input
+                                                        type="checkbox"
+                                                        className="form-check-input"
+                                                        id={`member-${member.id}`}
+                                                        checked={selectedMembers.includes(member.id)}
+                                                        onChange={(e) => handleCheckboxChange(e, member.id)}
+                                                    />
+                                                    </> : ""}
+                                                    <label className="form-check-label pl-2" htmlFor={`member-${member.id}`}>{member?.name}</label>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                     <div className="col-1">
                                         <div className="border-right" style={{ height: '100%', borderRight: '5px solid #ddd' }}></div>
                                     </div>
-
-                                    <div className='col-8 d-flex flex-column'>
+                                    <div className='col-9 d-flex flex-column'>
                                         {sendFeedback && (
                                             <>
-                                                <p className='feedback-reply'>{sendFeedback}<i className="fa fa-edit" title="Edit Feedback " onClick={() => handleEditFeedback(sendFeedback)}></i></p>
+                                                <p className='feedback-reply'>{sendFeedback}
+                                                    <div className='feedback-timestamp'>
+                                                        <small>{moment(sendFeedback.created_at).format('LLL')}</small>
+                                                        {/* <i className="fa fa-edit pl-2" title="Edit Feedback " onClick={() => handleEditFeedback(sendFeedback)}></i> */}
+                                                    </div>
+                                                </p>
                                             </>
-                                        )} {checkLeader && (
-                                            <>
-                                                <p className='feedback-reply'>{checkLeader?.message}<i className="fa fa-edit" title="Edit Feedback " onClick={() => handleEditFeedback(checkLeader?.message)}></i></p>
-                                            </>
+                                        )}
+                                        {
+                                            /* {checkLeader && (
+                                                <>
+                                                    <p className='feedback-reply'>{checkLeader?.message}<i className="fa fa-edit" title="Edit Feedback " onClick={() => handleEditFeedback(checkLeader?.message)}></i></p>
+                                                </>
+                                            )} */
+
+                                        }
+                                        {checkLeader && (
+                                            checkLeader.map((leader, index) => (
+                                                <div key={index}>
+                                                    <p className='feedback-reply'>
+                                                        {leader.message}
+                                                        <div className='feedback-timestamp'>
+                                                        <small>{moment(sendFeedback.created_at).format('LLL')}</small>
+                                                        {/* <i className="fa fa-edit pl-2" title="Edit Feedback " onClick={() => handleEditFeedback(sendFeedback)}></i> */}
+                                                    </div>
+                                                        {/* <i className="fa fa-edit" title="Edit Feedback" onClick={() => handleEditFeedback(leader?.message, leader?.receiver_id)}></i> */}
+                                                    </p>
+                                                </div>
+                                            ))
                                         )}
                                         {!sendFeedback && (
                                             <div className="mt-5 d-flex">
@@ -104,10 +191,14 @@ const SendFeedback = () => {
                                                 />
                                                 <div className="input-group-append">
                                                     <button
-                                                        className="input-group-text private_feedback mt-1"
+                                                        className={`mt-1 ${selectedMembers.length > 0 ? 'input-group-text private_feedback' : ''}`}
                                                         onClick={handleSendFeedback}
                                                         type="submit"
-                                                        style={{ height: "50px", cursor: 'pointer' }}
+                                                        style={{
+                                                            height: "50px",
+                                                            cursor: selectedMembers.length > 0 ? 'pointer' : 'not-allowed',
+                                                        }}
+                                                        disabled={selectedMembers.length === 0}
                                                     >
                                                         Send Feedback
                                                     </button>
@@ -116,7 +207,7 @@ const SendFeedback = () => {
                                         )}
                                     </div>
                                 </div>
-                                {loader == true ? <Loader /> : ""}
+                                {loader === true ? <Loader /> : ""}
                             </div>
                         </div>
                     </section>

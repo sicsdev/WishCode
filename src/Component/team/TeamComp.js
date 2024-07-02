@@ -9,6 +9,7 @@ import axiosConfig from '../../base_url/config';
 import { ToastContainer, toast } from 'react-toastify';
 import Select from 'react-select';
 import swal from 'sweetalert';
+import moment from 'moment';
 
 const TeamComp = () => {
     const { isToggleOpen, toggleMenu } = useColor();
@@ -16,6 +17,9 @@ const TeamComp = () => {
     const [modelHeader, setModelHeader] = useState("Add");
     const [showModal, setShowModal] = useState(false);
     const handleCloseModal = () => setShowModal(false);
+    const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+    const [feedbackData, setFeedbackData] = useState([]);
+    const handleCloseFeedbackModal = () => setShowFeedbackModal(false);
     const [totalCompanyUsers, setTotalCompanyUsers] = useState([]);
     const [teamName, setTeamName] = useState('');
     const [selectedMembers, setSelectedMembers] = useState([]);
@@ -30,9 +34,11 @@ const TeamComp = () => {
             Authorization: `Bearer ${tokens}`,
         },
     };
+
     useEffect(() => {
         getAllTeams();
-    }, [])
+    }, []);
+
     const handleTeam = () => {
         setShowModal(true);
         getAllCompanyUsers();
@@ -60,11 +66,12 @@ const TeamComp = () => {
                 });
             });
     };
+
     const handleTeamNameChange = (e) => {
-        if (modelHeader == "Add") {
+        if (modelHeader === "Add") {
             setTeamName(e.target.value);
         } else {
-            setSelectedTeam(e.target.value)
+            setSelectedTeam(e.target.value);
         }
     };
 
@@ -74,11 +81,12 @@ const TeamComp = () => {
 
     const handleLeaderChange = (selectedOptions) => {
         setSelectedLeader(selectedOptions);
-    }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoader(true);
-        if (modelHeader == "Add") {
+        if (modelHeader === "Add") {
             axiosConfig.post(`/create/team`, {
                 name: teamName,
                 user_id: selectedMembers,
@@ -121,6 +129,7 @@ const TeamComp = () => {
         setSelectedTeam("");
         setSelectedLeader("");
     };
+
     const getAllTeams = () => {
         setLoader(true);
         axiosConfig
@@ -136,8 +145,8 @@ const TeamComp = () => {
                     autoClose: 2000,
                 });
             });
-    }
-    //for delete team member
+    };
+
     const deleteTeam = (id, teamName) => {
         try {
             swal({
@@ -157,7 +166,6 @@ const TeamComp = () => {
                         autoClose: 2000,
                     });
                     setLoader(false);
-                    // getAllTeams();
                     setTeamMembers(prevRows => prevRows.filter(team => team.id !== id));
                 }
             });
@@ -169,7 +177,8 @@ const TeamComp = () => {
                 autoClose: 2000,
             });
         }
-    }
+    };
+
     const editTeam = (id) => {
         setShowModal(true);
         setModelHeader("Edit");
@@ -187,7 +196,7 @@ const TeamComp = () => {
                 const leader = {
                     value: response?.data?.data?.leader?.id,
                     label: response?.data?.data?.leader?.name,
-                }
+                };
                 setSelectedMembers(users);
                 setSelectedLeader(leader);
             })
@@ -198,7 +207,26 @@ const TeamComp = () => {
                     autoClose: 2000,
                 });
             });
-    }
+    };
+
+    const showFeedback = (teamId) => {
+        setLoader(true);
+        axiosConfig
+            .get(`/get/leader/feedback?team_id=${teamId}`, config)
+            .then((response) => {
+                setLoader(false);
+                setFeedbackData(response?.data?.data || []);
+                setShowFeedbackModal(true);
+            })
+            .catch((error) => {
+                setLoader(false);
+                toast.error("Unable to fetch feedback", {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                });
+            });
+    };
+
     return (
         <div>
             <div className="main-body">
@@ -235,6 +263,9 @@ const TeamComp = () => {
                                                                     Members
                                                                 </th>
                                                                 <th scope="col" className="text-center">
+                                                                    Feedback
+                                                                </th>
+                                                                <th scope="col" className="text-center">
                                                                     Action
                                                                 </th>
                                                             </tr>
@@ -251,6 +282,17 @@ const TeamComp = () => {
                                                                                 {index < member.users.length - 1 && ", "}
                                                                             </span>
                                                                         ))}
+                                                                    </td>
+                                                                    <td style={{ textAlign: "center", verticalAlign: "middle" }}>
+                                                                        <i
+                                                                            className="fa fa-eye text-center"
+                                                                            aria-hidden="true"
+                                                                            data-toggle="tooltip"
+                                                                            data-placement="top"
+                                                                            title="History"
+                                                                            style={{ fontSize: "20px", cursor: "pointer" }}
+                                                                            onClick={() => showFeedback(member?.id)}
+                                                                        ></i>
                                                                     </td>
                                                                     <td className="text-center">
                                                                         <div className="action-btn">
@@ -366,6 +408,39 @@ const TeamComp = () => {
                     </Modal.Footer>
                 </form>
             </Modal>
+
+            <Modal show={showFeedbackModal} onHide={handleCloseFeedbackModal} className='privateModal'>
+                <Modal.Header>
+                    <Modal.Title>History of Private Feedbacks</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {feedbackData.length > 0 ? (
+                        <ul>
+                            {feedbackData.map(feedback => (
+                                <li key={feedback.id} className='feedback-reply mr-1'>{feedback?.message}
+                                <div className='feedback-timestamp'>
+                                    <small>{moment(feedback?.created_at).format('LLL')}</small>
+                                </div>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <div className='text-center'><b>No feedback found</b></div>
+                    )}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        className="btn btn-lg-primary"
+                        onClick={() => {
+                            handleCloseFeedbackModal(false);
+                        }}
+                    >
+                        Close Modal
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
             {loader && <Loader />}
             <ToastContainer />
         </div>

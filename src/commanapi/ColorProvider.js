@@ -14,7 +14,7 @@ export const ColorProvider = ({ children }) => {
     buttonTextColor: '',
   });
   const [menus, setMenus] = useState([]);
-  const [checkLeader,setCheckLeader]=useState("");
+  const [checkLeader, setCheckLeader] = useState("");
   const currentId = localStorage.getItem('currentId');
   useEffect(() => {
     if (localStorage.getItem('role')) {
@@ -61,22 +61,22 @@ export const ColorProvider = ({ children }) => {
     document.documentElement.style.setProperty('--text-color', newColor.textColor);
     document.documentElement.style.setProperty('--button-text-color', newColor.buttonTextColor);
   };
-// for menu of sidebar control
-const [isToggleOpen, setIsToggleOpen] = useState(false);
-//api for check the current id check the privateFeedback show or hide
-const checkCurrentFeedback = async () => {
-  try {
+  // for menu of sidebar control
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
+  //api for check the current id check the privateFeedback show or hide
+  const checkCurrentFeedback = async () => {
+    try {
       const { data } = await axiosConfig.get(`/check/leader/teams?current_id=${currentId}`, config);
       setCheckLeader(data?.leader);
-  } catch (error) {
+    } catch (error) {
       console.log(error);
-  }
-};
-const toggleMenu = (e) => {
-  setIsToggleOpen((prevState) => !prevState);
-};
+    }
+  };
+  const toggleMenu = (e) => {
+    setIsToggleOpen((prevState) => !prevState);
+  };
   return (
-    <ColorContext.Provider value={{ menus, color, isToggleOpen,checkLeader,changeColor, getMenus ,toggleMenu,setCheckLeader,checkCurrentFeedback}}>
+    <ColorContext.Provider value={{ menus, color, isToggleOpen, checkLeader, changeColor, getMenus, toggleMenu, setCheckLeader, checkCurrentFeedback }}>
       {children}
     </ColorContext.Provider>
   );
